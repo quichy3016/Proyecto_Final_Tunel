@@ -25,10 +25,14 @@ for i=1:(muestras)
     DifP(i)=A(9,1);
     DifPcFA(i)=A(10,1);
     DifPcFB(i)=A(11,1);
-    VelA(i)=A(12,1);
-    VelB(i)=A(13,1);
-    tiempo(i)=A(14,1);
-    paro(i)=A(15,1);
+    Voltage1(i)=A(12,1);
+    DifP1(i)=A(13,1);
+    DifPcFB1(i)=A(14,1);
+    VelA(i)=A(15,1);
+    VelB(i)=A(16,1);
+    VelB1(i)=A(17,1);
+    tiempo(i)=A(18,1);
+    paro(i)=A(19,1);
     muestra(i)=i;
 
     if (paro(i) == 0)
@@ -36,7 +40,7 @@ for i=1:(muestras)
     end 
     
      figure(1)
-     title('Diferencia de Presión');
+     title('Diferencia de Presiï¿½n');
      ylim([-300 300]);
      xlim([0 muestras]);
      plot(i,DifP(i),'*',i,DifPcFA(i),'x',i,DifPcFB(i),'+');
@@ -51,31 +55,22 @@ delete(a);
 dlmwrite('Temp.dat', Temp, 'delimiter', '\n', 'precision', '%.3f')
 %[A]=importdata('Temp.dat'); %%para leer despues los valores
 dlmwrite('Humi.dat', Humi, 'delimiter', '\n', 'precision', '%.3f')
-%[B]=importdata('Humi.dat'); %%para leer despues los valores
 dlmwrite('Temp1.dat', Temp1, 'delimiter', '\n', 'precision', '%.3f')
-%[C]=importdata('Temp.dat'); %%para leer despues los valores
 dlmwrite('Humi1.dat', Humi1, 'delimiter', '\n', 'precision', '%.3f')
-%[D]=importdata('Humi2.dat'); %%para leer despues los valores
 dlmwrite('Temp2.dat', Temp2, 'delimiter', '\n', 'precision', '%.3f')
-%[E]=importdata('Temp.dat'); %%para leer despues los valores
 dlmwrite('Humi2.dat', Humi2, 'delimiter', '\n', 'precision', '%.3f')
-%[F]=importdata('Humi2.dat'); %%para leer despues los valores
 dlmwrite('Pres2.dat', Pres2, 'delimiter', '\n', 'precision', '%.3f')
-%[G]=importdata('Pres2.dat'); %%para leer despues los valores
 dlmwrite('Voltage.dat', Voltage, 'delimiter', '\n', 'precision', '%.3f')
-%[H]=importdata('Voltage.dat'); %%para leer despues los valores
 dlmwrite('DifP.dat', DifP, 'delimiter', '\n', 'precision', '%.3f')
-%[I]=importdata('DifP.dat'); %%para leer despues los valores
-dlmwrite('DifPcF.dat', DifPcFA, 'delimiter', '\n', 'precision', '%.3f')
-%[II]=importdata('DifPcFA.dat'); %%para leer despues los valores
-dlmwrite('DifPcF.dat', DifPcFB, 'delimiter', '\n', 'precision', '%.3f')
-%[III]=importdata('DifPcFB.dat'); %%para leer despues los valores
+dlmwrite('DifPcFA.dat', DifPcFA, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('DifPcFB.dat', DifPcFB, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('Voltage1.dat', Voltage1, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('DifP1.dat', DifP1, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('DifPcFB1.dat', DifPcFB1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('VelA.dat', VelA, 'delimiter', '\n', 'precision', '%.3f')
-%[J]=importdata('VelA.dat'); %%para leer despues los valores
 dlmwrite('VelB.dat', VelB, 'delimiter', '\n', 'precision', '%.3f')
-%[JJ]=importdata('VelB.dat'); %%para leer despues los valores
+dlmwrite('VelB1.dat', VelB1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Tiempo.dat', tiempo, 'delimiter', '\n', 'precision', '%.3f')
-%[T]=importdata('Tiempo.dat'); %%para leer despues los valores
 dlmwrite('Valoresmuestras.dat', muestra, 'delimiter', '\n', 'precision', '%.2f')
-%[M]=importdata('Valoresmuestras.dat'); %%para leer despues los valores
+
 end
