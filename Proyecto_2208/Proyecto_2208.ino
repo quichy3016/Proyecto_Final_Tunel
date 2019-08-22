@@ -9,7 +9,7 @@ ExponentialFilter<float> ADCFilter(20, 0);
 //https://www.youtube.com/watch?v=QGDG5v_UnIk
 float Y=0.0;
 float alpha=0.05;
-float S=Y;
+float S=Y,S1=Y;
 ///Sensores e INA
 #include "Adafruit_SHT31.h"
 #include "Adafruit_Si7021.h"
@@ -89,19 +89,25 @@ void loop() {
   Serial.print(S,3);Serial.print("\t"); //FiltroB
  ///////////ADS1115///////////////////////////
  float adc0 = ads.readADC_SingleEnded(0)*4.096/32768;
- float presionSF2 = (adc0 - 2.5) * (1000);
-  ADCFilter.Filter(presionSF2); //FiltroA
+ float presionSF2 = (adc0 - 2.52) * (1000);
+ //ADCFilter.Filter(presionSF2,3);
+ //float presionCF2 =  ADCFilter.Filter();//FiltroA
+//float presionCF2=1;
   Serial.print(adc0,6);Serial.print("\t"); 
   Serial.print(presionSF2,3);Serial.print("\t");
-  Serial.print(ADCFilter.Current(),3);Serial.print("\t"); //FiltroA
-  S=(alpha*presionSF2)+((1-alpha)*S); //FiltroB
-  Serial.print(S,3);Serial.print("\t"); //FiltroB 
+  //Serial.print(presionCF2,3);Serial.print("\t"); //FiltroA
+  S1=(alpha*presionSF2)+((1-alpha)*S1); //FiltroB
+  Serial.print(S1,3);Serial.print("\t"); //FiltroB 
   //////////Calculo velocidad////////////////
   float velocidadA = sqrt((2*abs(ADCFilter.Current()))/1.183);
   float velocidadB = sqrt(2*abs(S)/1.183);
   Serial.print(velocidadA,3);Serial.print("\t");  
   Serial.print(velocidadB,3);Serial.print("\t");
 
+  //float velocidadA1 = sqrt((2*abs(presionCF2))/1.183);
+  float velocidadB1 = sqrt(2*abs(S1)/1.183);
+  //Serial.print(velocidadA1,3);Serial.print("\t");  
+  Serial.print(velocidadB1,3);Serial.print("\t"); 
   
   /////////////////////////////////////////
   tiempo=millis();
