@@ -21,22 +21,30 @@ function Cargar_val
 
 [III]=importdata('DifPcFB.dat'); %%para leer despues los valores
 
+[H1]=importdata('Voltage1.dat'); %%para leer despues los valores
+
+[I1]=importdata('DifP1.dat'); %%para leer despues los valores
+
+[II1]=importdata('DifPcFB1.dat'); %%para leer despues los valores
+
 [J]=importdata('VelA.dat'); %%para leer despues los valores
 
 [JJ]=importdata('VelB.dat'); %%para leer despues los valores
+
+[JJJ]=importdata('VelB1.dat'); %%para leer despues los valores
 
 [T]=importdata('Tiempo.dat'); %%para leer despues los valores
 
 [M]=importdata('Valoresmuestras.dat'); %%para leer despues los valores
 
-[ALL]=[A,B,C,D,E,F,G,H,I,II,III,J,JJ,T,M];
-csvwrite('csvlist.csv',ALL);
+[ALL]=[A,B,C,D,E,F,G,H,I,II,III,H1,I1,II1,J,JJ,JJJ,T,M];
+csvwrite('csvlist1.csv',ALL);
 
     figure(1)
     subplot(211) 
     plot(T,A,'o');
     ylim([10 35]);
-    title('Temperatura [°C]- SHT-31');
+    title('Temperatura [ï¿½C]- SHT-31');
     
     subplot(212)
     plot(T,B,'o');
@@ -47,7 +55,7 @@ csvwrite('csvlist.csv',ALL);
     subplot(211) 
     plot(T,C,'o');
     ylim([10 35]);
-    title('Temperatura [°C]- SHT-21');
+    title('Temperatura [ï¿½C]- SHT-21');
     
     subplot(212)
     plot(T,D,'o');
@@ -58,7 +66,7 @@ csvwrite('csvlist.csv',ALL);
     subplot(311) 
     plot(T,E,'o');
     ylim([10 35]);
-    title('Temperatura [°C]- BME 280');
+    title('Temperatura [ï¿½C]- BME 280');
     
     subplot(312)
     plot(T,F,'o');
