@@ -1,8 +1,8 @@
 function prueba_ard_2208(muestras)
 %close all;
 %clc;
-delete(instrfind({'Port'},{'COM5'}));
-a=serial('com5');
+delete(instrfind({'Port'},{'COM27'}));
+a=serial('com27');
 set(a,'BaudRate',115200);
 fopen(a);
 A=fscanf(a,'%f');
