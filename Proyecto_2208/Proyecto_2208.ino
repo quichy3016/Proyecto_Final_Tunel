@@ -16,6 +16,7 @@ float S=Y;
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 #include <Adafruit_INA219.h>
+#include <Adafruit_ADS1015.h>
 
 /////SHT31////////////////////////////
 Adafruit_SHT31 sht31 = Adafruit_SHT31();
@@ -25,7 +26,8 @@ Adafruit_Si7021 sensor = Adafruit_Si7021();
 Adafruit_BME280 bme; // I2C
 ///////INA-219////////////////////////
 Adafruit_INA219 ina219;
-//////////////////////////////////////
+////////ADS115////////////////////////
+Adafruit_ADS1115 ads;
 
 long tiempo=0;
 
@@ -49,6 +51,9 @@ void setup() {
   //////INA-219///////////////////////
   ina219.begin();
   ina219.setCalibration_16V_400mA();
+  /////ADS1115///////////////////////
+  ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
+  ads.begin();
   pinMode(7,INPUT_PULLUP);
 }
 
@@ -82,7 +87,15 @@ void loop() {
   Serial.print(ADCFilter.Current(),3);Serial.print("\t"); //FiltroA
   S=(alpha*presionSF)+((1-alpha)*S); //FiltroB
   Serial.print(S,3);Serial.print("\t"); //FiltroB
- 
+ ///////////ADS1115///////////////////////////
+ float adc0 = ads.readADC_SingleEnded(0)*4.096/32768;
+ float presionSF2 = (adc0 - 2.5) * (1000);
+  ADCFilter.Filter(presionSF2); //FiltroA
+  Serial.print(adc0,6);Serial.print("\t"); 
+  Serial.print(presionSF2,3);Serial.print("\t");
+  Serial.print(ADCFilter.Current(),3);Serial.print("\t"); //FiltroA
+  S=(alpha*presionSF2)+((1-alpha)*S); //FiltroB
+  Serial.print(S,3);Serial.print("\t"); //FiltroB 
   //////////Calculo velocidad////////////////
   float velocidadA = sqrt((2*abs(ADCFilter.Current()))/1.183);
   float velocidadB = sqrt(2*abs(S)/1.183);
