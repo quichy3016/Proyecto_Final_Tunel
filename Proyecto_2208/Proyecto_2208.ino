@@ -59,46 +59,8 @@ void setup() {
 }
 
 void loop() {
-  ////////SHT31////////////////////////
-  float t = sht31.readTemperature()+0.77;//t
-  float h = sht31.readHumidity()-3.35;//h
-  Serial.print(t,3); Serial.print("\t");
-  Serial.print(h,3); Serial.print("\t");
-
-  ////////SHT21/////////////////////////
-  float t1=sensor.readTemperature()+0.564;
-  float h1=sensor.readHumidity()+4.07;
-  Serial.print(t1,3); Serial.print("\t");
-  Serial.print(h1,3);Serial.print("\t");
-  
-  /////////BME280///////////////////////
-  float t2=bme.readTemperature()-0.56;
-  float h2=bme.readHumidity()+3.49;
-  float p2=bme.readPressure();  
-  Serial.print(t2,3);Serial.print("\t");
-  Serial.print(h2,3);Serial.print("\t");
-  Serial.print(p2,3);Serial.print("\t");
-  
-  /////////INA-219////////////////////////
-  float busvoltage = ina219.getBusVoltage_V();
-  float presionSF = (busvoltage - 2.524) * (1000);
-  ADCFilter0.Filter(presionSF); //FiltroA
-  float presionCF = ADCFilter0.Current();
-  Serial.print(busvoltage,3);Serial.print("\t"); 
-  Serial.print(presionSF,3);Serial.print("\t");
-  Serial.print(presionCF,3);Serial.print("\t"); //FiltroA
-  S=(alpha*presionSF)+((1-alpha)*S); //FiltroB
-  Serial.print(S,3);Serial.print("\t"); //FiltroB
- ///////////ADS1115///////////////////////////
- float adc0 = ads.readADC_SingleEnded(0)*4.096/32768;
- float presionSF2 = (adc0 - 2.52) * (1000);
- ADCFilter1.Filter(presionSF2);
- float presionCF2 =  ADCFilter1.Current();//FiltroA1
-  Serial.print(adc0,6);Serial.print("\t"); 
-  Serial.print(presionSF2,3);Serial.print("\t");
-  Serial.print(presionCF2,3);Serial.print("\t"); //FiltroA1
-  S1=(alpha*presionSF2)+((1-alpha)*S1); //FiltroB1
-  Serial.print(S1,3);Serial.print("\t"); //FiltroB1
+  THP(); 
+  difPresion();
   //////////Calculo velocidad////////////////
   float velocidadA = sqrt((2*abs(presionCF))/1.183);
   float velocidadB = sqrt(2*abs(S)/1.183);
