@@ -29,24 +29,40 @@ Adafruit_BME280 bme; // I2C
 Adafruit_INA219 ina219;
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
-
+/////Variables THP ///////////////////
+float t=0,t1=0,t2=0;
+float h=0,h1=0,h2=0;
+float p2=0;
+/////Variables Dif - Presion//////////
+float presionSF=0,presionCF=0,presionSF2=0,presionCF2=0;
+//////Variables velocidad/////////////
+float velocidadA=0,velocidadB=0,velocidadA1=0,velocidadB1=0;
+/////////variables-offset/////////////
+int contador=0;
+float tempref=25;
+float humref=25;
+float presionref=101325;
+float offsett=0,offsett1=0,offsett2=0;
+float offseth=0,offseth1=0,offseth2=0;
+float offsetp2=0;
+//////////////////////////////////////
 long tiempo=0;
 
 void setup() {
   Serial.begin(115200);
   //////SHT31////////
   if (! sht31.begin(0x44)) {   // Set to 0x45 for alternate i2c addr
-    Serial.println("Couldn't find SHT31");
+    Serial.println("Problema sensor - SHT31");
     while (1) delay(1);
   }
   /////SHT21/////////////////
   if (!sensor.begin()) {
-    Serial.println("Did not find Si7021 sensor!");
+    Serial.println("Problema sensor - Si7021");
     while (true);
   }
   /////BME280////////////////////
   if (!bme.begin()) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
+    Serial.println("Problema sensor - BME280");
     while (1);
   }
   //////INA-219///////////////////////
@@ -59,60 +75,10 @@ void setup() {
 }
 
 void loop() {
-  ////////SHT31////////////////////////
-  float t = sht31.readTemperature()+0.77;//t
-  float h = sht31.readHumidity()-3.35;//h
-  Serial.print(t,3); Serial.print("\t");
-  Serial.print(h,3); Serial.print("\t");
-
-  ////////SHT21/////////////////////////
-  float t1=sensor.readTemperature()+0.564;
-  float h1=sensor.readHumidity()+4.07;
-  Serial.print(t1,3); Serial.print("\t");
-  Serial.print(h1,3);Serial.print("\t");
-  
-  /////////BME280///////////////////////
-  float t2=bme.readTemperature()-0.56;
-  float h2=bme.readHumidity()+3.49;
-  float p2=bme.readPressure();  
-  Serial.print(t2,3);Serial.print("\t");
-  Serial.print(h2,3);Serial.print("\t");
-  Serial.print(p2,3);Serial.print("\t");
-  
-  /////////INA-219////////////////////////
-  float busvoltage = ina219.getBusVoltage_V();
-  float presionSF = (busvoltage - 2.524) * (1000);
-  ADCFilter0.Filter(presionSF); //FiltroA
-  float presionCF = ADCFilter0.Current();
-  Serial.print(busvoltage,3);Serial.print("\t"); 
-  Serial.print(presionSF,3);Serial.print("\t");
-  Serial.print(presionCF,3);Serial.print("\t"); //FiltroA
-  S=(alpha*presionSF)+((1-alpha)*S); //FiltroB
-  Serial.print(S,3);Serial.print("\t"); //FiltroB
- ///////////ADS1115///////////////////////////
- float adc0 = ads.readADC_SingleEnded(0)*4.096/32768;
- float presionSF2 = (adc0 - 2.52) * (1000);
- ADCFilter1.Filter(presionSF2);
- float presionCF2 =  ADCFilter1.Current();//FiltroA1
-  Serial.print(adc0,6);Serial.print("\t"); 
-  Serial.print(presionSF2,3);Serial.print("\t");
-  Serial.print(presionCF2,3);Serial.print("\t"); //FiltroA1
-  S1=(alpha*presionSF2)+((1-alpha)*S1); //FiltroB1
-  Serial.print(S1,3);Serial.print("\t"); //FiltroB1
-  //////////Calculo velocidad////////////////
-  float velocidadA = sqrt((2*abs(presionCF))/1.183);
-  float velocidadB = sqrt(2*abs(S)/1.183);
-  Serial.print(velocidadA,3);Serial.print("\t");  
-  Serial.print(velocidadB,3);Serial.print("\t");
-
-  float velocidadA1 = sqrt((2*abs(presionCF2))/1.183);
-  float velocidadB1 = sqrt(2*abs(S1)/1.183);
-  Serial.print(velocidadA1,3);Serial.print("\t");  
-  Serial.print(velocidadB1,3);Serial.print("\t"); 
-  
-  /////////////////////////////////////////
-  tiempo=millis();
-  Serial.print(tiempo);Serial.print("\t");
+  calculo_offset();
+  THP(); 
+  difPresion();
+  vel_tiempo();
   boolean paro = digitalRead(7);
   Serial.println(paro);
   delay(100);
