@@ -1,21 +1,16 @@
 function Cargar_val
-    %%para leer despues los valores
+%%para leer despues los valores
 [A]=importdata('Temp.dat'); %%SHT31
-
 [B]=importdata('Humi.dat'); %%SHT31
 
 [C]=importdata('Temp1.dat'); %%SHT21
-
 [D]=importdata('Humi1.dat'); %%SHT21
 
 [E]=importdata('Temp2.dat'); %%BME280
-
 [F]=importdata('Humi2.dat'); %%BME280
-
 [G]=importdata('Pres2.dat'); %%BME280
 
 %%%%%%% Presion diferencial %%%%%%
-
 [H]=importdata('Voltage.dat'); %%INA Voltaje
 [I]=importdata('DifP.dat'); %%INA Diferencia de presion
 
@@ -49,49 +44,22 @@ function Cargar_val
 csvwrite('csvlist1.csv',ALL);
 
     figure(1)
-    subplot(211) 
-    plot(T,A,'o');
-    ylim([10 35]);
-    title('Temperatura [°C]- SHT-31');
-    
-    subplot(212)
-    plot(T,B,'o');
-    ylim([0 65]);
-    title('Humedad [%] - SHT-31');
+    plot(T,A,'bo',T,C,'r^',T,E,'k+');
+    ylim([5 35]);
+    title('Temperatura [°C]- o(SHT31) ^(SHT21) +(BME280)');
     
     figure(2)
-    subplot(211) 
-    plot(T,C,'o');
-    ylim([10 35]);
-    title('Temperatura [�C]- SHT-21');
-    
-    subplot(212)
-    plot(T,D,'o');
-    ylim([0 65]);
-    title('Humedad [%]- SHT-21');
-    
+    plot(T,B,'bo',T,D,'r^',T,F,'k+');
+    ylim([10 70]);
+    title('Humedad [%]- o(SHT31) ^(SHT21) +(BME280)');
+
     figure(3)
-    subplot(311) 
-    plot(T,E,'o');
-    ylim([10 35]);
-    title('Temperatura [�C]- BME 280');
-    
-    subplot(312)
-    plot(T,F,'o');
-    ylim([0 65]);
-    title('Humedad [%] - BME 280');
-    
-    subplot(313)
-    plot(T,G,'o');
-    ylim([90000 110000]);
-    title('Presion [Kpa] - BME 280');
-    
-    figure(4)
-    subplot(211) 
-    plot(T,H,'o');
-    ylim([0 5]);
-    title('Voltaje [V]- INA 219');
-    
+    plot(T,F,'k+');
+    ylim([85000 110000]);
+    title('Presion [kPa]- +(BME280)');
+
+  
+    %%me quede acaaaa
     subplot(212)
     plot(T,I,'o',T,II,'+',T,III,'*');
     ylim([-300 300]);
