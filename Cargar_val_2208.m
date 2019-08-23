@@ -14,58 +14,45 @@ function Cargar_val
 
 [G]=importdata('Pres2.dat'); %%BME280
 
-
 %%%%%%% Presion diferencial %%%%%%
 
 [H]=importdata('Voltage.dat'); %%INA Voltaje
 [I]=importdata('DifP.dat'); %%INA Diferencia de presion
 
-[IIa1INA]=importdata('DifPcFAv1INA.dat'); %%INA DdP FiltroA valor1
-[IIa2INA]=importdata('DifPcFAv2INA.dat'); %%INA DdP FiltroA valor2
-[IIa3INA]=importdata('DifPcFAv3INA.dat'); %%INA DdP FiltroA valor3
-[IIIb1INA]=importdata('DifPcFBv1INA.dat'); %%INA DdP FiltroB valor1
-[IIIb2INA]=importdata('DifPcFBv2INA.dat'); %%INA DdP FiltroB valor2
-[IIIb3INA]=importdata('DifPcFBv3INA.dat'); %%INA DdP FiltroB valor3
+[IIa1INA]=importdata('DifPcFAv1INA.dat'); %%INA DdP fA1
+[IIa2INA]=importdata('DifPcFAv2INA.dat'); %%INA DdP fA2
+[IIa3INA]=importdata('DifPcFAv3INA.dat'); %%INA DdP fA3
+[IIIb1INA]=importdata('DifPcFBv1INA.dat'); %%INA DdP fB1
+[IIIb2INA]=importdata('DifPcFBv2INA.dat'); %%INA DdP fB2
+[IIIb3INA]=importdata('DifPcFBv3INA.dat'); %%INA DdP fB3
 
 
 [H1]=importdata('Voltage1.dat'); %%ADC Voltaje
 [I1]=importdata('DifP1.dat'); %%ADC Diferencia de presion
 
-[IIa1ADC]=importdata('DifPcFAv1ADC.dat'); %%ADC DdP FiltroA valor1
-[IIa2ADC]=importdata('DifPcFAv2ADC.dat'); %%ADC DdP FiltroA valor2
-[IIa3ADC]=importdata('DifPcFAv3ADC.dat'); %%ADC DdP FiltroA valor3
-[IIIb1ADC]=importdata('DifPcFBv1ADC.dat'); %%ADC DdP FiltroB valor1
-[IIIb2ADC]=importdata('DifPcFBv2ADC.dat'); %%ADC DdP FiltroB valor2
-[IIIb3ADC]=importdata('DifPcFBv3ADC.dat'); %%ADC DdP FiltroB valor3
+[IIa1ADC]=importdata('DifPcFAv1ADC.dat'); %%ADC DdP fA1
+[IIa2ADC]=importdata('DifPcFAv2ADC.dat'); %%ADC DdP fA2
+[IIa3ADC]=importdata('DifPcFAv3ADC.dat'); %%ADC DdP fA3
+[IIIb1ADC]=importdata('DifPcFBv1ADC.dat'); %%ADC DdP fB1
+[IIIb2ADC]=importdata('DifPcFBv2ADC.dat'); %%ADC DdP fB2
+[IIIb3ADC]=importdata('DifPcFBv3ADC.dat'); %%ADC DdP fB3
 
 
 %%VELOCIDADES
-[JINAa1]=importdata('VelINAa1.dat'); %%Valor v INA fA1
-[JINAa2]=importdata('VelINAa2.dat'); %%Valor v INA fA2
-[JINAa3]=importdata('VelINAa3.dat'); %%Valor v INA fA3
-[JJINAb1]=importdata('VelINAb1.dat'); %%Valor v INA fB1
-[JJINAb2]=importdata('VelINAb2.dat'); %%Valor v INA fB2
-[JJINAb3]=importdata('VelINAb3.dat'); %%Valor v INA fB3
+[JJJADC]=importdata('VelADC.dat'); %% ADC v sFiltro
+[JJJADCb2]=importdata('VelADCb2.dat'); %%V ADC v fB2
 
+[T]=importdata('Tiempo.dat'); %%vector de tiempo
+[M]=importdata('Valoresmuestras.dat'); %%valor de muestras
 
-[JJJADCa1]=importdata('VelADCa1.dat'); %%Valor v ADC fA1
-[JJJADCa2]=importdata('VelADCa2.dat'); %%Valor v ADC fA2
-[JJJADCa3]=importdata('VelADCa3.dat'); %%Valor v ADC fA3
-[JJJADCb1]=importdata('VelADCb1.dat'); %%Valor v ADC fB1
-[JJJADCb2]=importdata('VelADCb2.dat'); %%Valor v ADC fB2
-[JJJADCb3]=importdata('VelADCb3.dat'); %%Valor v ADC fB3
-
-[T]=importdata('Tiempo.dat'); %%para leer despues los valores
-[M]=importdata('Valoresmuestras.dat'); %%para leer despues los valores
-
-[ALL]=[A,B,C,D,E,F,G,H,I,II,III,H1,I1,II1,J,JJ,JJJ,T,M];
+[ALL]=[A,B,C,D,E,F,G,H,I,IIa1INA,IIa2INA,IIa3INA,IIIb1INA,IIIb2INA,IIIb3INA,H1,I1,IIa1ADC,IIa2ADC,IIa3ADC,IIIb1ADC,IIIb2ADC,IIIb3ADC,JJJADC,JJJADCb2,T,M];
 csvwrite('csvlist1.csv',ALL);
 
     figure(1)
     subplot(211) 
     plot(T,A,'o');
     ylim([10 35]);
-    title('Temperatura [�C]- SHT-31');
+    title('Temperatura [°C]- SHT-31');
     
     subplot(212)
     plot(T,B,'o');
