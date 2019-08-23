@@ -31,6 +31,11 @@ function Cargar_val
 
 [JJ]=importdata('VelB.dat'); %%para leer despues los valores
 
+// hola ACA ESTOY EDITANDOOOOOO;
+// hola ACA ESTOY EDITANDOOOOOO;
+// hola ACA ESTOY EDITANDOOOOOO;
+
+
 [JJJ]=importdata('VelB1.dat'); %%para leer despues los valores
 
 [T]=importdata('Tiempo.dat'); %%para leer despues los valores
