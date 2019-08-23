@@ -7,6 +7,8 @@ void calculo_offset(){
         offseth1=h1-humref;
         offseth2=h2-humref;
         offsetp2=p2-presionref;
+        offsetdf=busvoltage;
+        offsetdf1=adc0;
         cancelcontador=1;
         contador=0;
     }

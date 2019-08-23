@@ -35,6 +35,7 @@ float h=0,h1=0,h2=0;
 float p2=0;
 /////Variables Dif - Presion//////////
 float presionSF=0,presionCF=0,presionSF2=0,presionCF2=0;
+float busvoltage=0,adc0=0;
 //////Variables velocidad/////////////
 float velocidadA=0,velocidadB=0,velocidadA1=0,velocidadB1=0;
 /////////variables-offset/////////////
@@ -44,7 +45,7 @@ float humref=55.5;
 float presionref=101312;
 float offsett=0,offsett1=0,offsett2=0;
 float offseth=0,offseth1=0,offseth2=0;
-float offsetp2=0,offsetdf=0;
+float offsetp2=0,offsetdf=0,offsetdf1=0;
 //////////////////////////////////////
 long tiempo=0;
 
