@@ -4,17 +4,18 @@
 //https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
 #include "Filter.h" 
 #include "MegunoLink.h"
-ExponentialFilter<float> INAFilter1(5,0);
+ExponentialFilter<float> INAFilter1(10,0);
 ExponentialFilter<float> INAFilter2(20,0);
 ExponentialFilter<float> INAFilter3(60,0);
-ExponentialFilter<float> ADCFilter1(5,0);
+ExponentialFilter<float> ADCFilter1(10,0);
 ExponentialFilter<float> ADCFilter2(20,0);
 ExponentialFilter<float> ADCFilter3(60,0);
 //FiltroB   
 //https://www.youtube.com/watch?v=QGDG5v_UnIk
 float Y=0.0;
-float alpha=0.05;
-float S=Y,S1=Y;
+float alpha1=0.05,alpha2=0.5,alpha3=0.9;
+float S11=Y,S12=Y,S13=Y;
+float S21=Y,S22=Y,S23=Y;
 ///Sensores e INA
 #include "Adafruit_SHT31.h"
 #include "Adafruit_Si7021.h"
@@ -88,5 +89,5 @@ void loop() {
   vel_tiempo();
   boolean paro = digitalRead(7);
   Serial.println(paro);
-  delay(100);
+  //delay(20);
 }
