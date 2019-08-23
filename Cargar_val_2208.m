@@ -17,6 +17,9 @@ function Cargar_val
 
 [I]=importdata('DifP.dat'); %%para leer despues los valores
 
+
+%%los comentarios es con esto
+
 [II]=importdata('DifPcFA.dat'); %%para leer despues los valores
 
 [III]=importdata('DifPcFB.dat'); %%para leer despues los valores
@@ -30,10 +33,8 @@ function Cargar_val
 [J]=importdata('VelA.dat'); %%para leer despues los valores
 
 [JJ]=importdata('VelB.dat'); %%para leer despues los valores
+%%%%asi son los comentarios
 
-// hola ACA ESTOY EDITANDOOOOOO;
-// hola ACA ESTOY EDITANDOOOOOO;
-// hola ACA ESTOY EDITANDOOOOOO;
 
 
 [JJJ]=importdata('VelB1.dat'); %%para leer despues los valores
