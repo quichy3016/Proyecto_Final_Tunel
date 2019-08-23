@@ -29,24 +29,40 @@ Adafruit_BME280 bme; // I2C
 Adafruit_INA219 ina219;
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
-
+/////Variables THP ///////////////////
+float t=0,t1=0,t2=0;
+float h=0,h1=0,h2=0;
+float p2=0;
+/////Variables Dif - Presion//////////
+float presionSF=0,presionCF=0,presionSF2=0,presionCF2=0;
+//////Variables velocidad/////////////
+float velocidadA=0,velocidadB=0,velocidadA1=0,velocidadB1=0;
+/////////variables-offset/////////////
+int contador=0;
+float tempref=25;
+float humref=25;
+float presionref=101325;
+float offsett=0,offsett1=0,offsett2=0;
+float offseth=0,offseth1=0,offseth2=0;
+float offsetp2=0;
+//////////////////////////////////////
 long tiempo=0;
 
 void setup() {
   Serial.begin(115200);
   //////SHT31////////
   if (! sht31.begin(0x44)) {   // Set to 0x45 for alternate i2c addr
-    Serial.println("Couldn't find SHT31");
+    Serial.println("Problema sensor - SHT31");
     while (1) delay(1);
   }
   /////SHT21/////////////////
   if (!sensor.begin()) {
-    Serial.println("Did not find Si7021 sensor!");
+    Serial.println("Problema sensor - Si7021");
     while (true);
   }
   /////BME280////////////////////
   if (!bme.begin()) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
+    Serial.println("Problema sensor - BME280");
     while (1);
   }
   //////INA-219///////////////////////
@@ -59,22 +75,10 @@ void setup() {
 }
 
 void loop() {
+  calculo_offset();
   THP(); 
   difPresion();
-  //////////Calculo velocidad////////////////
-  float velocidadA = sqrt((2*abs(presionCF))/1.183);
-  float velocidadB = sqrt(2*abs(S)/1.183);
-  Serial.print(velocidadA,3);Serial.print("\t");  
-  Serial.print(velocidadB,3);Serial.print("\t");
-
-  float velocidadA1 = sqrt((2*abs(presionCF2))/1.183);
-  float velocidadB1 = sqrt(2*abs(S1)/1.183);
-  Serial.print(velocidadA1,3);Serial.print("\t");  
-  Serial.print(velocidadB1,3);Serial.print("\t"); 
-  
-  /////////////////////////////////////////
-  tiempo=millis();
-  Serial.print(tiempo);Serial.print("\t");
+  vel_tiempo();
   boolean paro = digitalRead(7);
   Serial.println(paro);
   delay(100);
