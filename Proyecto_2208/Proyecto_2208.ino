@@ -38,13 +38,13 @@ float presionSF=0,presionCF=0,presionSF2=0,presionCF2=0;
 //////Variables velocidad/////////////
 float velocidadA=0,velocidadB=0,velocidadA1=0,velocidadB1=0;
 /////////variables-offset/////////////
-int contador=0;
-float tempref=25;
-float humref=25;
-float presionref=101325;
+int contador=0,cancelcontador=0;
+float tempref=17.4;
+float humref=55.5;
+float presionref=101312;
 float offsett=0,offsett1=0,offsett2=0;
 float offseth=0,offseth1=0,offseth2=0;
-float offsetp2=0;
+float offsetp2=0,offsetdf=0;
 //////////////////////////////////////
 long tiempo=0;
 
