@@ -87,6 +87,7 @@ void loop() {
   THP(); 
   difPresion();
   vel_tiempo();
+  imprimir_datos();
   boolean paro = digitalRead(7);
   Serial.println(paro);
   //delay(20);
