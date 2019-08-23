@@ -9,9 +9,6 @@ A=fscanf(a,'%f');
 s=0;
 
 for i=1:(muestras)
-%    if(i==1)
-%      out=fscanf(a);
-%    end
 
     A=fscanf(a,'%f');
     Temp(i)=A(1,1);
