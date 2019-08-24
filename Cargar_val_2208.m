@@ -11,8 +11,8 @@ function Cargar_val
 [G]=importdata('Pres2.dat'); %%BME280
 
 %%%%%%% Presion diferencial %%%%%%
-[H]=importdata('Voltage.dat'); %%INA Voltaje
-[I]=importdata('DifP.dat'); %%INA Diferencia de presion
+[H]=importdata('VolINA.dat'); %%INA Voltaje
+[I]=importdata('DifPINA.dat'); %%INA Diferencia de presion
 
 [IIa1INA]=importdata('DifPcFAv1INA.dat'); %%INA DdP fA1
 [IIa2INA]=importdata('DifPcFAv2INA.dat'); %%INA DdP fA2
@@ -22,7 +22,7 @@ function Cargar_val
 [IIIb3INA]=importdata('DifPcFBv3INA.dat'); %%INA DdP fB3
 
 
-[H1]=importdata('Voltage1.dat'); %%ADC Voltaje
+[H1]=importdata('VolADC.dat'); %%ADC Voltaje
 [I1]=importdata('DifP1.dat'); %%ADC Diferencia de presion
 
 [IIa1ADC]=importdata('DifPcFAv1ADC.dat'); %%ADC DdP fA1
