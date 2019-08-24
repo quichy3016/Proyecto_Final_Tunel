@@ -33,7 +33,7 @@ function Cargar_val
 [IIIb3ADC]=importdata('DifPcFBv3ADC.dat'); %%ADC DdP fB3
 
 
-%%VELOCIDADES
+%%Velocidad
 [JJJADC]=importdata('VelADC.dat'); %% ADC v sFiltro
 [JJJADCb2]=importdata('VelADCb2.dat'); %%V ADC v fB2
 
@@ -44,32 +44,50 @@ function Cargar_val
 csvwrite('csvlist1.csv',ALL);
 
     figure(1)
+    subplot(311)
     plot(T,A,'bo',T,C,'r^',T,E,'k+');
-    ylim([5 35]);
+    ylim([15 35]);
     title('Temperatura [°C]- o(SHT31) ^(SHT21) +(BME280)');
     
-    figure(2)
+    %%figure(2)
+    subplot(312)
     plot(T,B,'bo',T,D,'r^',T,F,'k+');
-    ylim([10 70]);
+    ylim([10 60]);
     title('Humedad [%]- o(SHT31) ^(SHT21) +(BME280)');
 
-    figure(3)
+    %%figure(3)
+    subplot(313)
     plot(T,F,'k+');
     ylim([85000 110000]);
     title('Presion [kPa]- +(BME280)');
 
-  
-    %%me quede acaaaa
-    subplot(212)
-    plot(T,I,'o',T,II,'+',T,III,'*');
+    figure(2)
+    %%figure(4)
+    subplot(221)
+    plot(T,I,'^g',T,IIa1INA,'b+',T,IIa2INA,'k+',T,IIa3INA,'r+');
     ylim([-300 300]);
-    title('Dif Presion [Pa]- INA 219');
-    
-    figure(5)
-    subplot(111)
-    plot(T,J,'o',T,JJ,'x');
+    title('Dif Presion [Pa]- INA 219// +bkr(fA123)');
+
+    subplot(222)
+    plot(T,I,'^g',T,IIIb1INA,'b*',T,IIIb2INA,'k*',T,IIIb3INA,'r*');
+    ylim([-300 300]);
+    title('Dif Presion [Pa]- INA 219// *bkr(fB123)');
+
+    subplot(223)
+    plot(T,I,'^g',T,IIa1ADC,'b+',T,IIa2ADC,'k+',T,IIa3ADC,'r+');
+    ylim([-300 300]);
+    title('Dif Presion [Pa]- ADC// +bkr(fA123)');
+
+    subplot(224)
+    plot(T,I,'^g',T,IIIb1ADC,'b*',T,IIIb2ADC,'k*',T,IIIb3ADC,'r*');
+    ylim([-300 300]);
+    title('Dif Presion [Pa]- ADC// *bkr(fB123)');
+
+    figure(3)
+    %%figure(5)
+    plot(T,JJJADC,'o',T,JJJADCb2,'x');
     ylim([0 25]);
-    title('Velocidad de aire');
+    title('Velocidad de aire [m/s] o(sF) x(fB2ADC)');
     
 
 end
