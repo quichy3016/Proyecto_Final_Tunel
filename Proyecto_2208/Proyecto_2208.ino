@@ -4,16 +4,16 @@
 //https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
 #include "Filter.h" 
 #include "MegunoLink.h"
-ExponentialFilter<float> INAFilter1(10,0);
-ExponentialFilter<float> INAFilter2(20,0);
-ExponentialFilter<float> INAFilter3(60,0);
-ExponentialFilter<float> ADCFilter1(10,0);
-ExponentialFilter<float> ADCFilter2(20,0);
-ExponentialFilter<float> ADCFilter3(60,0);
+ExponentialFilter<float> INAFilter1(30,0);
+ExponentialFilter<float> INAFilter2(50,0);
+ExponentialFilter<float> INAFilter3(80,0);
+ExponentialFilter<float> ADCFilter1(30,0);
+ExponentialFilter<float> ADCFilter2(50,0);
+ExponentialFilter<float> ADCFilter3(80,0);
 //FiltroB   
 //https://www.youtube.com/watch?v=QGDG5v_UnIk
 float Y=0.0;
-float alpha1=0.05,alpha2=0.5,alpha3=0.9;
+float alpha1=0.2,alpha2=0.5,alpha3=0.9;
 float S11=Y,S12=Y,S13=Y;
 float S21=Y,S22=Y,S23=Y;
 ///Sensores e INA
@@ -57,7 +57,7 @@ float offsetp2=0,offsetdf=0,offsetdf1=0;
 long tiempo=0;
 
 void setup() {
-  Serial.begin(115200);
+  Serial.begin(250000);
   //////SHT31////////
   if (! sht31.begin(0x44)) {   // Selecciono direccion i2c
     Serial.println("Problema sensor - SHT31");
@@ -90,5 +90,5 @@ void loop() {
   imprimir_datos();
   boolean paro = digitalRead(7);
   Serial.println(paro);
-  //delay(20);
+  //delay(1000);
 }

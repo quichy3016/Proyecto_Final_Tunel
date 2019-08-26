@@ -1,7 +1,7 @@
 function prueba_ard_2208(muestras)
-delete(instrfind({'Port'},{'COM27'})); %%Modificar puerto
-a=serial('com27');
-set(a,'BaudRate',115200);
+delete(instrfind({'Port'},{'COM5'})); %%Modificar puerto
+a=serial('com5');
+set(a,'BaudRate',250000);
 fopen(a);%%Inicializa puerto
 A=fscanf(a,'%f');
 s=0;
@@ -41,41 +41,49 @@ for i=1:(muestras)
     if (paro(i) == 0)
         break
     end 
-    
+    %I1(i)
+        if (rem(i,2)==0)
+            figure(1)
+            title('Diferencia de Presión sin filtros');
+            ylim([-300 300]);
+            xlim([0 muestras]);
+            plot((i),I(i),'*');%,i,I1(i),'x');
+            hold on;
+            %I(i)
+            drawnow;
+        end
+%     subplot(211)
+%     plot(i,I(i),'^g',i,IIa1INA(i),'b+',i,IIa2INA(i),'k+',i,IIa3INA(i),'r+',i,IIIb1INA(i),'b*',i,IIIb2INA(i),'k*',i,IIIb3INA(i),'r*');
+%     ylim([-300 300]);
+%     xlim([0 muestras]);
+%     title('Dif Presion [Pa]- INA 219// +bkr(fA123) *bkr(fB123)');
+%     hold on; %Esto va siempre?
+%     drawnow;
+%     
+%     subplot(212)
+%     plot(i,I1(i),'dg');%,i,IIa1ADC(i),'b+');%,i,IIa2ADC(i),'k+',i,IIa3ADC(i),'r+',i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
+%     ylim([-300 300]);
+%     xlim([0 muestras]);
+%     title('Dif Presion [Pa]- ADC// +bkr(fA123)  *bkr(fB123)');
+%     hold on; %Esto va siempre?
+%     drawnow;
 
-    figure(1)
-    subplot(211)
-    plot(i,I(i),'^g',i,IIa1INA(i),'b+',i,IIa2INA(i),'k+',i,IIa3INA(i),'r+',i,IIIb1INA(i),'b*',i,IIIb2INA(i),'k*',i,IIIb3INA(i),'r*');
-    ylim([-300 300]);
-    xlim([0 muestras]);
-    title('Dif Presion [Pa]- INA 219// +bkr(fA123) *bkr(fB123)');
-    hold on; %Esto va siempre?
-    drawnow
-    
-    subplot(212)
-    plot(i,I1(i),'^g',i,IIa1ADC(i),'b+',i,IIa2ADC(i),'k+',i,IIa3ADC(i),'r+',i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
-    ylim([-300 300]);
-    xlim([0 muestras]);
-    title('Dif Presion [Pa]- ADC// +bkr(fA123)  *bkr(fB123)');
-    hold on; %Esto va siempre?
-    drawnow
-
-     figure(2) %Solo muestra sin filtros
-     subplot(211)
-     title('Diferencia de Presión sin filtros');
-     ylim([-300 300]);
-     xlim([0 muestras]);
-     plot(i,I(i),'*',i,I1(i),'x');
-     hold on;
-     drawnow
-
-     subplot(212)
-     title('Velocidad estimada');
-     ylim([-20 20]); %velocidades en valor absoluto????????????????
-     xlim([0 muestras]);
-     plot(i,JJJADC(i));
-     hold on;
-     drawnow
+%      figure(2) %Solo muestra sin filtros
+%      subplot(211)
+%      title('Diferencia de Presión sin filtros');
+%      ylim([-300 300]);
+%      xlim([0 muestras]);
+%      plot(i,I(i),'*',i,I1(i),'x');
+%      hold on;
+%      drawnow;
+% 
+%      subplot(212)
+%      title('Velocidad estimada');
+%      ylim([-20 20]); %velocidades en valor absoluto????????????????
+%      xlim([0 muestras]);
+%      plot(i,JJJADC(i));
+%      hold on;
+%      drawnow;
 end
 
 fclose(a);
@@ -111,5 +119,5 @@ dlmwrite('Tiempo.dat', tiempo, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Valoresmuestras.dat', muestra, 'delimiter', '\n', 'precision', '%.3f')
 
 %[A]=importdata('Temp.dat'); %%para leer despues los valores (En otro archivo)
-
+fin = 1
 end
