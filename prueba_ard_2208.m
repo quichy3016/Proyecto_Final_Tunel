@@ -42,12 +42,13 @@ for i=1:(muestras)
         break
     end 
     %I1(i)
-        if (rem(i,3)==0)
+        if (rem(i,4)==0)
             figure(1)
             title('Diferencia de Presión sin filtros');
             ylim([-300 300]);
             xlim([0 muestras]);
-            plot((i),I(i),'*');%,i,I1(i),'x');
+            %plot((i),I(i),'*');%,i,I1(i),'x');
+            plot(i,I1(i),'dg',i,IIa1ADC(i),'b+',i,IIa2ADC(i),'k+',i,IIa3ADC(i),'r+',i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
             hold on;
             %I(i)
             drawnow;
