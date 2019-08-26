@@ -1,6 +1,6 @@
 function prueba_ard_2208(muestras)
-delete(instrfind({'Port'},{'COM5'})); %%Modificar puerto
-a=serial('com5');
+delete(instrfind({'Port'},{'COM27'})); %%Modificar puerto
+a=serial('com27');
 set(a,'BaudRate',250000);
 fopen(a);%%Inicializa puerto
 A=fscanf(a,'%f');
@@ -42,7 +42,7 @@ for i=1:(muestras)
         break
     end 
     %I1(i)
-        if (rem(i,2)==0)
+        if (rem(i,3)==0)
             figure(1)
             title('Diferencia de Presión sin filtros');
             ylim([-300 300]);
