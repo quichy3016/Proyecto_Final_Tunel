@@ -47,12 +47,12 @@ float busvoltage=0,adc0=0;
 float velocidadA=0,velocidadB=0,velocidadA1=0,velocidadB1=0;
 /////////variables-offset/////////////
 int contador=0,cancelcontador=0;
-float tempref=17.4;
-float humref=55.5;
+float tempref=22;
+float humref=25.5;
 float presionref=101312;
 float offsett=0,offsett1=0,offsett2=0;
 float offseth=0,offseth1=0,offseth2=0;
-float offsetp2=0,offsetdf=0,offsetdf1=0;
+float offsetp2=0,offsetdf=2.5,offsetdf1=2.5;
 //////////////////////////////////////
 long tiempo=0;
 

@@ -1,6 +1,6 @@
 function prueba_ard_2208(muestras)
-delete(instrfind({'Port'},{'COM27'})); %%Modificar puerto
-a=serial('com27');
+delete(instrfind({'Port'},{'COM5'})); %%Modificar puerto
+a=serial('com5');
 set(a,'BaudRate',250000);
 fopen(a);%%Inicializa puerto
 A=fscanf(a,'%f');
@@ -44,11 +44,11 @@ for i=1:(muestras)
     %I1(i)
         if (rem(i,4)==0)
             figure(1)
-            title('Diferencia de Presión sin filtros');
+            title('Diferencia de Presion d(sF)- +(a2)');
             ylim([-300 300]);
             xlim([0 muestras]);
             %plot((i),I(i),'*');%,i,I1(i),'x');
-            plot(i,I1(i),'dg',i,IIa1ADC(i),'b+',i,IIa2ADC(i),'k+',i,IIa3ADC(i),'r+',i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
+            plot((i),I1(i),'g-*',(i),IIa2ADC(i),'r-x');%,i,IIa3ADC(i),'r+');%,i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
             hold on;
             %I(i)
             drawnow;
