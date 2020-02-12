@@ -1,6 +1,6 @@
 function prueba_0209(muestras)
-delete(instrfind({'Port'},{'COM5'})); %%Modificar puerto
-a=serial('com5');
+delete(instrfind({'Port'},{'COM27'})); %%Modificar puerto
+a=serial('com27');
 set(a,'BaudRate',250000);
 fopen(a);%%Inicializa puerto
 A=fscanf(a,'%f');
@@ -48,10 +48,10 @@ for i=1:(muestras)
             ylim([-300 300]);
             xlim([0 muestras]);
             %plot((i),I(i),'*');%,i,I1(i),'x');
-            plot((i),I1(i),'g-*',(i),IIa2ADC(i),'r-x');%,i,IIa3ADC(i),'r+');%,i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
+            plot((i),I1(i),'g-*',(i),IIa2ADC(i),'r-x',(i),IIa3ADC(i),'r+',(i),IIIb1ADC(i),'b*',(i),IIIb2ADC(i),'k*',(i),IIIb3ADC(i),'r*');
             hold on;
             %I(i)
-            drawnow;
+            drawnow limitrate;
         end
 %     subplot(211)
 %     plot(i,I(i),'^g',i,IIa1INA(i),'b+',i,IIa2INA(i),'k+',i,IIa3INA(i),'r+',i,IIIb1INA(i),'b*',i,IIIb2INA(i),'k*',i,IIIb3INA(i),'r*');
@@ -85,7 +85,7 @@ for i=1:(muestras)
 %      plot(i,JJJADC(i));
 %      hold on;
 %      drawnow;
-I1(i)
+I1(i);
 end
 
 fclose(a);
@@ -121,5 +121,5 @@ dlmwrite('Tiempo.dat', tiempo, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Valoresmuestras.dat', muestra, 'delimiter', '\n', 'precision', '%.3f')
 
 %[A]=importdata('Temp.dat'); %%para leer despues los valores (En otro archivo)
-fin = 1
+fin = 1;
 end

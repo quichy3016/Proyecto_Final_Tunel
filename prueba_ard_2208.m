@@ -1,6 +1,6 @@
 function prueba_ard_2208(muestras)
-delete(instrfind({'Port'},{'COM5'})); %%Modificar puerto
-a=serial('com5');
+delete(instrfind({'Port'},{'COM27'})); %%Modificar puerto
+a=serial('com27');
 set(a,'BaudRate',250000);
 fopen(a);%%Inicializa puerto
 A=fscanf(a,'%f');
@@ -51,7 +51,7 @@ for i=1:(muestras)
             plot((i),I1(i),'g-*',(i),IIa2ADC(i),'r-x');%,i,IIa3ADC(i),'r+');%,i,IIIb1ADC(i),'b*',i,IIIb2ADC(i),'k*',i,IIIb3ADC(i),'r*');
             hold on;
             %I(i)
-            drawnow;
+            drawnow limitrate;
         end
 %     subplot(211)
 %     plot(i,I(i),'^g',i,IIa1INA(i),'b+',i,IIa2INA(i),'k+',i,IIa3INA(i),'r+',i,IIIb1INA(i),'b*',i,IIIb2INA(i),'k*',i,IIIb3INA(i),'r*');
