@@ -1,10 +1,10 @@
 function cargar_1303
 %%para leer despues los valores
-[A]=importdata('Temp.dat'); %%SHT31
-[B]=importdata('Humi.dat'); %%SHT31
+%[A]=importdata('Temp.dat'); %%SHT31
+%[B]=importdata('Humi.dat'); %%SHT31
 
-[C]=importdata('Temp1.dat'); %%SHT21
-[D]=importdata('Humi1.dat'); %%SHT21
+%[C]=importdata('Temp1.dat'); %%SHT21
+%[D]=importdata('Humi1.dat'); %%SHT21
 
 [E]=importdata('Temp2.dat'); %%BME280
 [F]=importdata('Humi2.dat'); %%BME280

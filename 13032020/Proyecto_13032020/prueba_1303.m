@@ -9,21 +9,17 @@ s=0;
 for i=1:(muestras)
 
     A=fscanf(a,'%f');
-    Temp(i)=A(1,1); %SHT31
-    Humi(i)=A(2,1);
-    Temp1(i)=A(3,1); %SHT21
-    Humi1(i)=A(4,1);
-    Temp2(i)=A(5,1); %BME280
-    Humi2(i)=A(6,1);
-    Pres2(i)=A(7,1);
-    H1(i)=A(8,1); %ADC Voltaje 
-    I1(i)=A(9,1); %ADC DdP
-    IIa1ADC(i)=A(10,1); %DdP ADC fA1
-    IIIb1ADC(i)=A(11,1); %DdP ADC fB1
-    JJJADC(i)=A(12,1); %ADC v sF
-    JJJADCb2(i)=A(13,1); %ADC v fB2
-    tiempo(i)=A(14,1);
-    paro(i)=A(15,1);
+    Temp2(i)=A(1,1); %BME280
+    Humi2(i)=A(2,1);
+    Pres2(i)=A(3,1);
+    H1(i)=A(4,1); %ADC Voltaje 
+    I1(i)=A(5,1); %ADC DdP
+    IIa1ADC(i)=A(6,1); %DdP ADC fA1
+    IIIb1ADC(i)=A(7,1); %DdP ADC fB1
+    JJJADC(i)=A(8,1); %ADC v sF
+    JJJADCb2(i)=A(9,1); %ADC v fB2
+    tiempo(i)=A(10,1);
+    paro(i)=A(11,1);
     muestra(i)=i;
 
     if (paro(i) == 0)
@@ -36,7 +32,7 @@ for i=1:(muestras)
             ylim([-300 300]);
             xlim([0 muestras]);
             %plot((i),I(i),'*');%,i,I1(i),'x');
-            plot((i),I1(i),'g-*',(i),IIa2ADC(i),'r-x',(i),IIa3ADC(i),'r+',(i),IIIb1ADC(i),'b*',(i),IIIb2ADC(i),'k*',(i),IIIb3ADC(i),'r*');
+            plot((i),I1(i),'g-*');
             hold on;
             %I(i)
             drawnow limitrate;
@@ -73,17 +69,13 @@ for i=1:(muestras)
 %      plot(i,JJJADC(i));
 %      hold on;
 %      drawnow;
-I1(i);
+%I1(i);
 end
 
 fclose(a);
 delete(a);
 
 %%Genero los archivos .dat
-dlmwrite('Temp.dat', Temp, 'delimiter', '\n', 'precision', '%.3f')
-dlmwrite('Humi.dat', Humi, 'delimiter', '\n', 'precision', '%.3f')
-dlmwrite('Temp1.dat', Temp1, 'delimiter', '\n', 'precision', '%.3f')
-dlmwrite('Humi1.dat', Humi1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Temp2.dat', Temp2, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Humi2.dat', Humi2, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Pres2.dat', Pres2, 'delimiter', '\n', 'precision', '%.3f')

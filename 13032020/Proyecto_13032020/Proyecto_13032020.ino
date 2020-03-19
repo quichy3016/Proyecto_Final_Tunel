@@ -10,6 +10,9 @@ ExponentialFilter<float> ADCFilter1(30,0);
 float Y=0.0;
 float alpha1=0.2,alpha2=0.5,alpha3=0.9;
 float S21=Y,S22=Y,S23=Y;
+
+//Libreria PWM//
+#include <TimerOne.h>
 ///Sensores e INA
 #include "Adafruit_SHT31.h"
 #include "Adafruit_Si7021.h"
@@ -49,7 +52,7 @@ float offseth=0,offseth1=0,offseth2=0;
 float offsetp2=0,offsetdf=2.5,offsetdf1=2.5;
 //////////////////////////////////////
 long tiempo=0;
-
+int pw=0;
 void setup() {
   Serial.begin(250000);
   //////SHT31////////
@@ -74,6 +77,8 @@ void setup() {
   ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
   pinMode(7,INPUT_PULLUP);
+  ///Inicializo pwm//
+  Timer1.initialize(5);
 }
 
 void loop() {
@@ -82,6 +87,7 @@ void loop() {
   difPresion();
   vel_tiempo();
   imprimir_datos();
+  timer_pwm();
   boolean paro = digitalRead(7);
   Serial.println(paro);
   //delay(1000);
