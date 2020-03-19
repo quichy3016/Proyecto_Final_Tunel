@@ -4,17 +4,11 @@
 //https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
 #include "Filter.h" 
 #include "MegunoLink.h"
-ExponentialFilter<float> INAFilter1(30,0);
-ExponentialFilter<float> INAFilter2(50,0);
-ExponentialFilter<float> INAFilter3(80,0);
 ExponentialFilter<float> ADCFilter1(30,0);
-ExponentialFilter<float> ADCFilter2(50,0);
-ExponentialFilter<float> ADCFilter3(80,0);
 //FiltroB   
 //https://www.youtube.com/watch?v=QGDG5v_UnIk
 float Y=0.0;
 float alpha1=0.2,alpha2=0.5,alpha3=0.9;
-float S11=Y,S12=Y,S13=Y;
 float S21=Y,S22=Y,S23=Y;
 ///Sensores e INA
 #include "Adafruit_SHT31.h"
@@ -31,7 +25,7 @@ Adafruit_Si7021 sensor = Adafruit_Si7021();
 //////BME280//////////////////////////
 Adafruit_BME280 bme; // I2C
 ///////INA-219////////////////////////
-Adafruit_INA219 ina219;
+//Adafruit_INA219 ina219;
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
 /////Variables THP ///////////////////
@@ -74,8 +68,8 @@ void setup() {
     while (1);
   }
   //////INA-219///////////////////////
-  ina219.begin();
-  ina219.setCalibration_16V_400mA();
+//  ina219.begin();
+//  ina219.setCalibration_16V_400mA();
   /////ADS1115///////////////////////
   ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
@@ -83,7 +77,7 @@ void setup() {
 }
 
 void loop() {
-  calculo_offset();
+  //calculo_offset();
   THP(); 
   difPresion();
   vel_tiempo();
