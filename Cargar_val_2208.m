@@ -84,7 +84,8 @@ csvwrite('csvlist1.csv',ALL);
     title('Dif Presion [Pa]- ADC// *bkr(fB123)');
 
     figure(4)
-    plot(T,JJJADC,'o',T,JJJADCb2,'x');
+    plot(M,JJJADC,'o',M,JJJADCb2,'x');
+    %%plot(T,JJJADCb2,'x');
     ylim([0 25]);
     title('Velocidad de aire [m/s] o(sF) x(fB2ADC)');
 
