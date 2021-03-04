@@ -26,19 +26,21 @@ function cargar_1303
 [T]=importdata('Tiempo.dat'); %%vector de tiempo
 [M]=importdata('Valoresmuestras.dat'); %%valor de muestras
 
-[ALL]=[A,B,C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,JJJADC,JJJADCb2,T,M];
+%%[ALL]=[A,B,C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,JJJADC,JJJADCb2,T,M];
 
-csvwrite('csvlist1.csv',ALL);
+%%csvwrite('csvlist1.csv',ALL);
 
 
     figure(1)
     subplot(311)
-    plot(T,A,'b-o',T,C,'r-^',T,E,'k-x');
+    %%plot(T,A,'b-o',T,C,'r-^',T,E,'k-x');
+    plot(T,E,'k-x');
     ylim([15 35]);
     title('Temperatura [°C]- o(SHT31) ^(SHT21) x(BME280)');
     
     subplot(312)
-    plot(T,B,'b-o',T,D,'r-^',T,F,'k-x');
+    %%plot(T,B,'b-o',T,D,'r-^',T,F,'k-x');
+    plot(T,F,'k-x');
     ylim([10 60]);
     title('Humedad [%]- o(SHT31) ^(SHT21) x(BME280)');
 
@@ -59,15 +61,15 @@ csvwrite('csvlist1.csv',ALL);
 %     title('Dif Presion [Pa]- INA 219// *bkr(fB123)');
 
     figure (3)
-    subplot(211)
-    plot(T,I1,'^-g',T,IIa1ADC,'b-x');%,T,IIa2ADC,'k-x');%,T,IIa3ADC,'r-x'); 
+    %%subplot(211)
+    plot(T,I1,'^-g',T,IIa1ADC,'b-x',T,IIIb1ADC,'r-*');%,T,IIa2ADC,'k-x');%,T,IIa3ADC,'r-x'); 
     ylim([-300 300]);
     title('Dif Presion [Pa]- ADC// xbkr(fA123)');
 
-    subplot(212)
-    plot(T,I1,'^-g',T,IIIb1ADC,'b-*');%,T,IIIb2ADC,'k-*');%,T,IIIb3ADC),'r-*'); 
-    ylim([-300 300]);
-    title('Dif Presion [Pa]- ADC// *bkr(fB123)');
+    %%subplot(212)
+    %plot(T,I1,'^-g',T,IIIb1ADC,'b-*');%,T,IIIb2ADC,'k-*');%,T,IIIb3ADC),'r-*'); 
+    %ylim([-300 300]);
+    %title('Dif Presion [Pa]- ADC// *bkr(fB123)');
 
     figure(4)
     plot(T,JJJADC,'o',T,JJJADCb2,'x');
@@ -75,7 +77,7 @@ csvwrite('csvlist1.csv',ALL);
     title('Velocidad de aire [m/s] o(sF) x(fB2ADC)');
 
     figure(5)
-    plot(T,I1,'^-g',T,I,'*-b');
+    plot(T,I1,'^-g');
      ylim([-300 300]);
     title('Dif Presion [Pa]- ADC ^g -INA b*');
 
