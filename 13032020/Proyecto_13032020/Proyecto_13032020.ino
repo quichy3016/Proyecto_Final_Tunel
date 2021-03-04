@@ -18,7 +18,7 @@ float S21=Y,S22=Y,S23=Y;
 #include "Adafruit_Si7021.h"
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
-#include <Adafruit_INA219.h>
+//#include <Adafruit_INA219.h>     Sacamos INA 04/03
 #include <Adafruit_ADS1015.h>
 
 /////SHT31////////////////////////////
@@ -28,7 +28,7 @@ Adafruit_Si7021 sensor = Adafruit_Si7021();
 //////BME280//////////////////////////
 Adafruit_BME280 bme; // I2C
 ///////INA-219////////////////////////
-//Adafruit_INA219 ina219;
+//Adafruit_INA219 ina219;          Sacamos INA 04/03
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
 /////Variables THP ///////////////////
@@ -72,7 +72,7 @@ void setup() {
   }
   //////INA-219///////////////////////
 //  ina219.begin();
-//  ina219.setCalibration_16V_400mA();
+//  ina219.setCalibration_16V_400mA();         Sacamos INA 04/03
   /////ADS1115///////////////////////
   ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
