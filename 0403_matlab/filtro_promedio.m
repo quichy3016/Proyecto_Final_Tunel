@@ -1,4 +1,5 @@
 [A]=importdata('VelADC.dat'); 
+[A2]=importdata('VelADCb2.dat'); 
 [T]=importdata('Tiempo.dat'); 
 [M]=importdata('Valoresmuestras.dat'); 
 %A=[2;5;8;11;8;2;7;5];
@@ -11,7 +12,7 @@ Pant=0;
 c=1;
 l=1;
 k=1;
-m=28;
+m=22;
 F=0;
 for i=1:1:(N-m)
     T1(i)=T(i+m);
@@ -20,7 +21,7 @@ T1(N-m+1)=T(N);
 vuelta()
 T=T/1000;
 T1=T1/1000;
-plot(T,A,'r-o',T1,F,'g-x')
+plot(T,A,'r-o',T1,F,'g-x',T,A2,'b-^')
 
 
 function vuelta
