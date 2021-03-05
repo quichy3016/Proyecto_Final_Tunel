@@ -11,48 +11,16 @@ Pant=0;
 c=1;
 l=1;
 k=1;
-m=25;
+m=28;
 F=0;
 for i=1:1:(N-m)
     T1(i)=T(i+m);
 end
 T1(N-m+1)=T(N);
 vuelta()
-
-function vuelta1()
-global c l k m Pant P N A
-N
-c
-end
-%%j= zeros(n,1);
-%%A1=0;
-%%j = float('single');
-%%a=5.5
-
-% for i=1:1:n
-%     if i==1
-%         j(i)=A(i);
-%         A1=j(i);
-%     else
-%         j(i)=(A(i)+A1)/2;
-%         A1=j(i);
-%     end
-%    
-% end
-
-% m=3;
-% for i=1:1:n
-%     if i<m
-%         j(i)=A(i);
-%         A1=j(i); %% revisar
-%     else
-%         for k=1:1:m
-%              g=A(k)+A1;
-%              A1=g;
-%         end
-%         H(i)=g/n;
-%     end
-% end
+T=T/1000;
+T1=T1/1000;
+plot(T,A,'r-o',T1,F,'g-x')
 
 
 function vuelta
