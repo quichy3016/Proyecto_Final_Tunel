@@ -1,10 +1,10 @@
 void imprimir_datos(){
 
-   // Serial.print(t,3); Serial.print("\t");
-   // Serial.print(h,3); Serial.print("\t");
+    //Serial.print(t,3); Serial.print("\t");
+    //Serial.print(h,3); Serial.print("\t");
 
-    //Serial.print(t1,3); Serial.print("\t");
-    //Serial.print(h1,3);Serial.print("\t");
+    Serial.print(t1,3); Serial.print("\t");
+    Serial.print(h1,3);Serial.print("\t");
 
     Serial.print(t2,3);Serial.print(" ");
     Serial.print(h2,3);Serial.print(" ");

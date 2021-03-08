@@ -5,8 +5,8 @@ void THP(){
   
 
   ////////SHT21/////////////////////////
-  //t1=sensor.readTemperature()-offsett1;
-  //h1=sensor.readHumidity()-offseth1;
+  t1=sensor.readTemperature()-offsett1;
+  h1=sensor.readHumidity()-offseth1;
   
   
   /////////BME280///////////////////////

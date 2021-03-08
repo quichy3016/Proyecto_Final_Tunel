@@ -14,15 +14,12 @@ float S21=Y,S22=Y,S23=Y;
 //Libreria PWM//
 #include <TimerOne.h>
 ///Sensores e INA
-#include "Adafruit_SHT31.h"
 #include "Adafruit_Si7021.h"
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h>
 //#include <Adafruit_INA219.h>     Sacamos INA 04/03
 #include <Adafruit_ADS1015.h>
 
-/////SHT31////////////////////////////
-Adafruit_SHT31 sht31 = Adafruit_SHT31();
 //////DHT21//////////////////////////
 Adafruit_Si7021 sensor = Adafruit_Si7021();
 //////BME280//////////////////////////
@@ -55,18 +52,13 @@ long tiempo=0;
 int pw=0;
 void setup() {
   Serial.begin(250000);
-  //////SHT31////////
-  if (! sht31.begin(0x44)) {   // Selecciono direccion i2c
-    Serial.println("Problema sensor - SHT31");
-    while (1) delay(1);
-  }
   /////SHT21/////////////////
   if (!sensor.begin()) {
     Serial.println("Problema sensor - Si7021");
     while (true);
   }
   /////BME280////////////////////
-  if (!bme.begin()) {
+  if (!bme.begin(0x76)) {
     Serial.println("Problema sensor - BME280");
     while (1);
   }
