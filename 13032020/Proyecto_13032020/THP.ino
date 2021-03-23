@@ -6,6 +6,7 @@ void THP(){
 
   ////////SHT21/////////////////////////
   t1=sensor.readTemperature()-offsett1;
+  T1=t1+273.15;
   h1=sensor.readHumidity()-offseth1;
   
   

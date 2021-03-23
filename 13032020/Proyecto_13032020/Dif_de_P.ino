@@ -8,5 +8,6 @@ void difPresion(){
   
   S21=(alpha1*presionSF2)+((1-alpha1)*S21); //FiltroB1
 
+  ADCFilterM = medianFilter.AddValue(presionSF2);
   
 }
