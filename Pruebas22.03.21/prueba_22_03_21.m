@@ -14,22 +14,24 @@ for i=1:(muestras)
     Temp2(i)=A(3,1); %BME280
     Humi2(i)=A(4,1);
     Pres2(i)=A(5,1);
-    H1(i)= A(6,1); %ADC Voltaje 
-    I1(i)= A(7,1); %ADC DdP
-    IIa1ADC(i)=A(8,1); %DdP ADC fA1
-    IIIb1ADC(i)=A(9,1); %DdP ADC fB1
-    IIIIb1ADC(i)=A(10,1); %DdP ADC median filter
-    JJJADC(i)=A(11,1); %ADC v sF
-    JJJADCb2(i)=A(12,1); %ADC v fB2
-    tiempo(i)=A(13,1);
-    paro(i)=A(14,1);
+    Den(i)=A(6,1);
+    H1(i)= A(7,1); %ADC Voltaje 
+    I1(i)= A(8,1); %ADC DdP SF
+    IIa1ADC(i)=A(9,1); %DdP ADC fA1
+    IIIb1ADC(i)=A(10,1); %DdP ADC fB1
+    IIIIb1ADC(i)=A(11,1); %DdP ADC median filter
+    JJJADC(i)=A(12,1); %ADC v sF
+    JJJADCb2(i)=A(13,1); %ADC v fB2
+    tiempo(i)=A(14,1);
+    PWM(i)=A(15,1);
+    paro(i)=A(16,1);
     muestra(i)=i;
 
     if (paro(i) == 0)
         break
     end 
     %I1(i)
-        if (rem(i,4)==0)
+        if (rem(i,1)==0)
             figure(1)
             title('Diferencia de Presion d(sF)- +(a2)');
             ylim([-300 300]);
@@ -79,16 +81,21 @@ fclose(a);
 delete(a);
 
 %%Genero los archivos .dat
+dlmwrite('Temp1.dat', Temp1, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('Humi1.dat', Humi1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Temp2.dat', Temp2, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Humi2.dat', Humi2, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Pres2.dat', Pres2, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('Den.dat', Den, 'delimiter', '\n', 'precision', '%.5f')
 dlmwrite('VolADC.dat', H1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('DifP1.dat', I1, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('DifPcFAv1ADC.dat', IIa1ADC, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('DifPcFBv1ADC.dat', IIIb1ADC, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('DifPcFMv1ADC.dat', IIIIb1ADC, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('VelADC.dat', JJJADC, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('VelADCb2.dat', JJJADCb2, 'delimiter', '\n', 'precision', '%.3f')
 dlmwrite('Tiempo.dat', tiempo, 'delimiter', '\n', 'precision', '%.3f')
+dlmwrite('PWM.dat', PWM, 'delimiter', '\n', 'precision', '%.1f')
 dlmwrite('Valoresmuestras.dat', muestra, 'delimiter', '\n', 'precision', '%.3f')
 
 %[A]=importdata('Temp.dat'); %%para leer despues los valores (En otro archivo)

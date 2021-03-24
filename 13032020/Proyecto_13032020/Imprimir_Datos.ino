@@ -21,6 +21,6 @@ void imprimir_datos(){
     Serial.print(velocidadB,3);Serial.print(" ");
 
     Serial.print(tiempo);Serial.print(" ");//\t
-    Serial.print(pw);Serial.print(" ");
+    Serial.print(contador);Serial.print(" ");
 
 }

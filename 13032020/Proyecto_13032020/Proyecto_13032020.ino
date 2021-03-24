@@ -82,11 +82,12 @@ void setup() {
 
 void loop() {
   calculo_offset();
+  escalon();
   THP(); 
   difPresion();
   vel_tiempo();
   imprimir_datos();
-  timer_pwm();
+  //timer_pwm();
   boolean paro = digitalRead(7);
   Serial.println(paro);
   //delay(1000);
