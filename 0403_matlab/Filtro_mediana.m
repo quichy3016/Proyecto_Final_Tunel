@@ -4,7 +4,7 @@
 [T]=importdata('Tiempo.dat'); 
 [M]=importdata('Valoresmuestras.dat'); 
 T=T/1000;
-
+A=-A;
 % for i=1:1:(N-m)
 %     T1(i)=T(i+m);
 % end

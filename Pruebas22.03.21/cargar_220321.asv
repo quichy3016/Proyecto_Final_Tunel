@@ -29,7 +29,7 @@ function cargar_220321
 [Den]=importdata('Den.dat'); %%vector de tiempo
 [M]=importdata('Valoresmuestras.dat'); %%valor de muestras
 
-[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
+[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIb1ADC,JJJADC,JJJADCb2,T,M];
 
 csvwrite('csvlist1.csv',ALL);
 

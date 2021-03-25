@@ -10,6 +10,6 @@ void escalon(){
     if (tiempo>=15000) {
       pw=600;
     }
-
+  Timer1.pwm(9, pw);
    
   }

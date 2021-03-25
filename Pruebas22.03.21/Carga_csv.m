@@ -1,40 +1,34 @@
-function cargar_220321
-%%para leer despues los valores
-%[A]=importdata('Temp1.dat'); %%SHT31
-%[B]=importdata('Humi1.dat'); %%SHT31
+%[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
 
-[C]=importdata('Temp1.dat'); %%SHT21
-[D]=importdata('Humi1.dat'); %%SHT21
+[ALL]=importdata('csvlist1.csv'); %%valor de muestras
 
-[E]=importdata('Temp2.dat'); %%BME280
-[F]=importdata('Humi2.dat'); %%BME280
-[G]=importdata('Pres2.dat'); %%BME280
+[C]=ALL(:,1)
+[D]=ALL(:,2)
+
+[E]=ALL(:,3)
+[F]=ALL(:,4)
+[G]=ALL(:,5)
 
 %%%%%%% Presion diferencial %%%%%%
 
-[H1]=importdata('VolADC.dat'); %%ADC Voltaje
-[I1]=importdata('DifP1.dat'); %%ADC Diferencia de presion
+[H1]=ALL(:,6)
+[I1]=ALL(:,7)
 
-[IIa1ADC]=importdata('DifPcFAv1ADC.dat'); %%ADC DdP fA1
-[IIIb1ADC]=importdata('DifPcFBv1ADC.dat'); %%ADC DdP fB1
-[IIIIb1ADC]=importdata('DifPcFMv1ADC.dat'); %%ADC DdP fM
+[IIa1ADC]=ALL(:,8)
+[IIIb1ADC]=ALL(:,9)
+[IIIIb1ADC]=ALL(:,10)
 
 
 %%Velocidad
-[JJJADC]=importdata('VelADC.dat'); %% ADC v sFiltro
-[JJJADCb2]=importdata('VelADCb2.dat'); %%V ADC v fB2
+[JJJADC]=ALL(:,11)
+[JJJADCb2]=ALL(:,12)
 
-[T]=importdata('Tiempo.dat'); %%vector de tiempo
-[PWM]=importdata('PWM.dat'); %%vector de tiempo
-[Den]=importdata('Den.dat'); %%vector de tiempo
-[M]=importdata('Valoresmuestras.dat'); %%valor de muestras
+[T]=ALL(:,13)
+[PWM]=ALL(:,14)
+[Den]=ALL(:,15)
+[M]=ALL(:,16)
 
-[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
-
-csvwrite('csvlist1.csv',ALL);
-
-
-    figure(1)
+figure(1)
     subplot(311)
     %%plot(T,A,'b-o',T,C,'r-^',T,E,'k-x');
     plot(T,E,'k-x');
@@ -81,5 +75,3 @@ csvwrite('csvlist1.csv',ALL);
      ylim([0 2]);
     title('Densidad del Aire - T (ms)*');
 
-
-end
