@@ -10,8 +10,14 @@ void vel_tiempo(){
     //////////Calculo velocidad////////////////
   //velocidadB = sqrt((2*abs(presionCF21))/1.219);
   //velocidadA = sqrt(2*abs(presionSF2)/1.219);
-  velocidadB = sqrt((2*abs(ADCFilterM))/den);
-  velocidadA = sqrt((2*abs(presionSF2))/den);
+  if (ADCFilterM<0){
+    ADCFilterM1=0;
+  } else ADCFilterM1=ADCFilterM;
+  if (presionSF2<0){
+    presionSF21=0;
+  } else presionSF21=presionSF2;
+  velocidadB = sqrt((2*(ADCFilterM1))/den);
+  velocidadA = sqrt((2*(presionSF21))/den);
   
 
   /////////////////////////////////////////

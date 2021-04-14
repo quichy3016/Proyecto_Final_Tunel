@@ -34,13 +34,13 @@ for i=1:(muestras)
         if (rem(i,1)==0)
             figure(1)
             title('Diferencia de Presion d(sF)- +(a2)');
-            ylim([-300 300]);
+            ylim([-300 1000]);
             xlim([0 muestras]);
-            %plot((i),I(i),'*');%,i,I1(i),'x');
-            plot((i),I1(i),'g-*');
+            plot((i),JJJADCb2(i),'g-*',(i),PWM(i),'b-o');%,i,I1(i),'x');
+            %%plot((i),I1(i),'g-*');
             hold on;
             %I(i)
-            drawnow limitrate;
+            drawnow ;%%limitrate;
         end
 %     subplot(211)
 %     plot(i,I(i),'^g',i,IIa1INA(i),'b+',i,IIa2INA(i),'k+',i,IIa3INA(i),'r+',i,IIIb1INA(i),'b*',i,IIIb2INA(i),'k*',i,IIIb3INA(i),'r*');

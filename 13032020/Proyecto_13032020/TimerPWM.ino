@@ -3,5 +3,5 @@ void timer_pwm(){
     pw=0;
     
 Timer1.pwm(9, pw);
-pw=pw+1;
+pw=pw+3;
 }

@@ -1,5 +1,9 @@
 #include <Arduino.h>
 #include <Wire.h>
+#include <SoftwareSerial.h>
+SoftwareSerial BT(2,3);
+char  Escalon;
+int Escalon1;
 ///FiltroA 
 //https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
 #include "MeanFilterLib.h"
@@ -34,8 +38,8 @@ float t=0,t1=0,t2=0;
 float h=0,h1=0,h2=0;
 float p2=0;
 /////Variables Dif - Presion//////////
-float presionSF=0,presionSF2=0;
-float presionCF1=0,presionCF2=0,presionCF3=0,ADCFilterM=0;
+float presionSF=0,presionSF2=0,presionSF21;
+float presionCF1=0,presionCF2=0,presionCF3=0,ADCFilterM=0,ADCFilterM1;
 float presionCF21=0,presionCF22=0,presionCF23=0;
 float busvoltage=0,adc0=0;
 //////Variables velocidad/////////////
@@ -79,12 +83,13 @@ void setup() {
   ///Inicializo pwm//
   Timer1.initialize(5);
 
-  
+  /////////Inicializo Bluetooth///////////
+  BT.begin(9600); 
 }
 
 void loop() {
   calculo_offset();
-  escalon();
+  escalon1();
   THP(); 
   difPresion();
   vel_tiempo();

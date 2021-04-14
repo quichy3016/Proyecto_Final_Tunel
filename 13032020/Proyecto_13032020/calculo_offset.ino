@@ -1,5 +1,5 @@
 void calculo_offset(){
-    if (contador<=30){
+    if (contador==30){
         offsett=0;//t-tempref;
         offsett1=0;//t1-tempref;
         offsett2=0;//t2-tempref;
@@ -17,4 +17,5 @@ void calculo_offset(){
     //if (cancelcontador==0){
     //    contador=contador+1;
     //}
+    contador=contador+1;
 }
