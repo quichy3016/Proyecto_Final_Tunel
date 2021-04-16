@@ -31,7 +31,7 @@ function cargar_220321
 
 [ALL]=[C,D,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
 
-csvwrite('Prueba_4_corriente.csv',ALL);
+csvwrite('Prueba_7_pote.csv',ALL);
 
 
     figure(1)
