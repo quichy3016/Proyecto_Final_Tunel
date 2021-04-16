@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
-SoftwareSerial BT(2,3);
+//SoftwareSerial BT(2,3);
 char  Escalon;
 int Escalon1;
 ///FiltroA 
@@ -18,7 +18,7 @@ ExponentialFilter<float> ADCFilter1(30,0);
 float Y=0.0;
 float alpha1=0.2,alpha2=0.5,alpha3=0.9;
 float S21=Y,S22=Y,S23=Y;
-
+int Timeoffset=10000;
 //Libreria PWM//
 #include <TimerOne.h>
 ///Sensores
@@ -65,7 +65,7 @@ float fpt,psv,xv,Z,den;
 long tiempo=0;
 int pw=0;
 void setup() {
-  Serial.begin(250000);
+  Serial.begin(115200);
   /////SHT21/////////////////
   if (!sensor.begin()) {
     Serial.println("Problema sensor - Si7021");
@@ -84,12 +84,12 @@ void setup() {
   Timer1.initialize(5);
 
   /////////Inicializo Bluetooth///////////
-  BT.begin(9600); 
+  
 }
 
 void loop() {
   calculo_offset();
-  escalon1();
+  escalon3();
   THP(); 
   difPresion();
   vel_tiempo();

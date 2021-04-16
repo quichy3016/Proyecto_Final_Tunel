@@ -1,47 +1,60 @@
 void escalon(){
   
-  if (tiempo>=5000 & tiempo<=10000 & pw<=200) {
-      pw=pw+3;
+  if (tiempo>=20000 & tiempo<=40000 & pw<=250) {
+      pw=pw+2;
     }
   
-  if (tiempo>=10000 & tiempo<=15000) {
-      pw=200;
+  if (tiempo>=40000 & tiempo<=50000) {//13+10hz
+      pw=250;
     }
-    if (tiempo>=15000) {
+    if (tiempo>=50000) {//13+20hz
+      pw=500;
+    }
+
+    if (tiempo>=60000) {//13+24hz
       pw=600;
+    }
+    if (tiempo>=70000) {//13+22hz
+      pw=550;
+    }
+    if (tiempo>=80000) {//13+18hz
+      pw=450;
+    }
+    if (tiempo>=90000) {//13+14hz
+      pw=350;
+    }
+    if (tiempo>=100000) {//13hz
+      pw=0;
     }
   Timer1.pwm(9, pw);
    
   }
 
-  void escalon1(){
-  
-  if (tiempo>=5000 & tiempo<=10000 & pw<=200) {
-      pw=pw+3;
-    }
-  Timer1.pwm(9, pw);
 
-   if(BT.available())    // Si llega un dato por el puerto BT se envía al monitor serial
-  {
-    Escalon = BT.read();
-    if (Escalon == 'A'){
-        Escalon1 = 125;
-      }
-    if (Escalon== 'B'){
-      Escalon1 = 350;
-    }
-    if (Escalon== 'C'){
-      Escalon1 = 512;
-    }
-    if (Escalon== 'D'){
-      Escalon1 = 850;
-    }
-    if (Escalon== 'E'){
-      Escalon1 = 950;
-    }
-    
-    pw=Escalon1;
-    }
+  void escalon2(){
+  
+  pw=analogRead(A0);
+  Timer1.pwm(9, pw);
+   
   }
 
+void escalon3(){
+  
+  if (tiempo>=20000 & tiempo<=33000 ) {
+      pw=100;
+    }
+  
+  if (tiempo>=33000 & tiempo<=40000) {//13+10hz
+      pw=200;
+    }
+    if (tiempo>=40000 & tiempo<=50000){//13+20hz
+      pw=50;
+    }
+     if (tiempo>=50000) {//13+20hz
+      pw=0;
+    }
+
+  Timer1.pwm(9, pw);
+   
+  }
   

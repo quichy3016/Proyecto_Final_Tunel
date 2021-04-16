@@ -6,8 +6,8 @@ function cargar_220321
 [C]=importdata('Temp1.dat'); %%SHT21
 [D]=importdata('Humi1.dat'); %%SHT21
 
-[E]=importdata('Temp2.dat'); %%BME280
-[F]=importdata('Humi2.dat'); %%BME280
+%[E]=importdata('Temp2.dat'); %%BME280
+%[F]=importdata('Humi2.dat'); %%BME280
 [G]=importdata('Pres2.dat'); %%BME280
 
 %%%%%%% Presion diferencial %%%%%%
@@ -29,20 +29,20 @@ function cargar_220321
 [Den]=importdata('Den.dat'); %%vector de tiempo
 [M]=importdata('Valoresmuestras.dat'); %%valor de muestras
 
-%%[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
+[ALL]=[C,D,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
 
-%%csvwrite('csvlist1.csv',ALL);
+csvwrite('Prueba_4_corriente.csv',ALL);
 
 
     figure(1)
     subplot(311)
-    plot(T,C,'r-^',T,E,'k-x');
+    plot(T,C,'r-^');%,E,'k-x');
     %%plot(T,E,'k-x');
     ylim([15 35]);
     title('Temperatura [°C]-^(SHT21) x(BME280)');
     
     subplot(312)
-    plot(T,D,'r-^',T,F,'k-x');
+    plot(T,D,'r-^');%,F,'k-x');
     %%plot(T,F,'k-x');
     ylim([10 60]);
     title('Humedad [%]-  ^(SHT21) x(BME280)');

@@ -31,12 +31,12 @@ for i=1:(muestras)
         break
     end 
     %I1(i)
-        if (rem(i,5)==0)
+        if (rem(i,3)==0)
             figure(1)
             title('Diferencia de Presion d(sF)- +(a2)');
-            ylim([-300 300]);
+            ylim([-300 1000]);
             xlim([0 muestras]);
-            plot((i),I1(i),'g-*');%(i),PWM(i),'b-o');%,i,I1(i),'x');
+            plot((i),I1(i),'g-*',(i),PWM(i),'b-o');%,i,I1(i),'x');
             %%plot((i),I1(i),'g-*');
             hold on;
             %I(i)
