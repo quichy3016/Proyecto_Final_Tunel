@@ -1,5 +1,5 @@
 void escalon(){
-  
+  //HOLA//
   if (tiempo>=20000 & tiempo<=40000 & pw<=250) {
       pw=pw+2;
     }
