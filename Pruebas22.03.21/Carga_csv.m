@@ -1,6 +1,6 @@
 %[ALL]=[C,D,E,F,G,H1,I1,IIa1ADC,IIIb1ADC,IIIIb1ADC,JJJADC,JJJADCb2,T,PWM,Den,M];
 
-[ALL]=importdata('Prueba_3_corriente.csv'); %%valor de muestras
+[ALL]=importdata('Prueba_6.csv'); %%valor de muestras
 
 [C]=ALL(:,1)
 [D]=ALL(:,2)

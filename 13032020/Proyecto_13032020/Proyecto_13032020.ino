@@ -62,6 +62,8 @@ float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056
 float P=101220,H=39.8,T=17.7,T1=290.85;
 float fpt,psv,xv,Z,den;
 //////////////////////////
+/////Variables Funcion Aceleracion/////
+
 long tiempo=0;
 int pw=0;
 void setup() {
