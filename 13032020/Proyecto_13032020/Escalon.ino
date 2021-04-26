@@ -41,16 +41,16 @@ void escalon(){
 void escalon3(){
   
   if (tiempo>=20000 & tiempo<=33000 ) {
-      pw=100;
+      pw=320;
     }
   
-  if (tiempo>=33000 & tiempo<=40000) {//13+10hz
-      pw=200;
+  if (tiempo>=33000 & tiempo<=45000) {//13+10hz
+      pw=450;
     }
-    if (tiempo>=40000 & tiempo<=50000){//13+20hz
-      pw=50;
+    if (tiempo>=45000 & tiempo<=55000){//13+20hz
+      pw=320;
     }
-     if (tiempo>=50000) {//13+20hz
+     if (tiempo>=55000) {//13+20hz
       pw=0;
     }
 
