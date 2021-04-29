@@ -91,13 +91,13 @@ void setup() {
 
 void loop() {
   calculo_offset();
-  escalon3();
+  escalon4();
   THP(); 
   difPresion();
   vel_tiempo();
   imprimir_datos();
   //timer_pwm();
   boolean paro = digitalRead(7);
-  Serial.println(paro);
+  Serial.print(paro);Serial.println(";");
   //delay(1000);
 }

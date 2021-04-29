@@ -41,16 +41,38 @@ void escalon(){
 void escalon3(){
   
   if (tiempo>=20000 & tiempo<=33000 ) {
-      pw=320;
+      pw=220;     //// supongo 18,33 Hz
     }
   
-  if (tiempo>=33000 & tiempo<=45000) {//13+10hz
-      pw=450;
+  if (tiempo>=33000 & tiempo<=45000) {//
+      pw=270;    /////Supongo 25 HZ
     }
-    if (tiempo>=45000 & tiempo<=55000){//13+20hz
-      pw=320;
+    if (tiempo>=45000 & tiempo<=55000){//
+      pw=220;  ////Supongo 18.33 Hz
     }
-     if (tiempo>=55000) {//13+20hz
+     if (tiempo>=55000) {//
+      pw=0;
+    }
+
+  Timer1.pwm(9, pw);
+   
+  }
+
+
+
+  void escalon4(){
+  
+  if (tiempo>=20000 & tiempo<=35000 ) {
+      pw=325;     //// supongo 23 Hz
+    }
+  
+  if (tiempo>=35000 & tiempo<=50000) {//
+      pw=595;    /////Supongo 35 HZ
+    }
+    if (tiempo>=50000 & tiempo<=65000){//
+      pw=325;  ////Supongo 23 Hz
+    }
+     if (tiempo>=55000) {//
       pw=0;
     }
 

@@ -16,11 +16,11 @@ void vel_tiempo(){
   if (presionSF2<0){
     presionSF21=0;
   } else presionSF21=presionSF2;
-  velocidadB = sqrt((2*(ADCFilterM1))/den);
-  velocidadA = sqrt((2*(presionSF21))/den);
+  velocidadB = sqrt((2*(abs(ADCFilterM1)))/den);
+  velocidadA = sqrt((2*(abs(presionSF21)))/den);
   
-  velocidadC = sqrt((2*(presionCF21))/den);
-  velocidadD = sqrt((2*(S21))/den);
+  velocidadC = sqrt((2*(abs(presionCF21)))/den);
+  velocidadD = sqrt((2*(abs(S21)))/den);
 
   /////////////////////////////////////////
   tiempo=millis();
