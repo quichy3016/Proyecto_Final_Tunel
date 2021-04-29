@@ -98,6 +98,6 @@ void loop() {
   imprimir_datos();
   //timer_pwm();
   boolean paro = digitalRead(7);
-  Serial.print(paro);Serial.println(";");
+  Serial.println(paro);//Serial.println(";");
   //delay(1000);
 }
