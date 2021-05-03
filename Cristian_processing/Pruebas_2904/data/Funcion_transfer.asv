@@ -44,17 +44,11 @@ h3=V1+H2*(U2-U1);
 figure(2)
 step(h3);
 
-a1=408;
-for i=a1:1:2500+a1;
-    A11(i-407,1)=K(i,1);
-    T11(i-407,1)=T(i,1);
-    O22(i-407,1)=O2(i,1);
-end
 
 
 
 [A1]=ScopeData1.time;
-[B1]=ScopeData1.signals(:,1).values;
-[C1]=ScopeData1.signals(:,2).values;
+[B1]=ScopeData1.signals.values;
+[C1]=ScopeData1.signals{;
 figure(3)
-plot(A1,B1,A1,C1+2,T11,A11,T11,O22+1.5)
+plot(A1,B1)
