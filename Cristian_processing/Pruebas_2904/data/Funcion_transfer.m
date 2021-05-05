@@ -1,6 +1,7 @@
 %usar solo con datos generados por PUTTY
 [ALL]=importdata('Corriente_7_putty.csv'); %%valor de muestras
 
+
 [B]=str2double(ALL.textdata(:,1)); %temp
 [C]=str2double(ALL.textdata(:,2));%hum
 %[D1]=ALL.textdata(:,3); %Presion->class "cell"
@@ -58,7 +59,17 @@ tao4=0.42;
 T4=0.6;
 
 
-H5= (k4/(1+tao4*s)^4)*exp(-T4*s)
+H5= (k4/(1+tao4*s)^4)*exp(-T4*s);
+
+%%%% de Segundo orden
+
+wn=1.326098609;
+epsi=0.768138662;
+epsi2=0.7;
+T2o=0.22;
+
+H6=(k4*wn^2)/(s^2+2*epsi2*wn*s+wn^2)
+
 
 a1=408;
 for i=a1:1:2500+a1;
@@ -66,6 +77,10 @@ for i=a1:1:2500+a1;
     T11(i-407,1)=T(i,1);
     O22(i-407,1)=O2(i,1);
 end
+
+
+
+
 
 
 
