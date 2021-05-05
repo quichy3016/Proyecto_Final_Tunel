@@ -34,20 +34,27 @@ T=T/1000;
 % %%2º orden estándar con retardo.
 % %%https://rua.ua.es/dspace/bitstream/10045/18965/1/Identificacion%20experimental%20de%20sistemas.pdf
 % %%pág14
-DQ=input('Ingresa sobreoscilacion ej 0.023: ');%0.023;%  sobreoscilacion
-tpQ=input('Ingresa tiempo pico ej 4: ');%4; % tiempo pico
-Dy=input('Ingresa Dy ej 1.62: ');%1.62; %
-Du=input('Ingresa Du ej 121: ');%121; %
+DQ=0.023;%  sobreoscilacion
+tpQ=3.7; % tiempo pico
+Dy=1.62; %
+Du=121; % 
+TQ=0.22; %retardo puro
+% DQ=input('Ingresa sobreoscilacion ej 0.023: ');%0.023;%  sobreoscilacion
+% tpQ=input('Ingresa tiempo pico ej 3,7: ');%3,7; % tiempo pico
+% Dy=input('Ingresa Dy ej 1.62: ');%1.62; %
+% Du=input('Ingresa Du ej 121: ');%121; %
+% TQ=input('Ingresa Retardo ej0.22: ');%0.22
 kQ=Dy/Du;
 syms eQ wQ;
 ecA=((-eQ*pi)/sqrt(1-eQ^2))-log(DQ)== 0;
 eQ= vpa(solve(ecA,eQ)); %valor epsilon
+e1=double(eQ);
 ecB=(pi/(wQ*(sqrt(1-eQ^2))))-tpQ==0;
 wQ= vpa(solve(ecB,wQ)); %valor ohmega
-e1=double(eQ);
+
 w1=double(wQ);
 s=tf('s');
-Q=tf((kQ*(w1)^2)/(s^2+2*e1+s+(w1)^2)*exp(-tpQ*s));
+Q=tf((kQ*(w1)^2)/(s^2+2*e1*s+(w1)^2)*exp(-TQ*s));
 Q_apro=pade(Q,1); %muestra la tf en forma de polinomio
 [nQ,dQ] = tfdata(Q_apro,'v');
 
@@ -55,8 +62,10 @@ Q_apro=pade(Q,1); %muestra la tf en forma de polinomio
 %%%%%Parámetros de Strejc con retardo
 %%%%%(https://rua.ua.es/dspace/bitstream/10045/18965/1/Identificacion%20experimental%20de%20sistemas.pdf)
 %%%%%pag 9.
-tu=input('Ingresa tu (Strejc) ej 1.19: ');%1.19; %modificar
-ta=input('Ingresa ta (Strejc) ej 1.89: ');%1.89; %modificar
+%tu=input('Ingresa tu (Strejc) ej 1.19: ');%1.19; %modificar
+%ta=input('Ingresa ta (Strejc) ej 1.89: ');%1.89; %modificar
+tu=1.19; %modificar
+ta=1.89; %modificar
 tu1=tu/2;
 TS=tu1;
 kS= Dy/Du;
@@ -89,6 +98,14 @@ S2_apro=pade(S2,1);
 [nS1,dS1] = tfdata(S1_apro,'v');%num y den para utilizar en Simulink
 [nS2,dS2] = tfdata(S2_apro,'v');%num y den para utilizar en Simulink
 %%%%%%%%FIN ESTIMACIÓN DE PLANTA
+
+
+%PROBAR ESTO DE SIMULINK
+
+open_system('D1_simuprueba');
+set_param(gcs,'SimulationMode','normal');
+set_param(gcs,'SimulationCommand','start');
+pause(1.5);
 
 %me falta ver que onda esto
 a1=408;
