@@ -51,7 +51,7 @@ float humref=30.7;
 float presionref=102540;
 float offsett=0,offsett1=0,offsett2=0;
 float offseth=0,offseth1=0,offseth2=0;
-float offsetp2=0,offsetdf=2.5,offsetdf1=2.5;
+float offsetp2=0,offsetdf=0,offsetdf1=2.574;
 //////////////////////////////////////
 ///Constantes Densidad/////
 float a0=0.00000158123,a1=-0.000000029331,a2=0.00000000011043;
@@ -62,10 +62,18 @@ float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056
 float P=101220,H=39.8,T=17.7,T1=290.85;
 float fpt,psv,xv,Z,den;
 //////////////////////////
-/////Variables Funcion Aceleracion/////
+/////Variables Entrada Serial/////
+String inputString = "";         // a String to hold incoming data
+bool stringComplete = false;  // whether the string is complete
+int inputString1=0;
+int datos[1];
+int data;
+#define DEBUG(a);
+
+
 
 long tiempo=0;
-int pw=0;
+int pw=0,pw1=0;
 void setup() {
   Serial.begin(115200);
   /////SHT21/////////////////
@@ -91,13 +99,58 @@ void setup() {
 
 void loop() {
   calculo_offset();
-  escalon4();
+  //escalonserial();
+  escalon22();
   THP(); 
   difPresion();
   vel_tiempo();
   imprimir_datos();
   //timer_pwm();
   boolean paro = digitalRead(7);
-  Serial.println(paro);//Serial.println(";");
+  Serial.print(paro);Serial.print(";");
+  Serial.print(h2,3);Serial.println(";");
   //delay(1000);
+
+
+//  if (stringComplete) {
+//    Serial.println(inputString);
+//    // clear the string:
+//    inputString = "";
+//    stringComplete = false;
+//  }
+//
+//  if (inputString1==65){
+//  digitalWrite(13,HIGH);
+//  }
+//  else{digitalWrite(13,LOW);}
+
+
+
+  
+}
+
+
+
+void serialEvent() {
+  while (Serial.available()) {
+
+    // get the new byte:
+    //char inChar = (char)Serial.read();
+    // add it to the inputString:
+    //inputString += inChar;
+    //inputString1=Serial.parseInt();
+    char buffer[6];
+    Serial.readBytesUntil('\n', buffer,6);
+    data = atoi(buffer);
+    //int data = Serial.readBytes(buffer,1);
+      //DEBUG((int)data);
+      inputString1=data;
+      //Serial.print(inputString1);
+      //Serial.println("sssssssssssssssssssssssssssssssssssssssssssss");
+    // if the incoming character is a newline, set a flag so the main loop can
+    // do something about it:
+//    if (inChar == '\n') {
+//      stringComplete = true;
+//    }
+  }
 }

@@ -1,7 +1,7 @@
 %usar solo con datos generados por PUTTY
 %usar solo con datos generados por processing
 
-[ALL]=csvread('Corriente_escalon5.csv'); %%valor de muestras
+[ALL]=csvread('Corriente_escalon4.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum
 [C]=ALL(:,4); %pres
@@ -21,7 +21,8 @@
 [P]=ALL(:,17); %paro
 T=T/1000;
 
-plot(T,O2,'b:',T,M,'r',T,K,'g',T,L,'y')
+%plot(T,O2,'b:',T,M,'r',T,K,'g',T,L,'y')
+plot(T,K)
 ylim([0 15]);
 
 
@@ -41,8 +42,8 @@ V1=6.1;
 s=tf('s');
 H2=(k/(ts*s+1))*exp(-T1*s);
 h3=V1+H2*(U2-U1);
-figure(2)
-step(h3);
+%figure(2)
+%step(h3);
 
 k3=0.01322314;
 ta=2;
@@ -67,11 +68,11 @@ epsi=0.768138662;
 epsi2=0.7;
 T2o=0.22;
 
-H6=(k4*wn^2)/(s^2+2*epsi2*wn*s+wn^2)
+H6=(k4*wn^2)/(s^2+2*epsi*wn*s+wn^2)
 
 
 a1=40;
-for i=a1:1:1504;
+for i=a1:1:1334;
     A11(i-39,1)=K(i,1);
     T11(i-39,1)=T(i,1);
     O22(i-39,1)=O2(i,1);

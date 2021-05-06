@@ -7,7 +7,7 @@ void imprimir_datos(){
     Serial.print(h1,3);Serial.print(";");
 
     //Serial.print(t2,3);Serial.print(" ");
-    //Serial.print(h2,3);Serial.print(" ");
+    
     Serial.print(p2,3);Serial.print(";");
     Serial.print(den,4);Serial.print(";");
   

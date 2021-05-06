@@ -22,8 +22,8 @@
 [P]=ALL.data(:,13);%parada
 T=T/1000;
 %plot(T,O);
-plot(T,O2,'b:',T,K,'g')
-ylim([0 15]);
+%plot(T,O2,'b:',T,K,'g')
+%ylim([0 15]);
 
 
 
@@ -42,8 +42,8 @@ V1=6.1;
 s=tf('s');
 H2=(k/(ts*s+1))*exp(-T1*s);
 h3=V1+H2*(U2-U1);
-figure(2)
-step(h3);
+%figure(2)
+%step(h3);
 
 k3=0.01322314;
 ta=2;
@@ -68,7 +68,7 @@ epsi=0.768138662;
 epsi2=0.7;
 T2o=0.22;
 
-H6=(k4*wn^2)/(s^2+2*epsi2*wn*s+wn^2)
+H6=(k4*wn^2)/(s^2+2*epsi*wn*s+wn^2)
 
 
 a1=408;

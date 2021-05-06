@@ -35,7 +35,15 @@ void escalon(){
   
   pw=analogRead(A0);
   Timer1.pwm(9, pw);
-   
+
+  }
+
+  void escalon22(){
+  
+  pw=analogRead(A0);
+  pw=map(pw,0,1023,50,170);
+  Timer1.pwm(9, pw);
+
   }
 
 void escalon3(){
@@ -101,4 +109,14 @@ void escalon3(){
   Timer1.pwm(9, pw);
    
   }
+
+
+  void escalonserial(){
+    pw=inputString1;
+    Timer1.pwm(9, pw);
+    }
+
+
+ void escalonautoma(){
   
+  }
