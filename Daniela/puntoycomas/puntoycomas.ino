@@ -9,7 +9,7 @@ int Escalon1;
 #include "MeanFilterLib.h"
 MeanFilter<float> meanFilter(20);
 #include "MedianFilterLib.h"  //Filtro de Mediana
-MedianFilter<float> medianFilter(30);
+MedianFilter<float> medianFilter(40);
 #include "Filter.h" 
 #include "MegunoLink.h"
 ExponentialFilter<float> ADCFilter1(35,0);

@@ -35,7 +35,7 @@ void setup (){
   size(700, 600);
   background(255);
   print(Serial.list());//Cambia el indice [1] por el que indique la consola
-  puertoArduino = new Serial(this, Serial.list()[2], 115200);
+  puertoArduino = new Serial(this, Serial.list()[0], 115200);
   datos = createWriter("medidasT_HR.txt");
   fill(255, 0, 0);
   text("TEMPERATURA [ºC] : ", 20, 20);
@@ -92,7 +92,7 @@ void keyPressed() {//Presionar 'ESC' para salir
     
     if (keyPressed) {
     if (key == 'b' || key == 'B') {
-    saveTable(table, "data/en_mi_casa_pruebas1.csv","csv");
+    saveTable(table, "data/Prueba_6_serial.csv","csv");
     //fill(0);
     }
     } else {
