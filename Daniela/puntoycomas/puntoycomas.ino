@@ -91,7 +91,7 @@ void setup() {
   ads.begin();
   pinMode(7,INPUT_PULLUP);
   ///Inicializo pwm//
-  Timer1.initialize(5);
+  Timer1.initialize(40);
 
   /////////Inicializo Bluetooth///////////
   
