@@ -99,8 +99,8 @@ void setup() {
 
 void loop() {
   calculo_offset();
-  //escalonserial();
-  escalon22();
+  escalonserial();
+  //escalon2();
   THP(); 
   difPresion();
   vel_tiempo();
