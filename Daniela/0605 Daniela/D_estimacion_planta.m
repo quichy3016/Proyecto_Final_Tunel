@@ -7,7 +7,7 @@
 %escalones.
 
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_6_serial2.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_5_serial.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum
 [C]=ALL(:,4); %pres
@@ -27,23 +27,27 @@
 [P]=ALL(:,17); %paro Q no se utiliza aca
 [R]=ALL(:,18); %humedad
 T=T/1000;
-% plot(T,K,'g',T,O2,':r');
-% %ylim([0 15]);
-% grid on
-% grid minor
-% 
+figure(1)
+plot(T,K,'g',T,O2,':r');
+%ylim([0 15]);
+grid on
+grid minor
 
 %% DATOS DE LA PLANTA - Modificar
 %Datos que se deben modificar al estimar plantas.
 %Observar "ima1.png" e "ima2.png"
-Dy=4.1; %
+Dy=4.18; %
 Du=300; % 
-DQ=0.05;%  sobreoscilacion- 2º orden estándar con retardo
-tpQ=4.7; % tiempo pico-2º orden estándar con retardo
-TQ=2; %retardo puro- 2º orden estándar con retardo
+DQ=0.03;%  sobreoscilacion- 2º orden estándar con retardo
+tpQ=3.7; % tiempo pico-2º orden estándar con retardo
+TQ=0;%1.2; %retardo puro- 2º orden estándar con retardo
+TQQ=2;
 %--
-tu=2; %modificar STREJC
-ta=4; %modificar STREJC
+
+tu=1.64; %modificar STREJC
+ta=1.42; %modificar STREJC
+TS=0;%1.2;
+TSS=1.2;
 
 %% ESTIMACIÓN DE LA PLANTA
 % No modificar nada acá
@@ -66,8 +70,7 @@ Q_apro=pade(Q,1); %muestra la tf en forma de polinomio
 %%%%%(https://rua.ua.es/dspace/bitstream/10045/18965/1/Identificacion%20experimental%20de%20sistemas.pdf)
 %%%%%pag 9.
 
-tu1=tu/2;
-TS=tu1;
+tu1=tu-TSS;
 kS= Dy/Du;
 f=tu1/ta;
 if (0<f)&&(f<=0.104)
@@ -119,4 +122,4 @@ end
 [C1]=ScopeData1.signals(:,2).values; %Q
 [D1]=ScopeData1.signals(:,3).values; %PWM
 figure(3)
-plot(A1,B1,A1,C1,A1,D1,T11,A11-4.5)
+plot(A1,B1,A1,C1,A1,D1,T11,A11)
