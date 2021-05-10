@@ -7,7 +7,7 @@
 %escalones.
 
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_5_serial.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_6_serial.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum
 [C]=ALL(:,4); %pres
@@ -110,7 +110,7 @@ set_param(gcs,'SimulationCommand','start');
 pause(2);
 
 a1=408;
-for i=a1:1:5600+a1;
+for i=a1:1:3100+a1;
     A11(i-407,1)=K(i,1);
     T11(i-407,1)=T(i,1);
     O22(i-407,1)=O2(i,1);
