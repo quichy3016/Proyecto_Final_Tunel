@@ -41,7 +41,7 @@ Du=300; %
 DQ=0.03;%  sobreoscilacion- 2º orden estándar con retardo
 tpQ=3.7; % tiempo pico-2º orden estándar con retardo
 TQ=0;%1.2; %retardo puro- 2º orden estándar con retardo
-TQQ=2;
+TQQ=1.2;
 %--
 
 tu=1.64; %modificar STREJC
