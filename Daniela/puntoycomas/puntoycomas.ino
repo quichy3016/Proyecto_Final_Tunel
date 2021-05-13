@@ -61,6 +61,10 @@ float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056
 
 float P=101220,H=39.8,T=17.7,T1=290.85;
 float fpt,psv,xv,Z,den;
+
+boolean paro, BOT=0,BOT2=0,step1=0,step2=0;
+double In=0;
+long time1, time2,time3;
 //////////////////////////
 /////Variables Entrada Serial/////
 String inputString = "";         // a String to hold incoming data
@@ -68,12 +72,25 @@ bool stringComplete = false;  // whether the string is complete
 int inputString1=0;
 int datos[1];
 int data;
-#define DEBUG(a);
+////////PID////////
+//#include <PID_v2.h>
 
+// Specify the links and initial tuning parameters
+double Kp = 0.225, Ki = 0.01, Kd = 0,output=0;//Ki=0.326 Kp=0.225
+float VelRef=0;
+// variables externas del controlador
+double Input, Output, Setpoint;
+
+//PID_v2 myPID(Kp, Ki, Kd,0);
+#include <Custom_PID.h>
+PID pid(0.225, 0.326, 0);
+float Error1=0;
 
 
 long tiempo=0;
 int pw=0,pw1=0;
+long Cte=60.17;
+
 void setup() {
   Serial.begin(115200);
   /////SHT21/////////////////
@@ -93,22 +110,32 @@ void setup() {
   ///Inicializo pwm//
   Timer1.initialize(40);
 
-  /////////Inicializo Bluetooth///////////
-  
+//////////PID//////////////
+//
+//myPID.Start(velocidadB,  // input
+//              0,                      // current output
+//              20);                   // setpoint
+//myPID.PID::SetOutputLimits(0, 1023);
+//myPID.PID::SetSampleTime(50);
+////myPID.PID::SetMode(1);
+//myPID.PID::SetTunings(Kp,Ki,Kd,P_ON_M);
+
+
+
 }
 
 void loop() {
   calculo_offset();
-  escalonserial();
+  //escalonserial();
   //escalon2();
   THP(); 
   difPresion();
   vel_tiempo();
+  PIDS();
   imprimir_datos();
   //timer_pwm();
-  boolean paro = digitalRead(7);
-  Serial.print(paro);Serial.print(";");
-  Serial.print(h2,3);Serial.println(";");
+  paro = digitalRead(7);
+  
   //delay(1000);
 
 

@@ -28,7 +28,7 @@
 [R]=ALL(:,18); %humedad
 T=T/1000;
 figure(1)
-plot(T,K,'g',T,O2,':r');
+plot(T,K,'g',T,M,'b',T,O2,':r');
 %ylim([0 15]);
 grid on
 grid minor

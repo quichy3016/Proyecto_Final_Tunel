@@ -24,5 +24,10 @@ void imprimir_datos(){
 
     Serial.print(tiempo);Serial.print(";");//
     Serial.print(pw);Serial.print(";");
+    Serial.print(paro);Serial.print(";");
+    Serial.print(h2,3);Serial.print(";");
+    Serial.print(VelRef);Serial.print(";");
+    Serial.print(Error1);Serial.println(";");
+    
 
 }
