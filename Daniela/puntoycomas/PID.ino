@@ -1,7 +1,7 @@
 void PIDS(){
 
   In=analogRead(A0);
-  VelRef=In/Cte;
+  VelRef=In/Cte;      ///Para a (m/s)
   Error1=In-velocidadB*Cte;
   if (paro==0 & BOT==0){
     time1=millis();
@@ -33,7 +33,8 @@ void PIDS(){
   output = pid.Update(Error1, 55);
   
   //myPID.Compute();
-   }else output=In;
+   }else {output=In;
+   step1=0;}
 
    pw=output;
    Timer1.pwm(9, pw);

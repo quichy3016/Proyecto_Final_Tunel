@@ -33,7 +33,7 @@ class Graf {
       i = i + 100;
       
     }
-    int k=-50;
+    int k=0;
     for (int n = (nY / 2) - 20; n >= (nY / 2) - 220; n = n - 20){
       fill(0, 0, 0);
       text(k, 650, n + 1);
@@ -63,12 +63,12 @@ class Graf {
     fill(colF); // Color del fondo
     noStroke();
     rectMode(CORNERS);
-    rect(50 , 50, nX , nY - 30 ); 
+    rect(50 , 65, nX , nY - 30 ); 
   }
   
   void puntosT(int x, float tem, boolean primeroT){
       
-      float vT = map(tem, -50, 150, (nY / 2) - 20 , 80);
+      float vT = map(tem, 0, 200, (nY / 2) - 20 , 80);
       ellipse(x, vT, 5, 5);
       if (primeroT == false){
         stroke(50);

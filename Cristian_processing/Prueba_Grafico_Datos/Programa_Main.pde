@@ -23,6 +23,8 @@ void Main(){
       pwm=algo[14];
       paro=algo[15];
       h2=algo[16];
+      VelRef=algo[17];
+      error=algo[18];
       tabla();
       fill (0,255,255);
       text(h, 140, 40);
@@ -39,7 +41,9 @@ void Main(){
       rectMode(CORNERS); 
       rect(140,20,200,45);//Borra lectura anterior
       rect(270,20,330,45);//Borra lectura anterior 
-      rect(450,20,500,45);//Borra lectura anterior 
+      rect(400,560,460,590);//Borra lectura anterior 
+      rect(580,20,670,45);//Borra lectura anterior 
+      rect(140,45,180,70);//Borra lectura anterior 
       //h = float(inString);
       datos.print(pwm +" "+ TAB); 
       flagTemp = true;
@@ -60,7 +64,9 @@ void Main(){
        rectMode(CORNERS);
        rect(140,5,200,25); //borra lectura anterior 
        rect(270,5,330,25);//Borra lectura anterior
-       rect(450,5,500,25);//Borra lectura anterior
+       rect(400,5,460,25);//Borra lectura anterior
+       rect(580,5,670,25);//Borra lectura anterior
+       rect(580,45,670,70);//Borra lectura anterior
        //t = float(inString);
        
        datos.println(t);

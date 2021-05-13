@@ -22,7 +22,7 @@ Graf g = new Graf(ancho, alto, cFondo);
 
 /////variables*//
 float [] algo;
-float p,d,v,dp,dp1,dp2,dp3,v1,v2,v3,v4,tiempo,pwm,paro,h2;
+float p,d,v,dp,dp1,dp2,dp3,v1,v2,v3,v4,tiempo,pwm,paro,h2,VelRef,error;
 
 /////tabla////
 Table table;
@@ -35,20 +35,26 @@ void setup (){
   size(700, 600);
   background(255);
   print(Serial.list());//Cambia el indice [1] por el que indique la consola
-  puertoArduino = new Serial(this, Serial.list()[0], 115200);
+  puertoArduino = new Serial(this, Serial.list()[2], 115200);
   datos = createWriter("medidasT_HR.txt");
   fill(255, 0, 0);
   text("TEMPERATURA [ºC] : ", 20, 20);
   fill(255, 0, 0);
+  text("Control : ", 20, 60);
+  fill(255, 0, 0);
   text("PWM : ", 200, 20);
   fill(255, 0, 0);
-  text("DP [Pa]: ", 400, 20);
+  text("DP [Pa]: ", 330, 20);
   fill(0, 0, 255);
-  text("Vel (m/s) : ", 200, 40);
+  text("Vel (m/s) : ", 480, 20);
   fill(0, 0, 255);
   text("HR (%) : ", 20, 40);
   fill(0, 0, 255);
-  text("Tiempo (s) : ", 390, 40);
+  text("Tiempo (s) : ", 330, 580);
+  fill(0, 0, 255);
+  text("Vel Ref (m/s) : ", 480, 40);
+  fill(0, 0, 255);
+  text("Error (m/s) : ", 480, 60);
   //text("DHT11 - Rango de temperaturas (0ºC < T < 50ºC)", (ancho / 2) - 100, 20);
   //text("DHT11 - Rango de humedad relativa (20 % < H < 90 %)", (ancho / 2) - 100, 40);
   pT = true;
@@ -75,6 +81,8 @@ void setup (){
   table.addColumn("PWM");
   table.addColumn("Paro");
   table.addColumn("Hum2");
+  table.addColumn("VelRef");
+  table.addColumn("Error");
 }
 
 void draw(){
@@ -92,7 +100,7 @@ void keyPressed() {//Presionar 'ESC' para salir
     
     if (keyPressed) {
     if (key == 'b' || key == 'B') {
-    saveTable(table, "data/Prueba_6_serial.csv","csv");
+    saveTable(table, "data/Prueba_7_serial.csv","csv");
     //fill(0);
     }
     } else {
@@ -137,6 +145,8 @@ void tabla(){
   newRow.setFloat("PWM", pwm);
   newRow.setFloat("Paro", paro);
   newRow.setFloat("Hum2", h2);
+  newRow.setFloat("VelRef", VelRef);
+  newRow.setFloat("Error", error);
 
   
   //println(table.getRowCount());  // Prints 3

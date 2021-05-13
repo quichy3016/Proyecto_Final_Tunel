@@ -5,10 +5,16 @@ void Mostrar(){
     fill (255,0,0);
     text(pwm, 270, 20);
     fill (255,0,0);
-    text(v2, 270, 40);
+    text(paro, 140, 60);
     fill (255,0,0);
-    text(dp1, 460, 20);
+    text(v2, 580, 20);
     fill (255,0,0);
-    text(tiempo/1000, 460, 40);
+    text(dp1, 400, 20);
+    fill (255,0,0);
+    text(tiempo/1000, 400, 580);
+    fill (255,0,0);
+    text(VelRef, 580, 40);
+    fill (255,0,0);
+    text(error, 580, 60);
     
 }
