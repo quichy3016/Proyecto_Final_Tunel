@@ -112,8 +112,8 @@ void escalon3(){
 
 
   void escalonserial(){
-    pw=inputString1;
-    Timer1.pwm(9, pw);
+    In=inputString1;
+    //Timer1.pwm(9, pw);
     }
 
 
