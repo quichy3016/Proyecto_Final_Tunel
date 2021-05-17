@@ -7,7 +7,7 @@
 %escalones.
 
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_6_serial.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_7_PID.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum
 [C]=ALL(:,4); %pres
