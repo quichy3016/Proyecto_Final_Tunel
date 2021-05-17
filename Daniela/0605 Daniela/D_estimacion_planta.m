@@ -7,7 +7,7 @@
 %escalones.
 
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_7_PID.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_8_PID.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum
 [C]=ALL(:,4); %pres
@@ -26,9 +26,11 @@
 [O2]=((ALL(:,16))/45);% pwm
 [P]=ALL(:,17); %paro Q no se utiliza aca
 [R]=ALL(:,18); %humedad
+[U]=ALL(:,19); %set point vref
+[V]=ALL(:,20); %error
 T=T/1000;
 figure(1)
-plot(T,K,'g',T,M,'b',T,O2,':r');
+plot(T,K,'g',T,O2,':r',T,U,'m');%T,V,'b'
 %ylim([0 15]);
 grid on
 grid minor
@@ -110,7 +112,7 @@ set_param(gcs,'SimulationCommand','start');
 pause(2);
 
 a1=408;
-for i=a1:1:3100+a1;
+for i=a1:1:3900+a1;
     A11(i-407,1)=K(i,1);
     T11(i-407,1)=T(i,1);
     O22(i-407,1)=O2(i,1);
@@ -122,4 +124,4 @@ end
 [C1]=ScopeData1.signals(:,2).values; %Q
 [D1]=ScopeData1.signals(:,3).values; %PWM
 figure(3)
-plot(A1,B1,A1,C1,A1,D1,T11,A11)
+plot(A1,B1,'b',A1,C1,'k',A1,D1,'g',T11,A11,'r')
