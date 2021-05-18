@@ -28,9 +28,14 @@
 [R]=ALL(:,18); %humedad
 [U]=ALL(:,19); %set point vref
 [V]=ALL(:,20); %error
+%U=round(U*60.17);
+U=(U*60.17);
+%U=U-52;
 T=T/1000;
 figure(1)
-plot(T,K,'g',T,O2,':r',T,U,'m');%T,V,'b'
+plot(T,K,'k',T,O2,':r',T,U/60.17,'m');%T,V,'b'
+figure(2)
+plot(T,V,'k',T,U,'r');%T,V,'b'
 %ylim([0 15]);
 grid on
 grid minor
@@ -38,8 +43,11 @@ grid minor
 %% DATOS DE LA PLANTA - Modificar
 %Datos que se deben modificar al estimar plantas.
 %Observar "ima1.png" e "ima2.png"
+% Dy=0.83;%4.18; %
+% Du=50;%300; % 
 Dy=4.18; %
 Du=300; % 
+
 DQ=0.03;%  sobreoscilacion- 2º orden estándar con retardo
 tpQ=3.7; % tiempo pico-2º orden estándar con retardo
 TQ=0;%1.2; %retardo puro- 2º orden estándar con retardo
@@ -113,7 +121,7 @@ pause(2);
 
 a1=408;
 for i=a1:1:3900+a1;
-    A11(i-407,1)=K(i,1);
+    A11(i-407,1)=K(i,1); %v medida
     T11(i-407,1)=T(i,1);
     O22(i-407,1)=O2(i,1);
 end
@@ -121,7 +129,8 @@ end
 %esto es para tomar los valores del simulink!
 [A1]=ScopeData1.time;
 [B1]=ScopeData1.signals(:,1).values; %S1
-[C1]=ScopeData1.signals(:,2).values; %Q
-[D1]=ScopeData1.signals(:,3).values; %PWM
+%[C1]=ScopeData1.signals(:,2).values; %Q
+[D1]=ScopeData1.signals(:,3).values; %vref- set point
 figure(3)
-plot(A1,B1,'b',A1,C1,'k',A1,D1,'g',T11,A11,'r')
+plot(A1,B1,'b',A1,D1,'g',T11,A11,'r')%A1,C1,'k',
+xlim([0 250]);
