@@ -67,6 +67,7 @@ void Main(){
        rect(400,5,460,25);//Borra lectura anterior
        rect(580,5,670,25);//Borra lectura anterior
        rect(580,45,670,70);//Borra lectura anterior
+       rect(130,560,190,610);//Borra lectura anterior
        //t = float(inString);
        
        datos.println(t);

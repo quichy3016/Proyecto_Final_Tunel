@@ -16,5 +16,5 @@ void Mostrar(){
     text(VelRef, 580, 40);
     fill (255,0,0);
     text(error, 580, 60);
-    
+    text(textbox_says, 150, 580);
 }

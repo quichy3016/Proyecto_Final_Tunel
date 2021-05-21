@@ -51,7 +51,7 @@ float humref=30.7;
 float presionref=102540;
 float offsett=0,offsett1=0,offsett2=0;
 float offseth=0,offseth1=0,offseth2=0;
-float offsetp2=0,offsetdf=0,offsetdf1=2.574;
+float offsetp2=0,offsetdf=0,offsetdf1=2.577;
 //////////////////////////////////////
 ///Constantes Densidad/////
 float a0=0.00000158123,a1=-0.000000029331,a2=0.00000000011043;
@@ -63,15 +63,15 @@ float P=101220,H=39.8,T=17.7,T1=290.85;
 float fpt,psv,xv,Z,den;
 
 boolean paro, BOT=0,BOT2=0,step1=0,step2=0;
-double In=0;
+float In=0;
 long time1, time2,time3;
 //////////////////////////
 /////Variables Entrada Serial/////
 String inputString = "";         // a String to hold incoming data
 bool stringComplete = false;  // whether the string is complete
-int inputString1=0;
+float inputString1=0;
 int datos[1];
-int data;
+float data;
 ////////PID////////
 //#include <PID_v2.h>
 
@@ -108,7 +108,7 @@ void setup() {
   ads.begin();
   pinMode(7,INPUT_PULLUP);
   ///Inicializo pwm//
-  Timer1.initialize(40);
+  Timer1.initialize(90);
 
 //////////PID//////////////
 //
@@ -166,18 +166,13 @@ void serialEvent() {
     // add it to the inputString:
     //inputString += inChar;
     //inputString1=Serial.parseInt();
-    char buffer[6];
-    Serial.readBytesUntil('\n', buffer,6);
-    data = atoi(buffer);
-    //int data = Serial.readBytes(buffer,1);
-      //DEBUG((int)data);
-      inputString1=data;
-      //Serial.print(inputString1);
-      //Serial.println("sssssssssssssssssssssssssssssssssssssssssssss");
-    // if the incoming character is a newline, set a flag so the main loop can
-    // do something about it:
-//    if (inChar == '\n') {
-//      stringComplete = true;
-//    }
+    //char buffer[10];
+    //Serial.readBytesUntil('\n', buffer,10);
+    //data = atof(buffer);
+    data=Serial.parseFloat();
+    
+
+    inputString1=data;
+
   }
 }
