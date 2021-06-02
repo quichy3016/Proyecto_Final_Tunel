@@ -1,42 +1,39 @@
+//Librerías
 #include <Arduino.h>
 #include <Wire.h>
 #include <SoftwareSerial.h>
-//SoftwareSerial BT(2,3);
-char  Escalon;
-int Escalon1;
-///FiltroA 
-//https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
-#include "MeanFilterLib.h"
-MeanFilter<float> meanFilter(20);
-#include "MedianFilterLib.h"  //Filtro de Mediana
-MedianFilter<float> medianFilter(40);
-#include "Filter.h" 
+#include "Filter.h"  //Filtro
 #include "MegunoLink.h"
+#include "MedianFilterLib.h"  //Filtro de Mediana
+#include "MeanFilterLib.h"  //Filtro de Media
+#include <TimerOne.h> //Libreria PWM
+#include "Adafruit_Si7021.h"
+#include <Adafruit_Sensor.h>
+#include <Adafruit_BME280.h> //sensor TH
+#include <Adafruit_ADS1015.h> //Convertidor analógico digital
+#include <Custom_PID.h> //Librería modificada
+//SoftwareSerial BT(2,3);
+
+//inicialización de variables
+MeanFilter<float> meanFilter(20);
+MedianFilter<float> medianFilter(40);
 ExponentialFilter<float> ADCFilter1(35,0);
-//FiltroB   
-//https://www.youtube.com/watch?v=QGDG5v_UnIk
 float Y=0.0;
 float alpha1=0.2,alpha2=0.5,alpha3=0.9;
 float S21=Y,S22=Y,S23=Y;
 int Timeoffset=10000;
-//Libreria PWM//
-#include <TimerOne.h>
-///Sensores
-#include "Adafruit_Si7021.h"
-#include <Adafruit_Sensor.h>
-#include <Adafruit_BME280.h>
-#include <Adafruit_ADS1015.h>
-
+char  Escalon;
+int Escalon1;
+/////Variables THP ///////////////////
+float t=0,t1=0,t2=0;
+float h=0,h1=0,h2=0;
+float p2=0;
 //////DHT21//////////////////////////
 Adafruit_Si7021 sensor = Adafruit_Si7021();
 //////BME280//////////////////////////
 Adafruit_BME280 bme; // I2C
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
-/////Variables THP ///////////////////
-float t=0,t1=0,t2=0;
-float h=0,h1=0,h2=0;
-float p2=0;
 /////Variables Dif - Presion//////////
 float presionSF=0,presionSF2=0,presionSF21;
 float presionCF1=0,presionCF2=0,presionCF3=0,ADCFilterM=0,ADCFilterM1;
@@ -82,10 +79,9 @@ float VelRef=0;
 double Input, Output, Setpoint;
 
 //PID_v2 myPID(Kp, Ki, Kd,0);
-#include <Custom_PID.h>
+
 PID pid(0.225, 0.326, 0);
 float Error1=0;
-
 
 long tiempo=0;
 int pw=0,pw1=0;
@@ -131,3 +127,8 @@ void serialEvent() {
     inputString1=data;
   }
 }
+
+//Bibliografía
+//FiltroA https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
+//FiltroB   https://www.youtube.com/watch?v=QGDG5v_UnIk
+//#include <> "" https://es.stackoverflow.com/questions/1959/da-igual-usar-include-iostream-o-include-iostream/1960
