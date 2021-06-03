@@ -15,77 +15,74 @@
 //SoftwareSerial BT(2,3);
 
 //inicialización de variables
-MeanFilter<float> meanFilter(20);
-MedianFilter<float> medianFilter(40);
-ExponentialFilter<float> ADCFilter1(35, 0);
-float Y = 0.0;
-float alpha1 = 0.2, alpha2 = 0.5, alpha3 = 0.9;
-float S21 = Y, S22 = Y, S23 = Y;
-int Timeoffset = 10000;
-char  Escalon;
-int Escalon1;
-/////Variables THP ///////////////////
-float t = 0, t1 = 0, t2 = 0;
-float h = 0, h1 = 0, h2 = 0;
-float p2 = 0;
+//variables utilizadas en PHT
+float t1=0,t2=0;
+float h1=0,h2=0;
+float p2=0;
 //////DHT21//////////////////////////
 Adafruit_Si7021 sensor = Adafruit_Si7021();
 //////BME280//////////////////////////
 Adafruit_BME280 bme; // I2C
 ////////ADS115////////////////////////
 Adafruit_ADS1115 ads;
+
+
 /////Variables Dif - Presion//////////
-float presionSF = 0, presionSF2 = 0, presionSF21;
-float presionCF1 = 0, presionCF2 = 0, presionCF3 = 0, ADCFilterM = 0, ADCFilterM1;
-float presionCF21 = 0, presionCF22 = 0, presionCF23 = 0;
-float busvoltage = 0, adc0 = 0;
+float presionSF2=0,presionSF21;
+float ADCFilterM=0,ADCFilterM1;
+float presionCF21=0;
+float adc0=0;
+
+//Variables utilizadas en los filtros
+MeanFilter<float> meanFilter(20);
+MedianFilter<float> medianFilter(40);
+ExponentialFilter<float> ADCFilter1(35,0);
+float Y=0.0;
+float alpha1=0.2;
+float S21=Y;
+
+
 //////Variables velocidad/////////////
-float velocidadA = 0, velocidadB = 0, velocidadA1 = 0, velocidadB1 = 0, velocidadC = 0, velocidadD = 0;
-/////////variables-offset/////////////
-int contador = 0, cancelcontador = 0;
-float tempref = 19.2;
-float humref = 30.7;
-float presionref = 102540;
-float offsett = 0, offsett1 = 0, offsett2 = 0;
-float offseth = 0, offseth1 = 0, offseth2 = 0;
-float offsetp2 = 0, offsetdf = 0, offsetdf1 = 2.577;
+float velocidadA=0,velocidadB=0,velocidadC=0,velocidadD=0;
+int contador=0;
+float offsett=0,offsett1=0,offsett2=0;
+float offseth=0,offseth1=0,offseth2=0;
+float offsetp2=0,offsetdf=0,offsetdf1=2.577;
 //////////////////////////////////////
 ///Constantes Densidad/////
-float a0 = 0.00000158123, a1 = -0.000000029331, a2 = 0.00000000011043;
-float b0 = 0.000005707, b1 = -0.00000002051, c0 = 0.00019898, c1 = -0.000002376;
-float d = 0.0000000000183, e = -0.00000000765, A = 0.000012378847, B = -0.019121316;
-float C = 33.93711047, D = -6343.1645, alfa = 1.00062, beta = 0.0000000314, gamma = 0.00000056;
+float a0=0.00000158123,a1=-0.000000029331,a2=0.00000000011043;
+float b0=0.000005707,b1=-0.00000002051,c0=0.00019898,c1=-0.000002376;
+float d=0.0000000000183,e=-0.00000000765,A=0.000012378847,B=-0.019121316;
+float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056;
 
-float P = 101220, H = 39.8, T = 17.7, T1 = 290.85;
-float fpt, psv, xv, Z, den;
+float T1=290.85; ////////////////////////////////////////////////////////OJO QUE ESTÁ DEFINIDO EN THP IGUAL
+float fpt,psv,xv,Z,den;
 
-boolean paro, BOT = 0, BOT2 = 0, step1 = 0, step2 = 0;
-float In = 0;
-long time1, time2, time3;
+boolean paro, BOT=0,BOT2=0,step1=0;
+float In=0;
+long time1, time2,time3;
 //////////////////////////
 /////Variables Entrada Serial/////
-String inputString = "";         // a String to hold incoming data
-bool stringComplete = false;  // whether the string is complete
-float inputString1 = 0;
-int datos[1];
-float data;
+String inputString = "";         // a String to hold incoming data ?????????????????
+bool stringComplete = false;  // whether the string is complete?????????????????
+float inputString1=0;
+int datos[1]; //?????????????????
+float data; //?????????????????
 ////////PID////////
-//#include <PID_v2.h>
-
 // Specify the links and initial tuning parameters
-double Kp = 0.225, Ki = 0.01, Kd = 0, output = 0; //Ki=0.326 Kp=0.225
-float VelRef = 0;
+double output=0;
+float VelRef=0;
 // variables externas del controlador
-double Input, Output, Setpoint;
+//double Input, Output, Setpoint; ?????????????????
 
-//PID_v2 myPID(Kp, Ki, Kd,0);
+
 
 PID pid(0.225, 0.326, 0);
-float Error1 = 0;
+float Error1=0;
 
-long tiempo = 0;
-int pw = 0, pw1 = 0;
-long Cte = 60.17;
+long tiempo=0;
+int pw=0;
+long Cte=60.17;
 
 void setup() {
   Serial.begin(115200);
@@ -102,7 +99,7 @@ void setup() {
   /////ADS1115///////////////////////
   ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
-  pinMode(7, INPUT_PULLUP);
+  pinMode(7,INPUT_PULLUP);
   ///Inicializo pwm//
   Timer1.initialize(90);
 }
@@ -111,20 +108,20 @@ void loop() {
   calculo_offset();
   //escalonserial();
   //escalon2();
-  THP();
+  THP(); 
   difPresion();
   vel_tiempo();
   PIDS();
-  paro = digitalRead(7);
-  imprimir_datos();
+  paro = digitalRead(7); 
+  imprimir_datos(); 
 }
 
 
 
 void serialEvent() {
   while (Serial.available()) {
-    data = Serial.parseFloat();
-    inputString1 = data;
+    data=Serial.parseFloat();
+    inputString1=data;
   }
 }
 
