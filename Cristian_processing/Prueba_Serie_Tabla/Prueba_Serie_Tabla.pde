@@ -6,7 +6,7 @@ Table table1;
 
 String textbox_says = "0";
 float [] algo;
-float t,t1;
+float t,t1,t2,t3;
 boolean a=true;
 int i=0;
 int long1;
@@ -14,16 +14,18 @@ void setup(){
   size(700, 600);
   background(255);
   println(Serial.list());//Cambia el indice [1] por el que indique la consola
-  puertoArduino = new Serial(this, Serial.list()[1], 115200);
+  puertoArduino = new Serial(this, Serial.list()[2], 115200);
   
-  table1 = loadTable("Tabla1.csv");
+  table1 = loadTable("vector1.csv");
   long1=table1.getRowCount();
   
   //println(b);
  ////TABLA////
   table = new Table();
   table.addColumn("Muestra");
-  table.addColumn("Temp");
+  table.addColumn("Filtro1");
+  table.addColumn("Filtro2");
+  table.addColumn("Filtro3");
 }
 
 void draw(){
@@ -76,7 +78,7 @@ void keyPressed() {//Presionar 'ESC' para salir
     
     if (keyPressed) {
     if (key == 'b' || key == 'B') {
-    saveTable(table, "data/Prueba_10_Casa.csv","csv");
+    saveTable(table, "data/Prueba_10_Casa1.csv","csv");
     //fill(0);
     }
     } else {
@@ -103,7 +105,9 @@ void keyPressed() {//Presionar 'ESC' para salir
 void tabla(){
   TableRow newRow = table.addRow();
   newRow.setFloat("Muestra", t);
-  newRow.setFloat("Temp", t1);
+  newRow.setFloat("Filtro1", t1);
+  newRow.setFloat("Filtro2", t2);
+  newRow.setFloat("Filtro3", t3);
 }
 
 void serialEvent(Serial puertoArduino) { 
@@ -116,6 +120,8 @@ void serialEvent(Serial puertoArduino) {
       fill (255,0,0);
       t=algo[0];
       t1=algo[1];
+      t2=algo[2];
+      t3=algo[3];
       //print(t);print("\t");
       //println(t1);
       tabla();}

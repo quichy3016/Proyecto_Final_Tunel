@@ -1,18 +1,19 @@
 #include "MedianFilterLib.h"  //Filtro de Mediana
 MedianFilter<float> medianFilter(40);
+MedianFilter<float> medianFilter1(100);
 
 float ADCFilterM,presionCF21;
 
 #include "Filter.h" 
 #include "MegunoLink.h"
 ExponentialFilter<float> ADCFilter1(10,0);
-ExponentialFilter<float> ADCFilter2(25,0);
+ExponentialFilter<float> ADCFilter2(10,0);
 
 float Y=0.0;
 
 float S21=0;
 
-float filtrado;
+float filtrado, deteccion;
 
 long time1;
 float data,Input,Inputant=0;
@@ -73,7 +74,7 @@ ADCFilterM = medianFilter.AddValue(Input);
 ADCFilter1.Filter(Input);
 presionCF21 =  ADCFilter1.Current();//FiltroA1
 ADCFilter2.Filter(Input);
-S21 =  ADCFilter2.Current();//FiltroA1
+S21 =  medianFilter1.AddValue(Input);//ADCFilter2.Current();//FiltroA1
 
 //if (ADCFilterM-Inputant>10 | Input-Inputant<10){
 //  filtrado=presionCF21;
@@ -93,10 +94,14 @@ i=i+1;
   }
   miArray[99]=ADCFilterM;
 }
-filtrado=ADCFilterM-miArray[0];
+deteccion=ADCFilterM-miArray[0];
+if (deteccion>0.12){
+  filtrado=ADCFilterM; 
+} else filtrado=S21;
+
 Serial.print(Input,4);Serial.print(";");
 Serial.print(ADCFilterM,4);Serial.print(";");
 Serial.print(presionCF21,4);Serial.print(";");
-Serial.print(S21,4);Serial.println(";");
+Serial.print(deteccion,4);Serial.println(";");
   }
 }
