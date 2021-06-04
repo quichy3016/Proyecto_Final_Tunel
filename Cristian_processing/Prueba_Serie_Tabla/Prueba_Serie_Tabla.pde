@@ -16,7 +16,11 @@ void setup(){
   println(Serial.list());//Cambia el indice [1] por el que indique la consola
   puertoArduino = new Serial(this, Serial.list()[2], 115200);
   
+<<<<<<< HEAD
   table1 = loadTable("vector1.csv");
+=======
+  table1 = loadTable("vector.csv");
+>>>>>>> 028ef32fb4eb1b012f328999e98f12f1632ff3da
   long1=table1.getRowCount();
   
   //println(b);
