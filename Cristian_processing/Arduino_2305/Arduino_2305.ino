@@ -9,7 +9,7 @@
 #include <TimerOne.h> //Libreria PWM
 #include "Adafruit_Si7021.h"
 #include <Adafruit_Sensor.h>
-#include <Adafruit_BME280.h> //sensor TH
+#include <Adafruit_BME280.h> //sensor THP
 #include <Adafruit_ADS1015.h> //Convertidor analógico digital
 #include <Custom_PID.h> //Librería modificada
 //SoftwareSerial BT(2,3);
@@ -45,8 +45,6 @@ float S21=Y;
 //////Variables velocidad/////////////
 float velocidadA=0,velocidadB=0,velocidadC=0,velocidadD=0;
 int contador=0;
-float offsett=0,offsett1=0,offsett2=0;
-float offseth=0,offseth1=0,offseth2=0;
 float offsetp2=0,offsetdf=0,offsetdf1=2.577;
 //////////////////////////////////////
 ///Constantes Densidad/////
@@ -55,7 +53,7 @@ float b0=0.000005707,b1=-0.00000002051,c0=0.00019898,c1=-0.000002376;
 float d=0.0000000000183,e=-0.00000000765,A=0.000012378847,B=-0.019121316;
 float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056;
 
-float T1=290.85; ////////////////////////////////////////////////////////OJO QUE ESTÁ DEFINIDO EN THP IGUAL
+float T1; ////////////////////////////////////////////////////////OJO QUE ESTÁ DEFINIDO EN THP IGUAL
 float fpt,psv,xv,Z,den;
 
 boolean paro, BOT=0,BOT2=0,step1=0;
@@ -63,18 +61,12 @@ float In=0;
 long time1, time2,time3;
 //////////////////////////
 /////Variables Entrada Serial/////
-String inputString = "";         // a String to hold incoming data ?????????????????
-bool stringComplete = false;  // whether the string is complete?????????????????
-float inputString1=0;
-int datos[1]; //?????????????????
-float data; //?????????????????
+float inputString1=0; //Almacena datos del Buffer serial
+float data; //Guardo los datos del buffer para utilizar en funcion princ.
 ////////PID////////
-// Specify the links and initial tuning parameters
 double output=0;
 float VelRef=0;
 // variables externas del controlador
-//double Input, Output, Setpoint; ?????????????????
-
 
 
 PID pid(0.225, 0.326, 0);
