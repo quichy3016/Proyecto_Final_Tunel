@@ -74,7 +74,7 @@ float Error1=0;
 
 long tiempo=0;
 int pw=0;
-long Cte=60.17;
+long Cte=56.88;
 
 void setup() {
   Serial.begin(115200);

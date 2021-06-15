@@ -2,6 +2,9 @@ void PIDS() {
   In = inputString1;
   //In=analogRead(A0);
   VelRef = In / Cte; ///Cte;      ///Para a (m/s)
+  if (VelRef<4.5){
+    In=256;
+  }
   Error1 = In - velocidadB * Cte;
   if (paro == 0 & BOT == 0) {
     time1 = millis();
