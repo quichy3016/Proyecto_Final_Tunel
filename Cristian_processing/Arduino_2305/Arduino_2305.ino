@@ -74,7 +74,7 @@ float Error1=0;
 
 long tiempo=0;
 int pw=0;
-long Cte=56.88;
+float Cte=56.88;
 
 void setup() {
   Serial.begin(115200);
@@ -96,7 +96,7 @@ void setup() {
   Timer1.initialize(90);
 }
 
-void loop() {
+void loop(){
   calculo_offset();
   //escalonserial();
   //escalon2();

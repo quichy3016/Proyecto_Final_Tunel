@@ -21,7 +21,7 @@ void imprimir_datos() {
   Serial.print(pw); Serial.print(";");
   Serial.print(BOT2); Serial.print(";");
   Serial.print(h2, 3); Serial.print(";");
-  Serial.print(VelRef); Serial.print(";");
+  Serial.print(In); Serial.print(";");
   Serial.print(Error1); Serial.println(";");
 
 }
