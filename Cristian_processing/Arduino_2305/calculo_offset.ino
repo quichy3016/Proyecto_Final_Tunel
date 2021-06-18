@@ -6,8 +6,9 @@ void calculo_offset() {
   else {
     if (contador == 35) {
       offsetp2 = offsetdf;
+      contador = contador + 1;
     }
-    contador = contador + 1;
+    
   }
 
 }

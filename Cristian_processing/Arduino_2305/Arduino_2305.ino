@@ -45,7 +45,7 @@ float S21=Y;
 //////Variables velocidad/////////////
 float velocidadA=0,velocidadB=0,velocidadC=0,velocidadD=0;
 int contador=0;
-float offsetp2=0,offsetdf=0,offsetdf1=2.577;
+float offsetp2=0,offsetdf=0,offsetdf1=2.573;
 //////////////////////////////////////
 ///Constantes Densidad/////
 float a0=0.00000158123,a1=-0.000000029331,a2=0.00000000011043;
