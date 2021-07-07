@@ -33,13 +33,13 @@ Dy=2.75;%4.18; %
 Du=170;%300; % 
 tu=1.21;%1.64; %modificar STREJC
 ta=2.8;
-TSS=0;
+TSS=1.2;
 
 %%%datos de segundo orden
 DQ=0.03;%  sobreoscilacion- 2º orden estándar con retardo
-tpQ=2.5; % tiempo pico-2º orden estándar con retardo
+tpQ=3.8; % tiempo pico-2º orden estándar con retardo
 TQ=0;%1.2; %retardo puro- 2º orden estándar con retardo
-TQQ=0.5;
+TQQ=2;
 %--
 
 %%%%%Parámetros de Strejc con retardo
