@@ -69,7 +69,7 @@ float VelRef=0;
 // variables externas del controlador
 
 
-PID pid(0.225, 0.326, 0);
+PID pid(0.6846, 0.4183, 0);
 float Error1=0;
 
 long tiempo=0;
