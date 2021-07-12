@@ -18,8 +18,8 @@ vel2=7.5;
 
 %% ArchivoP3
 	% Prueba3
-% P=	0.0699
-% I=	0.2035
+p3=	0.0699;
+I3=	0.2035;
 ca3=0;cb3=0;con3=0;
 if (vel1==6 && vel2==7.5) || (vel1==7.5 && vel2==8.5)
     for i=1:size(P3)
@@ -75,8 +75,8 @@ end
 
 %% ArchivoP4
 	% Prueba4
-% P=	0.244
-% I=	0.2756
+p4=	0.244;
+I4=	0.2756;
 ca4=0;cb4=0;con4=0;
 if (vel1==6 && vel2==7.5) || (vel1==7.5 && vel2==8.5)
     for i=1:size(P4)
@@ -124,8 +124,8 @@ end
 
 %% ArchivoP5
 	% Prueba5
-% P=	0.5451
-% I=	0.3599
+ p5=	0.5451;
+ I5=	0.3599;
 ca5=0;cb5=0;con5=0;
 if (vel1==6 && vel2==7.5) || (vel1==7.5 && vel2==8.5)
     for i=1:size(P5)
@@ -173,8 +173,8 @@ end
 
 %% ArchivoP6
 	% Prueba6
-% P=	0.6846
-% I=	0.4183
+ p6=	0.6846;
+I6=	0.4183;
 ca6=0;cb6=0;con6=0;
 if (vel1==6 && vel2==7.5) || (vel1==7.5 && vel2==8.5)
     for i=1:size(P6)
@@ -222,8 +222,8 @@ end
         
 %% ArchivoP7
 	% Prueba7
-% P=	0.3286
-% I=	0.3107
+p7=	0.3286;
+I7=	0.3107;
 ca7=0;cb7=0;con7=0;
 if (vel1==6 && vel2==7.5) || (vel1==7.5 && vel2==8.5)
     for i=1:size(P7)
@@ -270,5 +270,22 @@ if (vel1==8.5 && vel2==7.5) || (vel1==7.5 && vel2==7) || (vel1==7 && vel2==6)
 end
 
 %% Grafico
+co = [       0.4940    0.1840    0.5560];
+         
+
+set(figure,'defaultAxesColorOrder',co)
+
 figure(1)
-plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,5),'c',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g');
+%plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g',K(:,1),K(:,5),'c');
+plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g',K(:,1),K(:,5)); %no está con cyan
+
+txt3 = ['Prueba_3',' P= ',num2str(p3),' I= ',num2str(I3)];
+txt4 = ['Prueba_4',' P= ',num2str(p4),' I= ',num2str(I4)];
+txt5 = ['Prueba_5',' P= ',num2str(p5),' I= ',num2str(I5)];
+txt6 = ['Prueba_6',' P= ',num2str(p6),' I= ',num2str(I6)];
+txt7 = ['Prueba_7',' P= ',num2str(p7),' I= ',num2str(I7)];
+text(200,8,txt3,'Color','b')
+text(200,7.9,txt4,'Color','m')
+text(200,7.8,txt5,'Color','0.4940 0.1840 0.5560')
+text(200,7.7,txt6,'Color','r')
+text(200,7.6,txt7,'Color','g')

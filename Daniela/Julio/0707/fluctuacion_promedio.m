@@ -1,14 +1,14 @@
 %% fluctuación promediada en tiempo
 %%ver teoría del libro **libro.png**
 
-%clear
-%pause(1);
+clear
+pause(1);
 
 archivo='Prueba_3.csv';
 [P3]=table2array(readtable(archivo));
 con=0;con1=0;
-
-vel1=7; vel2=8.5;
+%6- 7.5- 8.5- 7.5- 7- 6 
+vel1=8.5; vel2=7;
 %si los valores fueran 6 o 7.5 el promeido es mayor al tener picos donde
 %estos escalones estan dos veces cada uno.
 %% primer valor
@@ -51,4 +51,4 @@ txt1 = ['La fluctuación promedio es= ' num2str(T)];
 txt2 = ['La fluctuación promedio es= ' num2str(T2)];
 text(200,vel1-0.3,txt1)
 text(200,vel1+(vel2-vel1)/2,archivo)
-text(200,vel2-0.3,txt2)
+text(200,vel2-0.2,txt2)
