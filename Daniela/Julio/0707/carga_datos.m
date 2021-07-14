@@ -1,5 +1,5 @@
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_1.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_3.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum1
 [C]=ALL(:,4); %hum
@@ -21,5 +21,6 @@ K=K/1000;
 figure(1)
 %plot(K,T,'b',K,I,'r',K,J,'k');%v c/f. + v ref +v s/f.
 plot(K,T,'b',K,J,'k');%v c/f  + v ref. 
+%xlim([45 183])
 grid on
 grid minor
