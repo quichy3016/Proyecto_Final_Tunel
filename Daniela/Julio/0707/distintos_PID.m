@@ -7,7 +7,7 @@
 %orden correspondiente
 
 m=600; %muestras
-vel1=8.5;
+vel1=6;
 vel2=7.5;
 %% cargar valores
 [P3]=table2array(readtable('Prueba_3.csv'));
@@ -276,16 +276,16 @@ co = [       0.4940    0.1840    0.5560];
 set(figure,'defaultAxesColorOrder',co)
 
 figure(1)
-%plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g',K(:,1),K(:,5),'c');
-plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g',K(:,1),K(:,5)); %no está con cyan
-
+%plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,4),'m',K(:,1),K(:,5),K(:,1),K(:,6),'r',K(:,1),K(:,7),'g'); %no está con cyan
+plot(K(:,1),K(:,2),'k',K(:,1),K(:,3),'b',K(:,1),K(:,6),'r',K(:,1),K(:,7),'g'); %no está con cyan
 txt3 = ['Prueba_3',' P= ',num2str(p3),' I= ',num2str(I3)];
-txt4 = ['Prueba_4',' P= ',num2str(p4),' I= ',num2str(I4)];
-txt5 = ['Prueba_5',' P= ',num2str(p5),' I= ',num2str(I5)];
+%txt4 = ['Prueba_4',' P= ',num2str(p4),' I= ',num2str(I4)];
+%txt5 = ['Prueba_5',' P= ',num2str(p5),' I= ',num2str(I5)];
 txt6 = ['Prueba_6',' P= ',num2str(p6),' I= ',num2str(I6)];
 txt7 = ['Prueba_7',' P= ',num2str(p7),' I= ',num2str(I7)];
-text(200,8,txt3,'Color','b')
-text(200,7.9,txt4,'Color','m')
-text(200,7.8,txt5,'Color','0.4940 0.1840 0.5560')
-text(200,7.7,txt6,'Color','r')
-text(200,7.6,txt7,'Color','g')
+
+xlabel('muestras') 
+ylabel('velocidad [m/s]') 
+xlim([300 con7-100])
+%legend({'v referencia',txt3,txt4,txt5,txt6,txt7},'Location','southwest')
+legend({'v referencia',txt3,txt6,txt7},'Location','southwest')

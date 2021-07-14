@@ -20,7 +20,12 @@ K=K/1000;
 
 figure(1)
 %plot(K,T,'b',K,I,'r',K,J,'k');%v c/f. + v ref +v s/f.
-plot(K,T,'b',K,J,'k');%v c/f  + v ref. 
-%xlim([45 183])
+plot(K,T,'r',K,J,'b');%v c/f  + v ref. 
+xlim([50 320])
+%xlim([30 120])
+xlabel('tiempo [s]') 
+ylabel('velocidad [m/s]') 
+legend({'velocidad de referencia','velocidad medida'},'Location','southwest')
+
 grid on
 grid minor

@@ -1,6 +1,6 @@
 
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_5.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_6.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum1
 [C]=ALL(:,4); %hum
@@ -104,7 +104,7 @@ set_param(gcs,'SimulationCommand','start');
 pause(2);
 
 
-for i=1:1:9642;
+for i=1:1:2270;
     A11(i,1)=J(i,1); %v medida
     T11(i,1)=K(i,1); %tiempo
     O22(i,1)=L(i,1); %pwm

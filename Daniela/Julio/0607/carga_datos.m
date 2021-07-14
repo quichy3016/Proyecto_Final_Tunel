@@ -1,5 +1,5 @@
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_6.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_1.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum1
 [C]=ALL(:,4); %hum
@@ -20,6 +20,9 @@ K=K/1000;
 
 figure(1)
 plot(K,J,'k',K,T,'b');%v c/f. + v ref
-
+xlim([30 120])
+xlabel('tiempo [s]') 
+ylabel('velocidad [m/s]') 
+legend({'velocidad medida','escalon'},'Location','southwest')
 grid on
 grid minor
