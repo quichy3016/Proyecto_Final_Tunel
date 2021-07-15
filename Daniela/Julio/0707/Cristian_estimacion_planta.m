@@ -66,7 +66,7 @@ Q_apro=pade(Q,1); %muestra la tf en forma de polinomio
 [D1]=ScopeData.signals(:,3).values; %vref- set point
 figure(3)
 plot(A1,B1,'b',A1,D1,'k',K,J,'r')
-xlim([29 118]);
+xlim([30 300]);
 xlabel('tiempo [s]') 
 ylabel('velocidad [m/s]') 
-legend({'Planta estimada','Escalon', 'v medida'},'Location','southwest')
+legend({'Planta estimada','Escalon', 'v medida'},'Location','northwest')

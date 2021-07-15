@@ -1,5 +1,5 @@
 %% CARGA DE DATOS
-[ALL]=csvread('Prueba_3.csv'); %%valor de muestras
+[ALL]=csvread('Prueba_1.csv'); %%valor de muestras
 [A]=ALL(:,2); %temp
 [B]=ALL(:,3); %hum1
 [C]=ALL(:,4); %hum
