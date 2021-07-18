@@ -50,9 +50,9 @@ plot(K(100:con,1),K(100:con,2),'b',K(100:con,1),Y(100:con,1),'r',K1(100:con1,1),
 xlim([100 600]);
 txt1 = ['El promedio de las fluctuaciones es= ' num2str(T)];
 txt2 = ['El promedio de las fluctuaciones es= ' num2str(T2)];
-text(200,vel1-0.3,txt1)
-text(110,vel1+(vel2-vel1)/2,archivo)
-text(200,vel2-0.3,txt2)
+text(200,vel1-0.3,txt1,'FontSize',14)
+text(110,vel1+(vel2-vel1)/2,archivo,'FontSize',14)
+text(200,vel2-0.3,txt2,'FontSize',14)
 
-xlabel('muestras') 
-ylabel('velocidad [m/s]') 
+xlabel('muestras','FontSize',14) 
+ylabel('velocidad [m/s]','FontSize',14) 
