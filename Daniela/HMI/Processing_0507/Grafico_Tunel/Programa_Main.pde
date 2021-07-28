@@ -99,7 +99,6 @@ void Main(){
         g.cuadricula2();
               
      }
-        Mostrar(); 
-  
-  
+            
+  Mostrar();
 }}
