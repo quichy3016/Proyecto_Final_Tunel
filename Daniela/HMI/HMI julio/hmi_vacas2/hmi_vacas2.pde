@@ -122,7 +122,7 @@ void setup() {
   // alto=height;
   // ancho=width;
   
-  cp5.addTextlabel("label1").setText("Automatización túnel de viento").setPosition(300,0).setColorValue(#03045e).setFont(createFont("Arial",25));
+  cp5.addTextlabel("label1").setText("Automatización túnel de viento").setPosition(70,30).setColorValue(#03045e).setFont(createFont("Arial",25));
   cp5.addTextlabel("label12").setText("Puerto:").setPosition(620,35).setColorValue(#002D5A).setFont(createFont("Arial",20));
   cp5.addTextlabel("label2").setText("Parametros actuales").setPosition(690,155).setColorValue(#002D5A).setFont(createFont("Arial",20));
   cp5.addTextlabel("label3").setText("T:           °C").setPosition(602,205).setColorValue(#002D5A).setFont(createFont("Arial",20));

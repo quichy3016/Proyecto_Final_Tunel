@@ -104,11 +104,11 @@
             line(float(x)/xDiv*Width+xPos-3,yPos+Height,       //  x-axis Sub devisions    
                  float(x)/xDiv*Width+xPos-3,yPos+Height+5);     
                  
-            textSize(10);                                      // x-axis Labels
+            textSize(15);                                      // x-axis Labels
             String xAxis=str(xMin+float(x)/xDiv*(xMax-xMin));  // the only way to get a specific number of decimals 
             String[] xAxisMS=split(xAxis,'.');                 // is to split the float into strings 
-            text(xAxisMS[0]+"."+xAxisMS[1].charAt(0),          // ...
-                 float(x)/xDiv*Width+xPos-3,yPos+Height+15);   // x-axis Labels
+            //text(xAxisMS[0]+"."+xAxisMS[1].charAt(0),          // ...
+                // float(x)/xDiv*Width+xPos-3,yPos+Height+15);   // x-axis Labels
           }
           
           
