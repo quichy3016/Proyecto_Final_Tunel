@@ -297,7 +297,7 @@ void Guardar() {
   print("El nombre del archivo es:");
   text2=cp5.get(Textfield.class, "Nombre archivo").getText();
   print(text2);
-  saveTable(table, text2+".csv","csv");
+  saveTable(table, "data/"+text2+".csv","csv");
   cp5.get(Textfield.class, "Nombre archivo").clear() ;
   
   }
