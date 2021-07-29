@@ -1,4 +1,4 @@
-# Writing all output to: D:\Users\Cristian-PC\Documents\PLACA_TUNEL_JULIO.log
+# Writing all output to: C:\Users\quich\Documents\Repositorios\Proyecto_Final_Tunel\Proteus\TUNEL_Julio\PLACA_TUNEL_JULIO.log
 set pad_wire_necking on
 bus diagonal
 fanout 5
