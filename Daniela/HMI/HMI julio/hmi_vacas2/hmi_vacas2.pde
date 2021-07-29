@@ -196,11 +196,11 @@ void draw() {
     if (millis()>2200){  //2200
     if (inString != null){
       
-      algo = float(split(inString,';'));
-      t=algo[0];
-      println(t);
-      h=algo[1];
-      h2=algo[2];
+      // algo = float(split(inString,';'));
+      // t=algo[0];
+      // println(t);
+      // h=algo[1];
+      // h2=algo[2];
       // p=algo[3];
       // d=algo[4];
       // v=algo[5];

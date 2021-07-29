@@ -52,10 +52,10 @@ void grafica() {
     cp5.addTextfield("lgMultiplier4").setPosition(x = x + 80, y).setLabel("").setText(getPlotterConfigString("lgMultiplier4")).setWidth(40).setAutoClear(false).setFont(createFont("Arial",20));
     cp5.addTextfield("lgMultiplier5").setPosition(x = x + 80, y).setLabel("").setText(getPlotterConfigString("lgMultiplier5")).setWidth(40).setAutoClear(false).setFont(createFont("Arial",20));
     cp5.addTextfield("lgMultiplier6").setPosition(x = x + 80, y).setLabel("").setText(getPlotterConfigString("lgMultiplier6")).setWidth(40).setAutoClear(false).setFont(createFont("Arial",20));
-    cp5.addToggle("lgVisible1").setPosition(x = 75, y = 582).setLabel("").setValue(int(getPlotterConfigString("lgVisible1"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[0]);
-    cp5.addToggle("lgVisible2").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible2"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[1]);
-    cp5.addToggle("lgVisible3").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible3"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[2]);
-    cp5.addToggle("lgVisible4").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible4"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[3]);
-    cp5.addToggle("lgVisible5").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible5"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[4]);
-    cp5.addToggle("lgVisible6").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible6"))).setMode(ControlP5.SWITCH).setColorActive(graphColors[5]);
+    cp5.addToggle("lgVisible1").setPosition(x = 75, y = 582).setLabel("").setValue(int(getPlotterConfigString("lgVisible1"))).setColorActive(graphColors[0]);//.setMode(ControlP5.SWITCH)
+    cp5.addToggle("lgVisible2").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible2"))).setColorActive(graphColors[1]);
+    cp5.addToggle("lgVisible3").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible3"))).setColorActive(graphColors[2]);
+    cp5.addToggle("lgVisible4").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible4"))).setColorActive(graphColors[3]);
+    cp5.addToggle("lgVisible5").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible5"))).setColorActive(graphColors[4]);
+    cp5.addToggle("lgVisible6").setPosition(x = x + 80, y).setLabel("").setValue(int(getPlotterConfigString("lgVisible6"))).setColorActive(graphColors[5]);
 }
