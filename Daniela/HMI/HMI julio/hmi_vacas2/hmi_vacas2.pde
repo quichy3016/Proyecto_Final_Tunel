@@ -17,6 +17,7 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 
  String text;// ingresa numero
  String text2;// puerto com
+ Float text4;
 
 ////////////////////inicio GUI
 /* SETTINGS BEGIN */
@@ -318,6 +319,8 @@ void draw() {
             textSize(15);
             fill(0,0,255);
             text(nf(d,0,2), 890,266);
+            //    text(nf(d,0,2), 890,266);
+
         }
         }
     
@@ -408,10 +411,9 @@ VERSERIE = false;
 
 
 void Enviar() {
-println();
-print("this is the text you typed :");
 text = cp5.get(Textfield.class, "Veloc").getText();
-
+text4 = float(text);
+print("this is the text you typed :" + text4);
 cp5.get(Textfield.class, "Veloc").clear();
 }
 
