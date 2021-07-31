@@ -21,8 +21,8 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 // int ancho=0;
 // int alto=0;
 
-String text;// ingresa numero
-String text2;// puerto com
+ String text;// ingresa numero
+ String text2;// puerto com
 
 ////////////////////inicio GUI
 /* SETTINGS BEGIN */
@@ -62,11 +62,15 @@ int baudrate = 115200; //serial
 
 //info Serial
 float[] algo;
+Table table;
+String val;
+
+
 String myString = "";
 String inString="";
 float t,h,p,d,v,dp,dp1,dp2,dp3,v1,v2,v3,v4,tiempo,pwm,paro,h2,VelRef,error;
 boolean VERSERIE = false;
-Table table;
+
 
 
 
@@ -136,11 +140,8 @@ void setup() {
        ;
     ///fin serial
     
-    
+//Elementos texto, botones, etc
     cp5.addButton("buttonA").setPosition(10,10).setImage(loadImage("unpsjb.png"));
-    
-    //alto=height;
-    //ancho=width;
     
     cp5.addTextlabel("label1").setText("Automatización túnel de viento").setPosition(70,30).setColorValue(#03045e).setFont(createFont("Arial",25));
     cp5.addToggle("ControlTodo").setLabel("").setPosition(440,30).setSize(60, 30).setColorActive(#38b000);
@@ -156,7 +157,6 @@ void setup() {
     TL8 = cp5.addTextlabel("label8").setText("Control").setPosition(730,460).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TB1 = cp5.addToggle("ControlONOFF").setLabel("").setPosition(825,465).setSize(25, 15).setColorActive(#38b000);
     
-    
     TL9 = cp5.addTextlabel("label10").setText("Velocidad: ").setPosition(640,495).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TF1 = cp5.addTextfield("Veloc").setPosition(744,495).setSize(100, 30).setAutoClear(false).setColor(cc).setFont(font).setLabel("");
     TB2 = cp5.addButton("Enviar").setPosition(744 + 100,495).setSize(85, 30).setFont(font2); //.toInt ver
@@ -169,7 +169,12 @@ void setup() {
     TB4 = cp5.addButton("Run").setPosition(690,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColor(ccONOFF);
     TB5 = cp5.addButton("Stop").setPosition(790,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
-    table = new Table();
+
+
+
+
+
+table = new Table();
     table.addColumn("Muestra");
     table.addColumn("Temp");
     table.addColumn("Hum");
@@ -305,25 +310,60 @@ void draw() {
         TB2.setVisible(false);
         }
     
-    // if (millis()>2200) {
-    // if (VERSERIE ==  true) {
-    //     try {
-    //         String inString = Arduino.readStringUntil('\n');
-    //         }
-    //     catch(Exception e) {
-    //         }
-
-    //    // split the string at delimiter (space)
-    //     algo = float(split(inString, ';'));
-    //     t = algo[0];
-    //     println(t);
-    //     h = algo[1];
-    //     h2 = algo[2];
-    //     // p=algo[3];
-    //     // d=algo[4];
-    //     }}
     
-    // if(VERSERIE ==  true) {
+
+
+
+     if(VERSERIE ==  true) {
+try {
+  val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
+  if (val!= null) { //Verifies reading
+    val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
+    println(val); //Shows received data
+    float algo[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
+    
+    t=algo[0];
+    h = algo[1];
+    h2 = algo[2];
+    p=algo[3];
+    d=algo[4];
+    v=algo[5];
+    dp=algo[6];
+    dp1=algo[7];
+    v1=algo[8];
+    v2=algo[9];
+    tiempo=algo[10];
+    pwm=algo[11];
+    paro=algo[12];
+    VelRef=algo[13];
+    error=algo[14];
+
+     TableRow newRow = table.addRow(); //adds a row for new reading
+        newRow.setInt("Muestra", table.lastRowIndex());
+        newRow.setFloat("Temp", t);
+        newRow.setFloat("Hum", h);
+        newRow.setFloat("Hum2", h2);
+        newRow.setFloat("Pres", p);
+        newRow.setFloat("Den", d);
+        newRow.setFloat("Vol", v);
+        newRow.setFloat("DP", dp);
+        newRow.setFloat("DP1", dp1);
+        newRow.setFloat("Vel1", v1);
+        newRow.setFloat("Vel2", v2);
+        newRow.setFloat("Tiempo", tiempo);
+        newRow.setFloat("PWM", pwm);
+        newRow.setFloat("Paro", paro);
+        newRow.setFloat("VelRef", VelRef);
+        newRow.setFloat("Error", error);
+    }
+  }
+  catch(RuntimeException e) {//catches errors
+//     e.printStackTrace();
+   }
+
+
+}
+
     // //print("HOLA");
     
     // String inString = Arduino.readStringUntil('\n'); 
@@ -349,11 +389,11 @@ void draw() {
     // VelRef=algo[13];
     // error=algo[14];
     
-    TableRow newRow = table.addRow();
-    newRow.setInt("Muestra", table.lastRowIndex());
-    newRow.setFloat("Temp", t);
-    newRow.setFloat("Hum", h);
-    newRow.setFloat("Hum2", h2);
+    // TableRow newRow = table.addRow();
+    // newRow.setInt("Muestra", table.lastRowIndex());
+    // newRow.setFloat("Temp", t);
+    // newRow.setFloat("Hum", h);
+    // newRow.setFloat("Hum2", h2);
     // newRow.setFloat("Pres", p);
     // newRow.setFloat("Den", d);
     // newRow.setFloat("Vol", v);
@@ -379,7 +419,37 @@ void draw() {
 }
 
 
+// void serialEvent(Serial ARduino){
+ 
+//   try {
+//   val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
+//   if (val!= null) { //Verifies reading
+//     val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
+//     println(val); //Shows received data
+//     float sensorVals[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
+    
+//     t=sensorVals[0];
+//     h = algo[1];
+//     h2 = algo[2];
 
+//      TableRow newRow = table.addRow(); //adds a row for new reading
+//         newRow.setInt("Muestra", table.lastRowIndex());
+//         newRow.setFloat("Depth", t);
+//         newRow.setFloat("Width", h);
+ 
+//     //readingCounter++; //writes file every numReadings reading cycles
+ 
+//     //saves the table as a csv in the same folder as the sketch every numReadings. 
+//     // if (readingCounter % numReadings ==0)//checks number of readings is correct
+//     // {
+//     //   fileName = str(year()) + str(month()) + str(day()) + str(table.lastRowIndex()); //filename is of the form year+month+day+readingCounter
+//     //   saveTable(table, fileName + ".csv"); //saves the data as a .csv
+//     // }
+//    }
+//   }
+//   catch(RuntimeException e) {//catches errors
+//     e.printStackTrace();
+//   }}
 
 
 ///////SERIAL

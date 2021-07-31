@@ -25,12 +25,7 @@ void grafica() {
         }
 }
     
-    //start serial communication
-    //if (!mockupSerial) {
-    //serialPort = new Serial(this, serialPortName, 115200);
-// }
-    //else
-    //serialPort = null;
+
     
     //build the gui
     int x = 24;

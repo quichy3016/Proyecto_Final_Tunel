@@ -3,19 +3,20 @@ int i = 0; // loop variable
 
 void graf_draw(){
 /* Read serial and update values */
-  if (mockupSerial || VERSERIE ==true) {
+  //if (mockupSerial || VERSERIE ==true) {
+      if (VERSERIE ==true) {
     String myString = "";
-    if (!mockupSerial) {
+   // if (!mockupSerial) {
       try {
         Arduino.readBytesUntil('\n', inBuffer);
       }
       catch (Exception e) {
       }
       myString = new String(inBuffer);
-    }
-    else {
-      myString = mockupSerialFunction();
-    }
+   // }
+    // else {
+    //   myString = mockupSerialFunction();
+    // }
 
 
     // split the string at delimiter (space)
