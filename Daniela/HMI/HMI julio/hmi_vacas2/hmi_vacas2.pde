@@ -72,7 +72,7 @@ boolean Parada = true;
 
 boolean ControlONOFF = false;
 boolean ControlTodo = false;
-Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL8,TL9,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4;
+Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4;
 Textfield TF1,TF2,TF3,TF4,TF5,TF6,TF7,TF8;
 Button TB2, TB3,TB4,TB5;
 Toggle TB1,TB6,TB7,TB8,TB9;
@@ -143,8 +143,9 @@ void setup() {
     TL4 = cp5.addTextlabel("label4").setText("H:          %").setPosition(743,205).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL5 = cp5.addTextlabel("label5").setText("P:           hPa").setPosition(862,205).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL6 = cp5.addTextlabel("label6").setText("v:           m/s").setPosition(642,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
-    TL7 = cp5.addTextlabel("label7").setText("v(ref):           m/s").setPosition(780,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
-    
+    TL7 = cp5.addTextlabel("label7").setText("v(ref):           m/s").setPosition(790,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
+    TL77= cp5.addTextlabel("label77").setText("f(aporx):           Hz").setPosition(770,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
+
     TL8 = cp5.addTextlabel("label8").setText("Control").setPosition(730,460).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TB1 = cp5.addToggle("ControlONOFF").setLabel("").setPosition(825,465).setSize(25, 15).setColorActive(#38b000);
     
@@ -199,8 +200,8 @@ void draw() {
         rect(626,206,53,30);//T
         rect(767,206,53,30);//H
         rect(885,206,53,30);//P
-        rect(662,246,53,30);//v
-        rect(841,246,53,30);//vref
+        rect(668,246,53,30);//v
+        rect(850,246,53,30);//vref
         rect(590,35,400,110);//serial
         rect(590,455,400,90);//control
         rect(590,560,400,80);//guardado
@@ -210,7 +211,7 @@ void draw() {
         TL4.setVisible(true);
         TL5.setVisible(true);
         TL6.setVisible(true);
-        TL7.setVisible(true);
+        TL77.setVisible(true);
         TL8.setVisible(true);
         TL10.setVisible(true);
         TL11.setVisible(true);
@@ -248,7 +249,8 @@ void draw() {
         text(nf(h,0,2), 813,226);
         text(nf(h2,0,2), 930,226);
         text(nf(p,0,1), 715,266);
-        text(nf(d,0,2), 880,266);
+        // text(nf(d,0,2), 880,266);
+        
         
     }
     
@@ -263,6 +265,7 @@ void draw() {
         TL5.setVisible(false);
         TL6.setVisible(false);
         TL7.setVisible(false);
+        TL77.setVisible(false);
         TL8.setVisible(false);
         TL10.setVisible(false);
         TL11.setVisible(false);
@@ -294,16 +297,28 @@ void draw() {
         Tx4.setVisible(false);
     }
     
-    if (ControlONOFF ==  true) {
+    if (ControlTodo== true && ControlONOFF ==  true) {
         TL9.setVisible(true);
         TF1.setVisible(true);
         TB2.setVisible(true);
+        TL7.setVisible(true);
+        TL77.setVisible(false);
+            textSize(15);
+            fill(255,0,0);
+            text(nf(h2,0,2), 890,266);
+
         
         
     } else {
         TL9.setVisible(false);
         TF1.setVisible(false);
         TB2.setVisible(false);
+        TL7.setVisible(false);
+        if (ControlTodo== true && ControlONOFF ==  false) {
+            textSize(15);
+            fill(0,0,255);
+            text(nf(d,0,2), 890,266);
+        }
         }
     
     
@@ -378,8 +393,6 @@ void seronoser(boolean estado) {
 if (estado ==  true) {
 println("abro puerto" + puerta);
 Arduino = new Serial(this,puerta,baudrate);
-//Arduino.bufferUntil('\n');//'\n' 
-//https://stackoverflow.com/questions/59024009/processing-bufferuntil-method-only-works-with-n
 VERSERIE = true;
 
 }
@@ -398,9 +411,6 @@ void Enviar() {
 println();
 print("this is the text you typed :");
 text = cp5.get(Textfield.class, "Veloc").getText();
-fill(3,4,94);
-text(text, 850,270);
-print(text);
 
 cp5.get(Textfield.class, "Veloc").clear();
 }
