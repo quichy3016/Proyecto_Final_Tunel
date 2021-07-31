@@ -9,17 +9,11 @@ import java.awt.Frame;//gui
 import java.awt.BorderLayout;//gui
 
 
-
-
-
 CColor cc = new CColor((#5DD2EA),color(248,240,248),(#002D5A),color(248,240,248),color(0,0,255));
 CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 //CColor cc=new CColor(color(250,0,0),color(0,250,0),color(0,0,0),color(120,17,90),color(0,0,255));
 //pasas mouse     color fijo,       click,               letra,       int cvl) 
 
-
-// int ancho=0;
-// int alto=0;
 
  String text;// ingresa numero
  String text2;// puerto com
@@ -32,7 +26,6 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 boolean mockupSerial = false;   //para que tome los valores de arduino tiene q estar en falso
 /* SETTINGS END */
 
-//Serial serialPort; // Serial port object
 
 // interface stuff
 ControlP5 cp5;
@@ -70,8 +63,6 @@ String myString = "";
 String inString="";
 float t,h,p,d,v,dp,dp1,dp2,dp3,v1,v2,v3,v4,tiempo,pwm,paro,h2,VelRef,error;
 boolean VERSERIE = false;
-
-
 
 
 // VARIABLES
@@ -253,6 +244,13 @@ void draw() {
         TB9.setVisible(true);
         Tx3.setVisible(true);
         Tx4.setVisible(true);
+         textSize(15);
+        fill(255,0,0);
+        text(nf(t,0,2), 669,226);
+        text(nf(h,0,2), 813,226);
+        text(nf(h2,0,2), 930,226);
+        text(nf(p,0,1), 715,266);
+        text(nf(d,0,2), 880,266);
         
     }
     
@@ -319,7 +317,7 @@ try {
   val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
   if (val!= null) { //Verifies reading
     val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
-    println(val); //Shows received data
+    println("tomando datos"); //Shows received data
     float algo[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
     
     t=algo[0];
@@ -364,92 +362,7 @@ try {
 
 }
 
-    // //print("HOLA");
-    
-    // String inString = Arduino.readStringUntil('\n'); 
-    
-    // if (millis()>2200) {  //2200
-    //     if (inString != null) {
-    
-    //         algo = float(split(inString,';'));
-    //         t = algo[0];
-    //         println(t);
-    //         h = algo[1];
-    //         h2 = algo[2];
-    //         // p=algo[3];
-    //         // d=algo[4];
-    // v=algo[5];
-    // dp=algo[6];
-    // dp1=algo[7];
-    // v1=algo[8];
-    // v2=algo[9];
-    // tiempo=algo[10];
-    // pwm=algo[11];
-    // paro=algo[12];
-    // VelRef=algo[13];
-    // error=algo[14];
-    
-    // TableRow newRow = table.addRow();
-    // newRow.setInt("Muestra", table.lastRowIndex());
-    // newRow.setFloat("Temp", t);
-    // newRow.setFloat("Hum", h);
-    // newRow.setFloat("Hum2", h2);
-    // newRow.setFloat("Pres", p);
-    // newRow.setFloat("Den", d);
-    // newRow.setFloat("Vol", v);
-    // newRow.setFloat("DP", dp);
-    // newRow.setFloat("DP1", dp1);
-    // newRow.setFloat("Vel1", v1);
-    // newRow.setFloat("Vel2", v2);
-    // newRow.setFloat("Tiempo", tiempo);
-    // newRow.setFloat("PWM", pwm);
-    // newRow.setFloat("Paro", paro);
-    // newRow.setFloat("VelRef", VelRef);
-    // newRow.setFloat("Error", error);
-    
-    
-    textSize(15);
-    fill(255,0,0);
-    text(nf(t,0,2), 671,226);
-    text(nf(h,0,2), 812,226);
-    text(nf(h2,0,2), 930,226);
-
-//print(t + "-"); 
-
 }
-
-
-// void serialEvent(Serial ARduino){
- 
-//   try {
-//   val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
-//   if (val!= null) { //Verifies reading
-//     val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
-//     println(val); //Shows received data
-//     float sensorVals[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
-    
-//     t=sensorVals[0];
-//     h = algo[1];
-//     h2 = algo[2];
-
-//      TableRow newRow = table.addRow(); //adds a row for new reading
-//         newRow.setInt("Muestra", table.lastRowIndex());
-//         newRow.setFloat("Depth", t);
-//         newRow.setFloat("Width", h);
- 
-//     //readingCounter++; //writes file every numReadings reading cycles
- 
-//     //saves the table as a csv in the same folder as the sketch every numReadings. 
-//     // if (readingCounter % numReadings ==0)//checks number of readings is correct
-//     // {
-//     //   fileName = str(year()) + str(month()) + str(day()) + str(table.lastRowIndex()); //filename is of the form year+month+day+readingCounter
-//     //   saveTable(table, fileName + ".csv"); //saves the data as a .csv
-//     // }
-//    }
-//   }
-//   catch(RuntimeException e) {//catches errors
-//     e.printStackTrace();
-//   }}
 
 
 ///////SERIAL
@@ -504,7 +417,6 @@ text2 = cp5.get(Textfield.class, "Nombre archivo").getText();
 print(text2);
 saveTable(table, "data/" + text2 + ".csv","csv");
 cp5.get(Textfield.class, "Nombre archivo").clear();
+table.clearRows();
 
 }
-
-
