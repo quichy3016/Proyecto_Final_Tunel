@@ -193,8 +193,6 @@ void draw() {
     graf_draw();
     
     if (ControlTodo == true) {
-        
-        
         fill(255);//cuadros con fondo
         stroke(#5DD2EA);
         rect(590,155,400,145);//Parametros actuales
@@ -309,9 +307,6 @@ void draw() {
         }
     
     
-
-
-
      if(VERSERIE ==  true) {
 try {
   val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 

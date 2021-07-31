@@ -3,23 +3,15 @@ int i = 0; // loop variable
 
 void graf_draw(){
 /* Read serial and update values */
-  //if (mockupSerial || VERSERIE ==true) {
       if (VERSERIE ==true) {
     String myString = "";
-   // if (!mockupSerial) {
       try {
         Arduino.readBytesUntil('\n', inBuffer);
       }
       catch (Exception e) {
       }
       myString = new String(inBuffer);
-   // }
-    // else {
-    //   myString = mockupSerialFunction();
-    // }
-
-
-    // split the string at delimiter (space)
+   
     String[] nums = split(myString, ';');
     
     for (i=0; i<nums.length; i++) {
@@ -27,8 +19,6 @@ void graf_draw(){
       try {
         if (i<lineGraphValues.length) {
           for (int k=0; k<lineGraphValues[i].length-1; k++) {
-            ////////////t=lineGraphValues[0][k];
-            ///////println(t);
             lineGraphValues[i][k] = lineGraphValues[i][k+1];
 
           }
