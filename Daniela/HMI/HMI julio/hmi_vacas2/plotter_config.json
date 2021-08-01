@@ -1,5 +1,5 @@
 {
-  "Nombre archivo": "htgfvj",
+  "Nombre archivo": "nose",
   "bcMultiplier1": "1",
   "bcMaxY": "100",
   "Stop": "1.0",
@@ -28,7 +28,7 @@
   "Enviar": "1.0",
   "bcVisible3": "0.0",
   "bcVisible4": "0.0",
-  "lgMinY": "-100",
+  "lgMinY": "0",
   "bcMinY": "0",
   "bcVisible1": "1.0",
   "Veloc": "44.5",

@@ -19,54 +19,33 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
  String text2;// puerto com
  Float text4;
 
-////////////////////inicio GUI
-/* SETTINGS BEGIN */
-// Serial port to connect to
-//String serialPortName = "COM4";
-// If you want to debug the plotter without using a real serial port set this to true
-boolean mockupSerial = false;   //para que tome los valores de arduino tiene q estar en falso
-/* SETTINGS END */
-
-
 // interface stuff
 ControlP5 cp5;
 
 // Settings for the plotter are saved in this file
 JSONObject plotterConfigJSON;
 
-// plots
 Graph LineGraph = new Graph(70,  115, 500, 400, color(20, 20, 200));
 float[][] lineGraphValues = new float[6][100];
 float[] lineGraphSampleNumbers = new float[100];
 color[] graphColors = new color[6];
 
-// helper for saving the executing path
 String topSketchPath = "";
-////////////////////FIN GUI
-
-/*
-Instancias de los objetos de las bibliotecas
-*/
 
 Serial Arduino;
 String puerta;
 List l; //serial
 int baudrate = 115200; //serial
 
-
-//info Serial
 float[] algo;
 Table table;
 String val;
-
 
 String myString = "";
 String inString="";
 float t,h,p,d,v,dp,dp1,dp2,dp3,v1,v2,v3,v4,tiempo,pwm,paro,h2,VelRef,error;
 boolean VERSERIE = false;
 
-
-// VARIABLES
 boolean ONOFF = false;
 boolean Corre = false;
 boolean Parada = true;
@@ -79,6 +58,9 @@ Button TB2, TB3,TB4,TB5;
 Toggle TB1,TB6,TB7,TB8,TB9;
 ScrollableList SL;   
 Icon ser, serono;
+int colorONOFF;
+boolean Run= false;
+boolean Stop = true;
 
 
 void setup() {
@@ -159,8 +141,8 @@ void setup() {
     TF2 = cp5.addTextfield("Nombre archivo").setPosition(720,590).setSize(160, 30).setAutoClear(false).setColor(cc).setFont(font).setLabel("");
     TB3 = cp5.addButton("Guardar").setPosition(720 + 160,590).setSize(85, 30).setFont(font2); 
     
-    TB4 = cp5.addButton("Run").setPosition(690,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColor(ccONOFF);
-    TB5 = cp5.addButton("Stop").setPosition(790,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
+    TB4 = cp5.addButton("Run").setPosition(700,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
+    TB5 = cp5.addButton("Stop").setPosition(813,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
 
 
@@ -195,6 +177,10 @@ void draw() {
     graf_draw();
     
     if (ControlTodo == true) {
+        fill(colorONOFF);//cuadros con fondo
+        noStroke();
+        rect(700,400,200,50);//P
+
         fill(255);//cuadros con fondo
         stroke(#5DD2EA);
         rect(590,155,400,145);//Parametros actuales
@@ -253,6 +239,15 @@ void draw() {
         // text(nf(d,0,2), 880,266);
         
         
+if (Corre== true && Parada== false){
+     colorONOFF=#00AA00;
+      println("POSITIVO");
+ }
+ if(Corre== false && Parada== true){
+    colorONOFF=#AA0000;
+    println("NEGATIVO");
+ } 
+
     }
     
     else{
@@ -375,8 +370,21 @@ try {
 
 }
 
-}
 
+    
+    }
+
+public void Run(){
+    Corre= true;
+    Parada = false;
+}
+    
+public void Stop(){
+    Corre= false;
+    Parada = true;
+
+}
+ 
 
 ///////SERIAL
 void dropdown(int n) {
