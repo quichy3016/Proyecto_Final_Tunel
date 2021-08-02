@@ -5,15 +5,11 @@ void grafica() {
     graphColors[1] = color(232, 158, 12);
     graphColors[2] = color(255, 0, 0);
     graphColors[3] = color(62, 12, 232);
-  //  graphColors[4] = color(13, 255, 243);
-  //  graphColors[5] = color(200, 46, 232);
     
     //settings save file
     topSketchPath = sketchPath();
     plotterConfigJSON = loadJSONObject(topSketchPath + "/plotter_config.json");
     
-    //gui
-    //////cp5 = new ControlP5(this);
     
     //init charts
     setChartSettings();
@@ -25,12 +21,7 @@ void grafica() {
         }
 }
     
-    //start serial communication
-    //if (!mockupSerial) {
-    //serialPort = new Serial(this, serialPortName, 115200);
-// }
-    //else
-    //serialPort = null;
+
     
     //build the gui
     int x = 24;
