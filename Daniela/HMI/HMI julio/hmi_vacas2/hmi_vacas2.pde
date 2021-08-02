@@ -49,12 +49,13 @@ boolean VERSERIE = false;
 boolean ONOFF = false;
 boolean Corre = false;
 boolean Parada = true;
+boolean ERROR = true;
 
 boolean ControlONOFF = false;
 boolean ControlTodo = false;
-Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4;
+Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177;
 Textfield TF1,TF2,TF3,TF4,TF5,TF6,TF7,TF8;
-Button TB2, TB3,TB4,TB5;
+Button TB2, TB3,TB4,TB5,TB10;
 Toggle TB1,TB6,TB7,TB8,TB9;
 ScrollableList SL;   
 Icon ser, serono;
@@ -127,7 +128,7 @@ void setup() {
     TL5 = cp5.addTextlabel("label5").setText("P:           hPa").setPosition(862,205).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL6 = cp5.addTextlabel("label6").setText("v:           m/s").setPosition(642,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL7 = cp5.addTextlabel("label7").setText("v(ref):           m/s").setPosition(790,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
-    TL77= cp5.addTextlabel("label77").setText("f(aporx):           Hz").setPosition(770,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
+    TL77= cp5.addTextlabel("label77").setText("f(aprox):           Hz").setPosition(770,245).setColorValue(#002D5A).setFont(createFont("Arial",20));
 
     TL8 = cp5.addTextlabel("label8").setText("Control").setPosition(730,460).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TB1 = cp5.addToggle("ControlONOFF").setLabel("").setPosition(825,465).setSize(25, 15).setColorActive(#38b000);
@@ -144,6 +145,7 @@ void setup() {
     TB4 = cp5.addButton("Run").setPosition(700,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
     TB5 = cp5.addButton("Stop").setPosition(813,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
+    TB10 = cp5.addButton("error").setPosition(910,100).setSize(60, 15).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
 
 
 
@@ -218,6 +220,10 @@ void draw() {
         TL15.setVisible(true);
         TL16.setVisible(true);
         TL17.setVisible(true);
+        TL144.setVisible(true);
+        TL155.setVisible(true);
+        TL166.setVisible(true);
+        TL177.setVisible(true);
         TF3.setVisible(true);
         TF4.setVisible(true);
         TF5.setVisible(true);
@@ -239,15 +245,6 @@ void draw() {
         // text(nf(d,0,2), 880,266);
         
         
-if (Corre== true && Parada== false){
-     colorONOFF=#00AA00;
-      println("POSITIVO");
- }
- if(Corre== false && Parada== true){
-    colorONOFF=#AA0000;
-    println("NEGATIVO");
- } 
-
     }
     
     else{
@@ -279,6 +276,10 @@ if (Corre== true && Parada== false){
         TL15.setVisible(false);
         TL16.setVisible(false);
         TL17.setVisible(false);
+        TL144.setVisible(false);
+        TL155.setVisible(false);
+        TL166.setVisible(false);
+        TL177.setVisible(false);
         TF3.setVisible(false);
         TF4.setVisible(false);
         TF5.setVisible(false);
@@ -291,6 +292,7 @@ if (Corre== true && Parada== false){
         TB9.setVisible(false);
         Tx3.setVisible(false);
         Tx4.setVisible(false);
+        TB10.setVisible(false);
     }
     
     if (ControlTodo== true && ControlONOFF ==  true) {
@@ -367,7 +369,24 @@ try {
 //     e.printStackTrace();
    }
 
+if (Corre== true && Parada== false){
+     colorONOFF=#00AA00;
+      println("POSITIVO");
+ }
+ if(Corre== false && Parada== true){
+    colorONOFF=#AA0000;
+    println("NEGATIVO");
+ } 
 
+  if (ControlTodo== true && ERROR== true){   //agregar la variable de reset del boton para que desaparezca el triangulo y boton
+      TB10.setVisible(true);
+      fill(255,0,0);
+      noStroke();
+      triangle(850, 90, 900, 90, 875, 135);
+  }
+  if (ERROR == false){
+      TB10.setVisible(false);
+  }
 }
 
 
@@ -375,14 +394,17 @@ try {
     }
 
 public void Run(){
+    if (VERSERIE ==  true){
     Corre= true;
     Parada = false;
+    }
 }
     
 public void Stop(){
+    if (VERSERIE ==  true){
     Corre= false;
     Parada = true;
-
+    }
 }
  
 
@@ -413,6 +435,8 @@ actualizar();
 Arduino.clear();
 Arduino.stop();
 VERSERIE = false;
+Corre= false;
+Parada = true;
 }
 }
 ///////FINSERIAL
