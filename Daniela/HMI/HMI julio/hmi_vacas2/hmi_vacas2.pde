@@ -52,7 +52,7 @@ boolean Corre = false;
 boolean Parada = true;
 boolean ERROR = true;
 
-boolean ControlONOFF = false;
+boolean ControlONOFFnueva;
 boolean ControlTodo = false;
 Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
@@ -77,7 +77,7 @@ void setup() {
     
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
-    ControlONOFF = false;
+    ControlONOFFnueva = false;
     ControlTodo = false;
     cp5 = new ControlP5(this);
     PFont font = createFont("arial",20);
@@ -254,7 +254,7 @@ void draw() {
         // text(nf(d,0,2), 880,266);
         
 
-        if (ControlONOFF ==  true){
+        if (ControlONOFFnueva ==  true){
         TL9.setVisible(true);
         TF1.setVisible(true);
         TB2.setVisible(true);
@@ -472,7 +472,7 @@ Parada = true;
 void EnviarVel() {
 textV = cp5.get(Textfield.class, "Veloc").getText();
 textVV = float(textV);
-if (5<textVV && textVV<16){
+if (5<textVV && textVV<17){
 print("velocidad:" + textVV);
 Dato2= str(textVV);
 
@@ -520,17 +520,20 @@ table.clearRows();
 
 
 void ControlONOFF(boolean D2){
-    if (D2==true){
+    
         print("prendido");
-       
+        ControlONOFFnueva=!ControlONOFFnueva;
+       if (ControlONOFFnueva==true){
     Dato2= "1";
     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
     Arduino.write(DatosWrite);
+
     }
     else {
          Dato2= "0";
     print("apagado");
     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
     Arduino.write(DatosWrite);
-    }
+
+     }
 }
