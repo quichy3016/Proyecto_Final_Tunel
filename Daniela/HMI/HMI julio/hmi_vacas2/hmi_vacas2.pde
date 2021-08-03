@@ -17,8 +17,8 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 
  String textV, textF;// ingresa numero
  String text2;// puerto com
- Float textVV;
- int textFF;
+ Float textVV, textFF;
+ int textVVV, textFFF;
 
 // interface stuff
 ControlP5 cp5;
@@ -53,16 +53,18 @@ boolean Parada = true;
 boolean ERROR = true;
 
 boolean ControlONOFFnueva;
-boolean ControlTodo = false;
+boolean ControlTodoall;
 Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
-Button TB2, TB22, TB3,TB4,TB5,TB10;
+Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
 Toggle TB6,TB7,TB8,TB9;
 ScrollableList SL;   
 Icon ser, serono, TODOonoff, TB1;
 int colorONOFF;
 boolean Run= false;
 boolean Stop = true;
+boolean DD4=false;
+boolean DD5=false;
 
 
 //envío de datos a Arduino
@@ -78,7 +80,7 @@ void setup() {
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
     ControlONOFFnueva = false;
-    ControlTodo = false;
+    ControlTodoall = false;
     cp5 = new ControlP5(this);
     PFont font = createFont("arial",20);
     PFont font2 = createFont("arial",14);
@@ -155,8 +157,8 @@ void setup() {
     TB4 = cp5.addButton("Run").setPosition(700,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
     TB5 = cp5.addButton("Stop").setPosition(813,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
-    TB10 = cp5.addButton("error").setPosition(910,100).setSize(60, 15).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
-
+    TB10 = cp5.addButton("reset").setPosition(910,100).setSize(60, 15).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
+    TB11=cp5.addButton("fallaext").setPosition(910,120).setSize(60, 15).setLabel("STOP EMERGENCIA").setFont(createFont("Arial",14)).setColorActive(#990000);
 
     TL18 = cp5.addTextlabel("valiTL18").setText("ingrese variable valida").setPosition(755,525).setColorValue(#770000).setFont(createFont("Arial",15));
 
@@ -187,7 +189,7 @@ table = new Table();
 void draw() {
     graf_draw();
     
-    if (ControlTodo == true) {
+    if (ControlTodoall == true) {
         fill(colorONOFF);//cuadros con fondo
         noStroke();
         rect(700,400,200,50);//P
@@ -249,8 +251,8 @@ void draw() {
         fill(255,0,0);
         text(nf(t,0,2), 669,226);
         text(nf(h,0,2), 813,226);
-        text(nf(error,0,2), 930,226);
-        text(nf(p,0,1), 715,266);
+        text(nf(p,0,2), 930,226);
+        text(nf(v1,0,1), 715,266);
         // text(nf(d,0,2), 880,266);
         
 
@@ -265,7 +267,7 @@ void draw() {
         TL77.setVisible(false);            
             textSize(15);
             fill(255,0,0);
-            text(nf(h,0,2), 890,266);
+            text(nf(VelRef,0,2), 890,266);
         }
         else{
         TL9.setVisible(false);
@@ -278,7 +280,7 @@ void draw() {
         TL77.setVisible(true);
         textSize(15);
         fill(0,255,0);
-        text(nf(d,0,2), 890,266);
+        text(nf(VelRef,0,2), 890,266);
         }
         
     }
@@ -351,7 +353,7 @@ try {
     tiempo = algo[0];
     t = algo[1];
     h = algo[2];
-    p = algo[3];
+    p = algo[3]/100;
     d = algo[4];
     dp=algo[5];
     VelRef=algo[6];
@@ -394,7 +396,7 @@ if (Corre== true && Parada== false){
     
  } 
 
-  if (ControlTodo== true && ERROR== true){   //agregar la variable de reset del boton para que desaparezca el triangulo y boton
+  if (ControlTodoall== true && ERROR== true){   //agregar la variable de reset del boton para que desaparezca el triangulo y boton
       TB10.setVisible(true);
       fill(255,0,0);
       noStroke();
@@ -416,9 +418,9 @@ public void Run(){
 
 
 
-    Dato0= "255";
+    Dato0= "1";
 
-        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
 Arduino.write(DatosWrite);
 
     }
@@ -429,7 +431,7 @@ public void Stop(){
     Corre= false;
     Parada = true;
     Dato0= "0";
-        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
     }
 }
@@ -474,7 +476,12 @@ textV = cp5.get(Textfield.class, "Veloc").getText();
 textVV = float(textV);
 if (5<textVV && textVV<17){
 print("velocidad:" + textVV);
-Dato2= str(textVV);
+
+textVV=map(textVV,5,17,0,32767);
+textVVV=int(textVV);
+Dato1= str(textVVV);
+DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
 
 TL18.setVisible(false);
 //////print(Dato2);
@@ -490,12 +497,16 @@ cp5.get(Textfield.class, "Veloc").clear();
 
 void EnviarFrec() {
 textF = cp5.get(Textfield.class, "Frec").getText();
-textFF = int(textF);
+textFF = float(textF);
 if (14<textFF && textFF<50){
 println("FRECUENCIA:" + textFF);
-Dato2= str(textFF);
+textFF=map(textFF,14,50,0,32767);
+textFFF=int(textFF);
+Dato1= str(textFFF);
 println(Dato2);
 TL18.setVisible(false);
+DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
 }
 else{
     println("ingrese un numero válido");
@@ -525,15 +536,69 @@ void ControlONOFF(boolean D2){
         ControlONOFFnueva=!ControlONOFFnueva;
        if (ControlONOFFnueva==true){
     Dato2= "1";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
 
     }
     else {
          Dato2= "0";
     print("apagado");
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
 
      }
+}
+
+
+void ControlTodo(boolean D3){
+    ControlTodoall= !ControlTodoall;
+// if (ControlTodoall==true){
+//     Dato3= "1";
+//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+//     Arduino.write(DatosWrite);
+
+//     }
+//     else {
+//          Dato3= "0";
+//     print("apagado");
+//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+//     Arduino.write(DatosWrite);
+
+//      }
+}
+
+
+void reset(boolean D4){
+
+     DD4=!DD4;
+    if (DD4==true){
+
+          Dato4= "1";
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
+    }
+    else{
+        Dato4= "0";
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
+    }
+     println("reset"+DatosWrite);
+}
+
+void fallaext(boolean D5){
+   
+     DD5=!DD5;
+    if (DD5==true){
+
+          Dato5= "1";
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
+    }
+    else{
+        Dato5= "0";
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
+ 
+    }
+       println("falla"+DatosWrite);
 }
