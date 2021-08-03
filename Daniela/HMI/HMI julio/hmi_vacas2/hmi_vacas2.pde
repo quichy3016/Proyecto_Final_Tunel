@@ -64,6 +64,7 @@ int colorONOFF;
 boolean Run= false;
 boolean Stop = true;
 
+
 //envío de datos a Arduino
 String Dato0="0",Dato1="0", Dato2="0", Dato3="0", Dato4="0", Dato5="0", DatosWrite;
 
@@ -76,7 +77,6 @@ void setup() {
     
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
-    
     ControlONOFF = false;
     ControlTodo = false;
     cp5 = new ControlP5(this);
@@ -255,9 +255,6 @@ void draw() {
         
 
         if (ControlONOFF ==  true){
-        Dato2= "1";
-        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
-        Arduino.write(DatosWrite);
         TL9.setVisible(true);
         TF1.setVisible(true);
         TB2.setVisible(true);
@@ -271,9 +268,6 @@ void draw() {
             text(nf(h,0,2), 890,266);
         }
         else{
-            // Dato2= "0";
-            // DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
-            // Arduino.write(DatosWrite);
         TL9.setVisible(false);
         TF1.setVisible(false);
         TB2.setVisible(false);
@@ -522,4 +516,21 @@ saveTable(table, "data/" + text2 + ".csv","csv");
 cp5.get(Textfield.class, "Nombre archivo").clear();
 table.clearRows();
 
+}
+
+
+void ControlONOFF(boolean D2){
+    if (D2==true){
+        print("prendido");
+       
+    Dato2= "1";
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+    Arduino.write(DatosWrite);
+    }
+    else {
+         Dato2= "0";
+    print("apagado");
+    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5 +'\n');
+    Arduino.write(DatosWrite);
+    }
 }
