@@ -141,22 +141,22 @@ println("apagado" + DatosWrite);
 }
 
 
-void ControlTodo(boolean D3){
-    ControlTodoall= !ControlTodoall;
-// if (ControlTodoall==true){
-//     Dato3= "1";
-//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-//     Arduino.write(DatosWrite);
+// void ControlTodo(boolean D3){
+//     ControlTodoall= !ControlTodoall;
+// // if (ControlTodoall==true){
+// //     Dato3= "1";
+// //     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+// //     Arduino.write(DatosWrite);
 
-//     }
-//     else {
-//          Dato3= "0";
-//     print("apagado");
-//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-//     Arduino.write(DatosWrite);
+// //     }
+// //     else {
+// //          Dato3= "0";
+// //     print("apagado");
+// //     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+// //     Arduino.write(DatosWrite);
 
-//      }
-}
+// //      }
+// }
 
 
 void reset(boolean D4){

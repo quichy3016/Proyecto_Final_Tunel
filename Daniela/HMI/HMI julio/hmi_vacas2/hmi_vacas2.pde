@@ -57,7 +57,7 @@ boolean Parada = true;
 boolean ERROR = true;
 
 boolean ControlONOFFnueva;
-boolean ControlTodoall;
+//boolean ControlTodoall;
 Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18, TL19;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
 Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
@@ -88,7 +88,7 @@ void setup() {
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
     ControlONOFFnueva = false;
-    ControlTodoall = false;
+   // ControlTodoall = false;
     unicavez=0;
     variablecontrol1=0;
     println(unicavez);
@@ -131,6 +131,7 @@ void setup() {
        .setColorBackground(color(255,100))
        .hideBackground()
        ;
+
     ///fin serial
     
 //Elementos texto, botones, etc
@@ -204,7 +205,12 @@ table = new Table();
 void draw() {
     graf_draw();
     
-    if (ControlTodoall == true) {
+               fill(255);//cuadros con fondo
+        stroke(#5DD2EA);
+        rect(590,35,400,110);//serial
+    if (VERSERIE == true) {
+         //   if (ControlTodoall == true) {
+
         fill(colorONOFF);//cuadros con fondo
         noStroke();
         rect(660,400,200,50);//P
@@ -217,11 +223,11 @@ void draw() {
         rect(885,206,53,30);//P
         rect(668,246,53,30);//v
         rect(850,246,53,30);//vref
-        rect(590,35,400,110);//serial
         rect(870,370,80,60);//habilita
         rect(590,455,400,90);//control
         rect(590,560,400,80);//guardado
-        TL1.setVisible(true);        TL2.setVisible(true);
+        //TL1.setVisible(true);      
+          TL2.setVisible(true);
         TL3.setVisible(true);        TL4.setVisible(true);
         TL5.setVisible(true);        TL6.setVisible(true);
         TL77.setVisible(true);        TL8.setVisible(true);
@@ -229,8 +235,8 @@ void draw() {
         TF2.setVisible(true);        TB3.setVisible(true);
         TB4.setVisible(true);        TB5.setVisible(true);
         TB1.setVisible(true);        TB4.setVisible(true);
-        TB5.setVisible(true);        SL.setVisible(true);
-        ser.setVisible(true);        serono.setVisible(true);
+        TB5.setVisible(true);     //   SL.setVisible(true);
+       // ser.setVisible(true);        serono.setVisible(true);
         TL12.setVisible(true);        TL13.setVisible(true);
         TL14.setVisible(true);        TL15.setVisible(true);
         TL16.setVisible(true);        TL17.setVisible(true);
@@ -245,7 +251,7 @@ void draw() {
         TB12.setVisible(true);        TL19.setVisible(true);
          textSize(15);
         fill(255,0,0);
-        text(nf(d,0,2), 669,226);
+        text(nf(t,0,2), 669,226);
         text(nf(h,0,2), 813,226);
         text(nf(p,0,-1), 935,226);
         text(nf(v1,0,1), 715,266);
@@ -277,7 +283,8 @@ void draw() {
         fill(255);//cuadros con fondo
         noStroke();
         rect(0,40,590,600);
-        TL1.setVisible(false);        TL2.setVisible(false);
+        //TL1.setVisible(false);     
+           TL2.setVisible(false);
         TL3.setVisible(false);        TL4.setVisible(false);
         TL5.setVisible(false);        TL6.setVisible(false);
         TL7.setVisible(false);        TL9.setVisible(false);
@@ -288,8 +295,9 @@ void draw() {
         TL11.setVisible(false);        TF2.setVisible(false);
         TB3.setVisible(false);        TB4.setVisible(false);
         TB5.setVisible(false);        TB1.setVisible(false);
-        SL.setVisible(false);        ser.setVisible(false);
-        serono.setVisible(false);        TL12.setVisible(false);
+       // SL.setVisible(false);        ser.setVisible(false);
+        //serono.setVisible(false);        
+        TL12.setVisible(false);
         TL13.setVisible(false);        TL14.setVisible(false);
         TL15.setVisible(false);        TL16.setVisible(false);
         TL17.setVisible(false);        TL144.setVisible(false);
