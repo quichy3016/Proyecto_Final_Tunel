@@ -19,6 +19,7 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
  String text2;// puerto com
  Float textVV, textFF;
  int textVVV, textFFF;
+ int unicavez=0;
 
 // interface stuff
 ControlP5 cp5;
@@ -251,7 +252,7 @@ void draw() {
         fill(255,0,0);
         text(nf(t,0,2), 669,226);
         text(nf(h,0,2), 813,226);
-        text(nf(p,0,2), 930,226);
+        text(nf(p,0,-1), 935,226);
         text(nf(v1,0,1), 715,266);
         // text(nf(d,0,2), 880,266);
         
@@ -267,7 +268,7 @@ void draw() {
         TL77.setVisible(false);            
             textSize(15);
             fill(255,0,0);
-            text(nf(VelRef,0,2), 890,266);
+            text(nf(VelRef,0,2), 900,266);
         }
         else{
         TL9.setVisible(false);
@@ -280,7 +281,7 @@ void draw() {
         TL77.setVisible(true);
         textSize(15);
         fill(0,255,0);
-        text(nf(VelRef,0,2), 890,266);
+        text(nf(VelRef,0,2), 900,266);
         }
         
     }
@@ -350,15 +351,15 @@ try {
     val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
     float algo[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
     
-    tiempo = algo[0];
-    t = algo[1];
-    h = algo[2];
-    p = algo[3]/100;
-    d = algo[4];
-    dp=algo[5];
-    VelRef=algo[6];
-    v1=algo[7];
-    pwm=algo[8];
+    tiempo = algo[4];
+    t = algo[5];
+    h = algo[6];
+    p = algo[7]/100;
+    d = algo[8];
+    dp=algo[2];
+    VelRef=algo[1];
+    v1=algo[0];
+    pwm=algo[3];
     controlSINO=algo[9];
     error=algo[10];
     Ev=algo[11];
@@ -405,6 +406,22 @@ if (Corre== true && Parada== false){
   if (ERROR == false){
       TB10.setVisible(false);
   }
+
+
+if (unicavez==0){
+    int variablecontrol1= int(controlSINO);
+if (variablecontrol1==1){
+TB1.setOn();
+
+}
+else{
+    TB1.setOff();
+    
+}
+unicavez=1;
+}
+
+
 }
 
 
@@ -457,7 +474,9 @@ println("abro puerto" + puerta);
 Arduino = new Serial(this,puerta,baudrate);
 VERSERIE = true;
 
+
 }
+
 else{
 println("cierro puerto " + puerta);
 actualizar();
@@ -474,12 +493,13 @@ Parada = true;
 void EnviarVel() {
 textV = cp5.get(Textfield.class, "Veloc").getText();
 textVV = float(textV);
-if (5<textVV && textVV<17){
-print("velocidad:" + textVV);
+if (4.7<textVV && textVV<17.05){
+//print("velocidad:" + textVV);
 
-textVV=map(textVV,5,17,0,32767);
+textVV=map(textVV,4.7,17,0,32767);
 textVVV=int(textVV);
 Dato1= str(textVVV);
+println(textVVV);
 DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
 
@@ -498,10 +518,11 @@ cp5.get(Textfield.class, "Veloc").clear();
 void EnviarFrec() {
 textF = cp5.get(Textfield.class, "Frec").getText();
 textFF = float(textF);
-if (14<textFF && textFF<50){
+if (13.8<textFF && textFF<50.5){
 println("FRECUENCIA:" + textFF);
 textFF=map(textFF,14,50,0,32767);
 textFFF=int(textFF);
+println("pwm"+textFFF);
 Dato1= str(textFFF);
 println(Dato2);
 TL18.setVisible(false);
@@ -532,9 +553,10 @@ table.clearRows();
 
 void ControlONOFF(boolean D2){
     
-        print("prendido");
+       
         ControlONOFFnueva=!ControlONOFFnueva;
        if (ControlONOFFnueva==true){
+            println("prendido");
     Dato2= "1";
     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
@@ -542,7 +564,7 @@ void ControlONOFF(boolean D2){
     }
     else {
          Dato2= "0";
-    print("apagado");
+    println("apagado");
     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
     Arduino.write(DatosWrite);
 
@@ -602,3 +624,4 @@ void fallaext(boolean D5){
     }
        println("falla"+DatosWrite);
 }
+
