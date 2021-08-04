@@ -117,6 +117,8 @@ print(text2);
 saveTable(table, "data/" + text2 + ".csv","csv");
 cp5.get(Textfield.class, "Nombre archivo").clear();
 table.clearRows();
+    tiempo3=tiempo;
+
 
 }
 

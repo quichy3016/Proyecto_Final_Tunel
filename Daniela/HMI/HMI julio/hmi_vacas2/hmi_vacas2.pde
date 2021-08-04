@@ -138,7 +138,7 @@ void setup() {
     cp5.addButton("buttonA").setPosition(10,10).setImage(loadImage("unpsjb.png"));
     
     cp5.addTextlabel("label1").setText("Automatización túnel de viento").setPosition(70,30).setColorValue(#03045e).setFont(createFont("Arial",25));
-    TODOonoff = cp5.addIcon("ControlTodo",10).setPosition(440,30).setSize(60, 30).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
+   // TODOonoff = cp5.addIcon("ControlTodo",10).setPosition(440,30).setSize(60, 30).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
 
     TL1 = cp5.addTextlabel("label12").setText("Puerto:").setPosition(620,35).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL2 = cp5.addTextlabel("label2").setText("Parametros actuales").setPosition(690,155).setColorValue(#002D5A).setFont(createFont("Arial",20));
@@ -251,7 +251,7 @@ void draw() {
         TB12.setVisible(true);        TL19.setVisible(true);
          textSize(15);
         fill(255,0,0);
-        text(nf(t,0,2), 669,226);
+        text(nf(error,0,2), 669,226);///////////////////
         text(nf(h,0,2), 813,226);
         text(nf(p,0,-1), 935,226);
         text(nf(v1,0,1), 715,266);
@@ -400,6 +400,7 @@ if (variablecontrol1==1){
 TB1.setOn();
 println("seton");
 }
+
 // 
 unicavez=1;
 }
