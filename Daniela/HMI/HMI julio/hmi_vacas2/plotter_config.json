@@ -36,7 +36,7 @@
   "reset": "1.0",
   "bcMinY": "0",
   "bcVisible1": "1.0",
-  "Veloc": "13.5",
+  "Veloc": "0",
   "bcVisible2": "0.0",
   "Guardar": "1.0",
   "EnviarVel": "1.0",

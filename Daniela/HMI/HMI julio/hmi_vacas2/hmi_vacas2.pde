@@ -19,8 +19,11 @@ CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
  String text2;// puerto com
  Float textVV, textFF;
  int textVVV, textFFF;
- int unicavez=0;
-
+ int unicavez;
+ boolean unicavez2=false;
+ int variablecontrol1;
+long tiempo1,tiempo2;
+float tiempo3;
 // interface stuff
 ControlP5 cp5;
 
@@ -55,17 +58,21 @@ boolean ERROR = true;
 
 boolean ControlONOFFnueva;
 boolean ControlTodoall;
-Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18;
+Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18, TL19;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
 Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
 Toggle TB6,TB7,TB8,TB9;
 ScrollableList SL;   
-Icon ser, serono, TODOonoff, TB1;
+Icon ser, serono, TODOonoff, TB1, TB12;
 int colorONOFF;
 boolean Run= false;
 boolean Stop = true;
 boolean DD4=false;
 boolean DD5=false;
+boolean DD6=false;
+boolean reinicioreset=false;
+
+
 
 
 //envío de datos a Arduino
@@ -82,6 +89,9 @@ void setup() {
     size(1000,650);           // Configura resolucion interfaz
     ControlONOFFnueva = false;
     ControlTodoall = false;
+    unicavez=0;
+    variablecontrol1=0;
+    println(unicavez);
     cp5 = new ControlP5(this);
     PFont font = createFont("arial",20);
     PFont font2 = createFont("arial",14);
@@ -155,13 +165,16 @@ void setup() {
     TF2 = cp5.addTextfield("Nombre archivo").setPosition(720,590).setSize(160, 30).setAutoClear(false).setColor(cc).setFont(font).setLabel("");
     TB3 = cp5.addButton("Guardar").setPosition(720 + 160,590).setSize(85, 30).setFont(font2); 
     
-    TB4 = cp5.addButton("Run").setPosition(700,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
-    TB5 = cp5.addButton("Stop").setPosition(813,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
+    TB4 = cp5.addButton("Run").setPosition(660,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
+    TB5 = cp5.addButton("Stop").setPosition(773,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
     TB10 = cp5.addButton("reset").setPosition(910,100).setSize(60, 15).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
     TB11=cp5.addButton("fallaext").setPosition(910,120).setSize(60, 15).setLabel("STOP EMERGENCIA").setFont(createFont("Arial",14)).setColorActive(#990000);
 
     TL18 = cp5.addTextlabel("valiTL18").setText("ingrese variable valida").setPosition(755,525).setColorValue(#770000).setFont(createFont("Arial",15));
+
+    TB12 = cp5.addIcon("Habilitacion",10).setPosition(900,400).setSize(25, 15).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
+    TL19 = cp5.addTextlabel("Habili").setText("Ai1").setPosition(900,370).setColorValue(#002D5A).setFont(createFont("Arial",20));
 
 
 
@@ -178,8 +191,9 @@ table = new Table();
     table.addColumn("PWM");
     table.addColumn("Control");
     table.addColumn("Error");
-    table.addColumn("ESTADOvariador");
+    table.addColumn("ESTADOvariador"); //motor funcionando
     table.addColumn("ERRORvariador");
+    table.addColumn("TiempoRel");
     
     grafica();
     
@@ -193,7 +207,7 @@ void draw() {
     if (ControlTodoall == true) {
         fill(colorONOFF);//cuadros con fondo
         noStroke();
-        rect(700,400,200,50);//P
+        rect(660,400,200,50);//P
 
         fill(255);//cuadros con fondo
         stroke(#5DD2EA);
@@ -204,53 +218,34 @@ void draw() {
         rect(668,246,53,30);//v
         rect(850,246,53,30);//vref
         rect(590,35,400,110);//serial
+        rect(870,370,80,60);//habilita
         rect(590,455,400,90);//control
         rect(590,560,400,80);//guardado
-        TL1.setVisible(true);
-        TL2.setVisible(true);
-        TL3.setVisible(true);
-        TL4.setVisible(true);
-        TL5.setVisible(true);
-        TL6.setVisible(true);
-        TL77.setVisible(true);
-        TL8.setVisible(true);
-        TL10.setVisible(true);
-        TL11.setVisible(true);
-        TF2.setVisible(true);
-        TB3.setVisible(true);
-        TB4.setVisible(true);
-        TB5.setVisible(true);
-        TB1.setVisible(true);
-        TB4.setVisible(true);
-        TB5.setVisible(true);
-        SL.setVisible(true);
-        ser.setVisible(true);
-        serono.setVisible(true);
-        TL12.setVisible(true);
-        TL13.setVisible(true);
-        TL14.setVisible(true);
-        TL15.setVisible(true);
-        TL16.setVisible(true);
-        TL17.setVisible(true);
-        TL144.setVisible(true);
-        TL155.setVisible(true);
-        TL166.setVisible(true);
-        TL177.setVisible(true);
-        TF3.setVisible(true);
-        TF4.setVisible(true);
-        TF5.setVisible(true);
-        TF6.setVisible(true);
-        TF7.setVisible(true);
-        TF8.setVisible(true);
-        TB6.setVisible(true);
-        TB7.setVisible(true);
-        TB8.setVisible(true);
-        TB9.setVisible(true);
-        Tx3.setVisible(true);
-        Tx4.setVisible(true);
+        TL1.setVisible(true);        TL2.setVisible(true);
+        TL3.setVisible(true);        TL4.setVisible(true);
+        TL5.setVisible(true);        TL6.setVisible(true);
+        TL77.setVisible(true);        TL8.setVisible(true);
+        TL10.setVisible(true);        TL11.setVisible(true);
+        TF2.setVisible(true);        TB3.setVisible(true);
+        TB4.setVisible(true);        TB5.setVisible(true);
+        TB1.setVisible(true);        TB4.setVisible(true);
+        TB5.setVisible(true);        SL.setVisible(true);
+        ser.setVisible(true);        serono.setVisible(true);
+        TL12.setVisible(true);        TL13.setVisible(true);
+        TL14.setVisible(true);        TL15.setVisible(true);
+        TL16.setVisible(true);        TL17.setVisible(true);
+        TL144.setVisible(true);        TL155.setVisible(true);
+        TL166.setVisible(true);        TL177.setVisible(true);
+        TF3.setVisible(true);        TF4.setVisible(true);
+        TF5.setVisible(true);        TF6.setVisible(true);
+        TF7.setVisible(true);        TF8.setVisible(true);
+        TB6.setVisible(true);        TB7.setVisible(true);
+        TB8.setVisible(true);        TB9.setVisible(true);
+        Tx3.setVisible(true);        Tx4.setVisible(true);
+        TB12.setVisible(true);        TL19.setVisible(true);
          textSize(15);
         fill(255,0,0);
-        text(nf(t,0,2), 669,226);
+        text(nf(d,0,2), 669,226);
         text(nf(h,0,2), 813,226);
         text(nf(p,0,-1), 935,226);
         text(nf(v1,0,1), 715,266);
@@ -258,27 +253,19 @@ void draw() {
         
 
         if (ControlONOFFnueva ==  true){
-        TL9.setVisible(true);
-        TF1.setVisible(true);
-        TB2.setVisible(true);
-        TL7.setVisible(true);
-        TL99.setVisible(false);
-        TF11.setVisible(false);
-        TB22.setVisible(false);
-        TL77.setVisible(false);            
+        TL9.setVisible(true);        TF1.setVisible(true);
+        TB2.setVisible(true);        TL7.setVisible(true);
+        TL99.setVisible(false);        TF11.setVisible(false);
+        TB22.setVisible(false);        TL77.setVisible(false);            
             textSize(15);
             fill(255,0,0);
             text(nf(VelRef,0,2), 900,266);
         }
         else{
-        TL9.setVisible(false);
-        TF1.setVisible(false);
-        TB2.setVisible(false);
-        TL7.setVisible(false);
-        TL99.setVisible(true);
-        TF11.setVisible(true);
-        TB22.setVisible(true);
-        TL77.setVisible(true);
+        TL9.setVisible(false);        TF1.setVisible(false);
+        TB2.setVisible(false);        TL7.setVisible(false);
+        TL99.setVisible(true);        TF11.setVisible(true);
+        TB22.setVisible(true);        TL77.setVisible(true);
         textSize(15);
         fill(0,255,0);
         text(nf(VelRef,0,2), 900,266);
@@ -290,61 +277,43 @@ void draw() {
         fill(255);//cuadros con fondo
         noStroke();
         rect(0,40,590,600);
-        TL1.setVisible(false);
-        TL2.setVisible(false);
-        TL3.setVisible(false);
-        TL4.setVisible(false);
-        TL5.setVisible(false);
-        TL6.setVisible(false);
-        TL7.setVisible(false);
-        TL9.setVisible(false);
-        TF1.setVisible(false);
-        TB2.setVisible(false);
-        TL77.setVisible(false);
-        TL99.setVisible(false);
-        TF11.setVisible(false);
-        TB22.setVisible(false);
-        TL8.setVisible(false);
-        TL10.setVisible(false);
-        TL11.setVisible(false);
-        TF2.setVisible(false);
-        TB3.setVisible(false);
-        TB4.setVisible(false);
-        TB5.setVisible(false);
-        TB1.setVisible(false);
-        SL.setVisible(false);
-        ser.setVisible(false);
-        serono.setVisible(false);
-        TL12.setVisible(false);
-        TL13.setVisible(false);
-        TL14.setVisible(false);
-        TL15.setVisible(false);
-        TL16.setVisible(false);
-        TL17.setVisible(false);
-        TL144.setVisible(false);
-        TL155.setVisible(false);
-        TL166.setVisible(false);
-        TL177.setVisible(false);
-        TF3.setVisible(false);
-        TF4.setVisible(false);
-        TF5.setVisible(false);
-        TF6.setVisible(false);
-        TF7.setVisible(false);
-        TF8.setVisible(false);
-        TB6.setVisible(false);
-        TB7.setVisible(false);
-        TB8.setVisible(false);
-        TB9.setVisible(false);
-        Tx3.setVisible(false);
-        Tx4.setVisible(false);
-        TB10.setVisible(false);
+        TL1.setVisible(false);        TL2.setVisible(false);
+        TL3.setVisible(false);        TL4.setVisible(false);
+        TL5.setVisible(false);        TL6.setVisible(false);
+        TL7.setVisible(false);        TL9.setVisible(false);
+        TF1.setVisible(false);        TB2.setVisible(false);
+        TL77.setVisible(false);        TL99.setVisible(false);
+        TF11.setVisible(false);        TB22.setVisible(false);
+        TL8.setVisible(false);        TL10.setVisible(false);
+        TL11.setVisible(false);        TF2.setVisible(false);
+        TB3.setVisible(false);        TB4.setVisible(false);
+        TB5.setVisible(false);        TB1.setVisible(false);
+        SL.setVisible(false);        ser.setVisible(false);
+        serono.setVisible(false);        TL12.setVisible(false);
+        TL13.setVisible(false);        TL14.setVisible(false);
+        TL15.setVisible(false);        TL16.setVisible(false);
+        TL17.setVisible(false);        TL144.setVisible(false);
+        TL155.setVisible(false);        TL166.setVisible(false);
+        TL177.setVisible(false);        TF3.setVisible(false);
+        TF4.setVisible(false);        TF5.setVisible(false);
+        TF6.setVisible(false);        TF7.setVisible(false);
+        TF8.setVisible(false);        TB6.setVisible(false);
+        TB7.setVisible(false);        TB8.setVisible(false);
+        TB9.setVisible(false);        Tx3.setVisible(false);
+        Tx4.setVisible(false);        TB10.setVisible(false);
         TL18.setVisible(false);
+         TB12.setVisible(false);        TL19.setVisible(false);
     }
     
 
 
     
      if(VERSERIE ==  true) {
+         if(unicavez2==false){
+         tiempo1=millis();
+         
+        unicavez2=true;
+         }
 try {
   val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
   if (val!= null) { //Verifies reading
@@ -362,8 +331,8 @@ try {
     pwm=algo[3];
     controlSINO=algo[9];
     error=algo[10];
-    Ev=algo[11];
-    ErrorVariador=algo[12];
+    Ev=algo[11]; //estado del motor
+    ErrorVariador=algo[12]; //indicacion de error en variador
 
 
      TableRow newRow = table.addRow(); //adds a row for new reading
@@ -379,8 +348,9 @@ try {
         newRow.setFloat("PWM", pwm);//8
         newRow.setFloat("Control", controlSINO);//9
         newRow.setFloat("Error", error);//10
-        newRow.setFloat("ESTADOvariador", Ev);//11
+        newRow.setFloat("ESTADOvariador", Ev);//11 //motor funcionando
         newRow.setFloat("ERRORvariador", ErrorVariador);//12
+        newRow.setFloat("TiempoRel",tiempo-tiempo3);
 
     }
   }
@@ -388,240 +358,62 @@ try {
 //     e.printStackTrace();
    }
 
-if (Corre== true && Parada== false){
-     colorONOFF=#00AA00;
+if (int(Ev)==1){
+     colorONOFF=#AA0000;
+print (" en marcha ");//agregar el cartel y refrescar 
      
  }
- if(Corre== false && Parada== true){
-    colorONOFF=#AA0000;
+ else{
+    colorONOFF=#00AA00;
     
  } 
 
-  if (ControlTodoall== true && ERROR== true){   //agregar la variable de reset del boton para que desaparezca el triangulo y boton
+  if (int(ErrorVariador)==1){   //agregar la variable de reset del boton para que desaparezca el triangulo y boton
       TB10.setVisible(true);
       fill(255,0,0);
       noStroke();
       triangle(850, 90, 900, 90, 875, 135);
+      DD4=TB10.isPressed();
   }
-  if (ERROR == false){
+  else{
       TB10.setVisible(false);
+    fill(255);
+      noStroke();
+      triangle(850, 90, 900, 90, 875, 135);
+      DD4=!DD4;
   }
 
-
+if((millis()-tiempo1)>1000){
 if (unicavez==0){
-    int variablecontrol1= int(controlSINO);
+    variablecontrol1= int(controlSINO);
+    println("HOLAAAAA" +variablecontrol1);
+    tiempo3=tiempo;
 if (variablecontrol1==1){
 TB1.setOn();
-
+println("seton");
 }
-else{
-    TB1.setOff();
-    
-}
+// 
 unicavez=1;
 }
 
-
 }
-
-
-    
-    }
-
-public void Run(){
-    if (VERSERIE ==  true){
-    Corre= true;
-    Parada = false;
-
-
-
-    Dato0= "1";
-
-        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-Arduino.write(DatosWrite);
-
-    }
-}
-    
-public void Stop(){
-    if (VERSERIE ==  true){
-    Corre= false;
-    Parada = true;
-    Dato0= "0";
-        DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-    }
-}
- 
-
-///////SERIAL
-void dropdown(int n) {
-puerta = cp5.get(ScrollableList.class, "dropdown").getItem(n).get("name").toString();
-println(puerta);
-}
-
-void actualizar() {
-cp5.get(ScrollableList.class, "dropdown").clear();
-l = Arrays.asList(Serial.list());
-cp5.get(ScrollableList.class, "dropdown").setItems(l);
-cp5.get(ScrollableList.class, "dropdown").removeItem("COM1");
-}
-
-void seronoser(boolean estado) {
-// falta agregar checkeo de eleccion del puerto
-if (estado ==  true) {
-println("abro puerto" + puerta);
-Arduino = new Serial(this,puerta,baudrate);
-VERSERIE = true;
-
-
-}
-
-else{
-println("cierro puerto " + puerta);
-actualizar();
-Arduino.clear();
-Arduino.stop();
-VERSERIE = false;
-Corre= false;
-Parada = true;
-}
-}
-///////FINSERIAL
-
-
-void EnviarVel() {
-textV = cp5.get(Textfield.class, "Veloc").getText();
-textVV = float(textV);
-if (4.7<textVV && textVV<17.05){
-//print("velocidad:" + textVV);
-
-textVV=map(textVV,4.7,17,0,32767);
-textVVV=int(textVV);
-Dato1= str(textVVV);
-println(textVVV);
-DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-
-TL18.setVisible(false);
-//////print(Dato2);
-}
-else{
-    println("ingrese un numero válido");
-    TL18.setVisible(true);
-} 
-
-cp5.get(Textfield.class, "Veloc").clear();
-}
-
-
-void EnviarFrec() {
-textF = cp5.get(Textfield.class, "Frec").getText();
-textFF = float(textF);
-if (13.8<textFF && textFF<50.5){
-println("FRECUENCIA:" + textFF);
-textFF=map(textFF,14,50,0,32767);
-textFFF=int(textFF);
-println("pwm"+textFFF);
-Dato1= str(textFFF);
-println(Dato2);
-TL18.setVisible(false);
-DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-}
-else{
-    println("ingrese un numero válido");
-    TL18.setVisible(true);
-} 
-
-cp5.get(Textfield.class, "Frec").clear();
-}
-
-
-
-void Guardar() {
-println();
-print("El nombre del archivo es:");
-text2 = cp5.get(Textfield.class, "Nombre archivo").getText();
-print(text2);
-saveTable(table, "data/" + text2 + ".csv","csv");
-cp5.get(Textfield.class, "Nombre archivo").clear();
-table.clearRows();
-
-}
-
-
-void ControlONOFF(boolean D2){
-    
-       
-        ControlONOFFnueva=!ControlONOFFnueva;
-       if (ControlONOFFnueva==true){
-            println("prendido");
-    Dato2= "1";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-
-    }
-    else {
-         Dato2= "0";
-    println("apagado");
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-
-     }
-}
-
-
-void ControlTodo(boolean D3){
-    ControlTodoall= !ControlTodoall;
-// if (ControlTodoall==true){
-//     Dato3= "1";
-//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-//     Arduino.write(DatosWrite);
-
-//     }
-//     else {
-//          Dato3= "0";
-//     print("apagado");
-//     DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-//     Arduino.write(DatosWrite);
-
-//      }
-}
-
-
-void reset(boolean D4){
-
-     DD4=!DD4;
-    if (DD4==true){
-
-          Dato4= "1";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-    }
-    else{
+if (reinicioreset==true){
+    if ((millis()-tiempo2)>3000){
+        DD4=false;
         Dato4= "0";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
+        DatosW();
+        reinicioreset=false;
+        println("HOLAAAAAAAAAAAAAAAAAAAAAAAA");
     }
-     println("reset"+DatosWrite);
+
+
+}}
+
+
+    
+    }
+
+void DatosW(){
+DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
+    Arduino.write(DatosWrite);
 }
-
-void fallaext(boolean D5){
-   
-     DD5=!DD5;
-    if (DD5==true){
-
-          Dato5= "1";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
-    }
-    else{
-        Dato5= "0";
-    DatosWrite= (Dato0 +","+Dato1 +","+ Dato2 +","+ Dato3 +","+ Dato4 +","+ Dato5+"," +'\n');
-    Arduino.write(DatosWrite);
- 
-    }
-       println("falla"+DatosWrite);
-}
-
