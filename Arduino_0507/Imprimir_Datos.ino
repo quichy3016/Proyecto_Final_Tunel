@@ -14,7 +14,7 @@ void imprimir_datos() {
   Serial.print(velocidadA, 3); Serial.print(";");
   Serial.print(velocidadB, 3); Serial.print(";");
 
-  Serial.print(tiempo); Serial.print(";"); //
+  Serial.print(tiempo); Serial.print(";"); 
   Serial.print(pw); Serial.print(";");
   Serial.print(BOT2); Serial.print(";");  
   Serial.print(In); Serial.print(";");

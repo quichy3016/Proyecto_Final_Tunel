@@ -56,13 +56,14 @@ float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056
 float T1; ////////////////////////////////////////////////////////OJO QUE ESTÁ DEFINIDO EN THP IGUAL
 float fpt,psv,xv,Z,den;
 
-boolean paro, BOT=0,BOT2=0,step1=0;
+boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
+int entrada[6], Inref;
+boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
 float In=0;
 long time1, time2,time3;
 //////////////////////////
 /////Variables Entrada Serial/////
-float inputString1=0; //Almacena datos del Buffer serial
-float data; //Guardo los datos del buffer para utilizar en funcion princ.
+String data; //Guardo los datos del buffer para utilizar en funcion princ.
 ////////PID////////
 double output=0;
 float VelRef=0;
@@ -92,12 +93,13 @@ void setup() {
   ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
   /////Inicializo Entradas/Salidas  
-  pinMode(2,INPUT);
+  pinMode(2,INPUT_PULLUP);
   pinMode(3,OUTPUT);
   pinMode(4,OUTPUT);
   pinMode(5,OUTPUT);
   pinMode(6,OUTPUT);
-  pinMode(7,INPUT);
+  pinMode(7,INPUT_PULLUP);
+  pinMode(13,OUTPUT);
   ///Inicializo pwm//
   Timer1.initialize(90);
 }
@@ -108,18 +110,37 @@ void loop(){
   difPresion();
   vel_tiempo();
   PIDS();
-  paro = digitalRead(7); 
+  entradas();
+  salidas();
+  pulsador = digitalRead(8); 
   imprimir_datos(); 
 }
 
 
 
 void serialEvent() {
-  while (Serial.available()) {
-    data=Serial.parseFloat();
-    inputString1=data;
-  }
-}
+
+  if(Serial.available() > 0){ // Lectura del puerto mientras sigue abierto
+     data = Serial.readStringUntil('\n');                   // Lectura del dato hasta el line feed 
+     //Serial.print("Dato original: "); Serial.println(data); // Muestra del dato original
+
+     int n,n1=0; // Variables para algoritmo de lectura
+
+     for (int i = 0; i <= data.length(); i++){ // Lectura total del tamano del dato
+       if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
+         if (n1==0){
+          entrada[n1] = data.substring(0, i).toInt();
+          n1=n1+1;
+          n = i + 1; 
+         }
+         else{
+         entrada[n1] = data.substring(n, i).toInt();
+         n1=n1+1;
+         n = i + 1;                            // Posicion de la letra final leida + 1
+       }}
+     }
+  
+}}
 
 //Bibliografía
 //FiltroA https://www.megunolink.com/documentation/arduino-libraries/exponential-filter/
