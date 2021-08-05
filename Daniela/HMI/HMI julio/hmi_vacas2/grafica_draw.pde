@@ -1,20 +1,20 @@
-byte[] inBuffer = new byte[500]; // holds serial message
 int i = 0; // loop variable
 
 void graf_draw(){
 /* Read serial and update values */
-      if (VERSERIE ==true) {
+      if (serono.isOn() ==true) {
     String myString = "";
       try {
         Arduino.readBytesUntil('\n', inBuffer);
       }
       catch (Exception e) {
       }
-      myString = new String(inBuffer);
+      myString = val1;// new String(inBuffer);
+      //println(myString);
    
     String[] nums = split(myString, ';');
     
-    for (i=0; i<nums.length; i++) {
+    for (i=0; i<nums.length; i++) { //nums.length
       // update line graph
       try {
         if (i<lineGraphValues.length) {
