@@ -210,11 +210,11 @@ void setup() {
 
 
 void draw() {
-    if (contgraf==3){
+    // if (contgraf==2){
     graf_draw();
-contgraf=0;
-    }
-    contgraf++;
+// contgraf=0;
+//     }
+    // contgraf++;
     
     fill(255);//cuadros con fondo
     stroke(#5DD2EA);
