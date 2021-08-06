@@ -8,7 +8,7 @@ import java.util.*;
 import java.awt.Frame;//gui
 import java.awt.BorderLayout;//gui
 
-
+CColor ccS = new CColor((#AA0000),(#AA0000),(#AAAAAA),(#AAAAAA),(#000000));
 CColor cc = new CColor((#5DD2EA),color(248,240,248),(#002D5A),color(248,240,248),color(0,0,255));
 CColor ccONOFF = new CColor((#5DD2EA),(#009900),(#000000),(#0000ff),(#000000));
 //CColor cc=new CColor(color(250,0,0),color(0,250,0),color(0,0,0),color(120,17,90),color(0,0,255));
@@ -46,10 +46,13 @@ float[] algo;
 Table table;
 String val,val1;
 byte[] inBuffer = new byte[500]; // holds serial message
+String[] nums;
+int tomomuestra=0;
+
 
 String myString = "";
 //String inString="";
-float tiempo,t,h,p,d,dp,VelRef,v1,pwm,controlSINO, error, Ev, ErrorVariador;
+float tiempo=0,t=0,h=0,p=0,d=0,dp=0,VelRef=0,v1=0,pwm=0,controlSINO=0, error=0, Ev=0, ErrorVariador=0;
 //boolean VERSERIE = false;
 
 boolean ONOFF = false;
@@ -59,7 +62,7 @@ boolean ERROR = true;
 
 boolean ControlONOFFnueva;
 //boolean ControlTodoall;
-Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18, TL19, TL20;
+Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18, TL19, TL20, TL21;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
 Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
 Toggle TB6,TB7,TB8,TB9;
@@ -175,9 +178,10 @@ void setup() {
     TB4 = cp5.addButton("Run").setPosition(660,310).setSize(85, 85).setLabel("RUN").setFont(font2).setColorActive(#009900);
     TB5 = cp5.addButton("Stop").setPosition(773,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     
-    TB10 = cp5.addButton("reset").setPosition(910,100).setSize(60, 15).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
-    TB11 = cp5.addButton("fallaext").setPosition(910,120).setSize(60, 15).setLabel("STOP EMERGENCIA").setFont(createFont("Arial",14)).setColorActive(#990000);
-    
+    TB10 = cp5.addButton("reset").setPosition(910,70).setSize(60, 25).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
+    TB11 = cp5.addButton("fallaext").setPosition(910,100).setSize(60, 35).setLabelVisible(false).setFont(createFont("Arial",14)).setColor(ccS);
+    TL21 = cp5.addTextlabel("emerg").setText("   STOP \n EMERG").setPosition(905,100).setColorValue(#AAAAAA).setFont(createFont("Arial",14));
+
     TL18 = cp5.addTextlabel("valiTL18").setText("ingrese un numero valido").setPosition(725,525).setColorValue(#770000).setFont(createFont("Arial",15));
     
     TB12 = cp5.addIcon("Habilitacion",10).setPosition(900,400).setSize(25, 15).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
@@ -210,11 +214,10 @@ void setup() {
 
 
 void draw() {
-    // if (contgraf==2){
+       
+
     graf_draw();
-// contgraf=0;
-//     }
-    // contgraf++;
+
     
     fill(255);//cuadros con fondo
     stroke(#5DD2EA);
@@ -310,18 +313,12 @@ void draw() {
             TB22.setVisible(false);        TL77.setVisible(true);
         }
            
-           
-           
-           
-           
-           
+                      
             }
         if (unicavez2 ==  false) {
-            
-            
             unicavez2 = true;
         }
-        
+    
         
         
         if (int(Ev) ==  1) {
@@ -356,10 +353,7 @@ void draw() {
          if ((millis() - tiempo1)>1000) {
              verificacion();    
          }
-        // if (unicavez==0){
-        //     verificacion();
-        //HOLAAAAA
-        // }
+        
         if (TB10.isOn() ==  true) {
             if ((millis() - tiempo2)>3000) {
                 
@@ -409,10 +403,7 @@ void draw() {
         TB12.setVisible(false);        TL19.setVisible(false);
     }
     
-    
-    
-    
-    
+        
 }
 
 
@@ -445,12 +436,17 @@ void verificacion() {
     
 
     void serialEvent(Serial Arduino){
+          if ((millis()-tiempo1)>3000) {
+              
+              println("TOMO MUESTRA"+millis());
         try {
             val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
             //println(val);
-         //   Arduino.readBytesUntil('\n', inBuffer);
-            //println(inBuffer);
+        //    Arduino.readBytesUntil('\n', inBuffer);
+        //     println(inBuffer);
             if (val!= null) { //Verifies reading
+            println(val);
+            if (tomomuestra==1){
                 val1=val;
                 val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
                 float algo[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
@@ -487,8 +483,18 @@ void verificacion() {
                 newRow.setFloat("ERRORvariador", ErrorVariador);//12
                 newRow.setFloat("TiempoRel",tiempo - tiempo3);
                 
+                tomomuestra=0;
             }
+            tomomuestra=tomomuestra+1;
+            }
+            
         }
         catch(RuntimeException e) {//catches errors
+        } 
+         
+         println(tomomuestra);}
+
         }
-    }
+
+
+    

@@ -1,19 +1,15 @@
 int i = 0; // loop variable
 
 void graf_draw(){
+  
 /* Read serial and update values */
       if (serono.isOn() ==true) {
     String myString = "";
-      try {
-        Arduino.readBytesUntil('\n', inBuffer);
-      }
-      catch (Exception e) {
-      }
-      myString = val1;// new String(inBuffer);
-      //println(myString);
-   
+      myString=str(v1)+";" +str(VelRef)+";"+str(dp)+";"+str(pwm)+";";
     String[] nums = split(myString, ';');
-    
+  
+
+
     for (i=0; i<nums.length; i++) { //nums.length
       // update line graph
       try {
@@ -29,7 +25,7 @@ void graf_draw(){
       catch (Exception e) {
       }
     }
-  }
+  
 
   // draw the bar chart
   background(255); 
@@ -42,4 +38,5 @@ void graf_draw(){
       LineGraph.LineGraph(lineGraphSampleNumbers, lineGraphValues[i]);
   }
   
+}
 }  

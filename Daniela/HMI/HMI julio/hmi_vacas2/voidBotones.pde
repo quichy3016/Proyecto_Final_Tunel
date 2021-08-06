@@ -130,7 +130,7 @@ void ControlONOFF(boolean D2) {
         Dato2 = "1";
         DatosW();
         println("prendido" + DatosWrite);
-        
+        Stop();
     }
     else {
         Dato2 = "0";
@@ -163,6 +163,7 @@ void fallaext(boolean D5) { //
         Dato5 = "1";
         DatosW();
         println("falla externa 1  " + DatosWrite);
+
     }
     else{
         Dato5 = "0";
