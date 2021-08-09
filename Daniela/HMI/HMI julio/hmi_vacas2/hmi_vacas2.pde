@@ -92,7 +92,7 @@ String Dato0 = "0",Dato1 = "0", Dato2 = "0", Dato3 = "0", Dato4 = "0", Dato5 = "
 void setup() {
     
     //background(0);
-    background(248,240,248);  //REFRESCOPANTALLA  // Configura color fondo
+   // background(248,240,248);  //REFRESCOPANTALLA  // Configura color fondo
     
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
@@ -215,6 +215,7 @@ void setup() {
 
 void draw() {
        
+    background(248,240,248);  //REFRESCOPANTALLA  // Configura color fondo
 
     graf_draw();
 
@@ -260,6 +261,7 @@ void draw() {
         TB8.setVisible(true);        TB9.setVisible(true);
         Tx3.setVisible(true);        Tx4.setVisible(true);
         TB12.setVisible(true);        TL19.setVisible(true);
+        TB11.setVisible(true);      TL21.setVisible(true);
         textSize(15);
         fill(255,0,0);
         text(nf(error,0,2), 669,226);///////////////////
@@ -273,7 +275,7 @@ void draw() {
         
         
        if(TB12.isOn()==true){ //ai1
-        if (TB1.isOn() ==  true) {
+        if (TB1.isOn() ==  true) { //control onoff
             TL9.setVisible(true);        TF1.setVisible(true);
             TB2.setVisible(true);        TL7.setVisible(true);
             TL99.setVisible(false);        TF11.setVisible(false);
@@ -371,10 +373,9 @@ void draw() {
         }
     
     else{
-        
-        fill(255);//cuadros con fondo
-        noStroke();
-        rect(0,40,590,600);
+        // fill(255);//cuadros con fondo
+        // noStroke();
+        // rect(0,40,590,600);
         //TL1.setVisible(false);     
         TL2.setVisible(false);
         TL3.setVisible(false);        TL4.setVisible(false);
@@ -401,6 +402,7 @@ void draw() {
         Tx4.setVisible(false);        TB10.setVisible(false);
         TL18.setVisible(false);
         TB12.setVisible(false);        TL19.setVisible(false);
+        TB11.setVisible(false);         TL21.setVisible(false);
     }
     
         
@@ -438,14 +440,14 @@ void verificacion() {
     void serialEvent(Serial Arduino){
           if ((millis()-tiempo1)>3000) {
               
-              println("TOMO MUESTRA"+millis());
+             // println("TOMO MUESTRA"+millis());        
         try {
             val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
             //println(val);
         //    Arduino.readBytesUntil('\n', inBuffer);
         //     println(inBuffer);
             if (val!= null) { //Verifies reading
-            println(val);
+            //println(val);
             if (tomomuestra==1){
                 val1=val;
                 val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
@@ -475,7 +477,7 @@ void verificacion() {
                 newRow.setFloat("Den", d);//4
                 newRow.setFloat("DP", dp);//5
                 newRow.setFloat("Ref", VelRef);//6
-                newRow.setFloat("VelFrec", v1);//7
+                newRow.setFloat("VelFrec", v1);//7 ///siempre es velocidaddddddddddddddddddd
                 newRow.setFloat("PWM", pwm);//8
                 newRow.setFloat("Control", controlSINO);//9
                 newRow.setFloat("Error", error);//10
@@ -492,7 +494,8 @@ void verificacion() {
         catch(RuntimeException e) {//catches errors
         } 
          
-         println(tomomuestra);}
+        // println(tomomuestra);
+        }
 
         }
 
