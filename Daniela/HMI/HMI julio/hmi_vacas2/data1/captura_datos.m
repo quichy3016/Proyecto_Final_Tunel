@@ -31,7 +31,7 @@ for i=of: largo
         G(k,1)=3;
     end
    
-     k=k+1;
+    end
 end
 
 % 
