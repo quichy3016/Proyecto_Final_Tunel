@@ -10,7 +10,7 @@ void imprimir_datos() {
   Serial.print(tiempo); Serial.print(";"); 
   
   Serial.print(t1, 3); Serial.print(";");
-  Serial.print(h1, 3); Serial.print(";");
+  Serial.print(output, 3); Serial.print(";");
   Serial.print(p2, 3); Serial.print(";");
   
   Serial.print(den, 4); Serial.print(";");    //Densidad

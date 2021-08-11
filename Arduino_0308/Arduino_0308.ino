@@ -58,6 +58,10 @@ float fpt,psv,xv,Z,den;
 
 boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
 int entrada[6], Inref;
+int entrada1[8]= {30000,5000,20000,5000,15000,5000,28020,5000};
+bool cambio=0,terminoautoma=0;
+int inc=0,inc1=1,Inref1;
+long vtiempoant,tiempoautomatico;
 boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
 float In=0;
 long time1, time2,time3;
@@ -111,12 +115,15 @@ void loop(){
   THP(); 
   difPresion();
   vel_tiempo();
+  if (terminoautoma==1 & (millis()-tiempoautomatico)>=5000){
+  cambio_automatico();}
   PIDS();
   entradas();
   salidas();
   pulsador = digitalRead(8);
   //if (contserie>=4){ 
   imprimir_datos(); 
+  
   //contserie=0;}
   //contserie++;
 }
@@ -143,6 +150,13 @@ void serialEvent() {
          n1=n1+1;
          n = i + 1;                            // Posicion de la letra final leida + 1
        }}
+     }
+     if (entrada[5]==1){
+
+      tiempoautomatico=millis();
+      cambio=1;
+      terminoautoma=1;
+      
      }
   
 }}

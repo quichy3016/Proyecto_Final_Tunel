@@ -16,7 +16,7 @@ void vel_tiempo() {
   velocidadA = sqrt((2 * (abs(presionSF21))) / den);
   //velocidadB = sqrt((2 * (abs(ADCFilterM1))) / den);
   velocidadB = analogRead(A0);
-  velocidadB = map(velocidadB,0,1023,4.7,18);
+  velocidadB = velocidadB/60.17;
 
   /////////////////////////////////////////
   tiempo = millis();

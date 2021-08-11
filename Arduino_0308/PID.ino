@@ -1,25 +1,28 @@
 void PIDS() {
+  if (terminoautoma==0){
+    In=Inref;
+  }else In=Inref1;
   if (Control==1){
-    In=Inref;      //En (m/s)
-    In=map(In,0,32767,9059,32767);
-    VelRef=In/1927.47;   
-    if (In>17.5){
-      In=17;
-    }
-    if (In<4.7){
-      In=4.7;
-    }
+   // In=Inref;      //En (m/s)
+    In=map(In,0,32767,9059,32767);   
+//    if (In>17.5){
+//      In=17;
+//    }
+//    if (In<4.7){
+//      In=4.7;
+//    }
+    VelRef=In/1927.47;
   }
   else if (Control==0){
-    In=Inref;      //En (hz) aproximados
+    //In=Inref;      //En (hz) aproximados
     In=map(In,0,32767,9175,32767);
+//    if (In>=50){
+//      In=50;
+//    }
+//    if (In<=14){
+//      In=14;
+//    }
     VelRef=In/655.34;
-    if (In>=50){
-      In=50;
-    }
-    if (In<=14){
-      In=14;
-    }
     step1=0;
   }else VelRef=0;
   
@@ -27,7 +30,7 @@ void PIDS() {
 
   if (Control == 1) {
     if (step1 == 0) {
-      pid.Initialize();
+      pid.Initialize(output);
       step1 = 1;   
   }
     
