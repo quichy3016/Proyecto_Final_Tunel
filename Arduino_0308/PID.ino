@@ -27,7 +27,7 @@ void PIDS() {
 
   if (Control == 1) {
     if (step1 == 0) {
-      pid.Initialize(0);
+      pid.Initialize();
       step1 = 1;   
   }
     

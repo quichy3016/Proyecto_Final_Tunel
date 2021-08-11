@@ -11,7 +11,7 @@
 #include <Adafruit_Sensor.h>
 #include <Adafruit_BME280.h> //sensor THP
 #include <Adafruit_ADS1015.h> //Convertidor analógico digital
-#include <Custom_PID.h> //Librería modificada
+#include <Custom_PID_Tunel.h> //Librería modificada
 //SoftwareSerial BT(2,3);
 
 //inicialización de variables
@@ -61,6 +61,7 @@ int entrada[6], Inref;
 boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
 float In=0;
 long time1, time2,time3;
+int contserie=0;
 //////////////////////////
 /////Variables Entrada Serial/////
 String data; //Guardo los datos del buffer para utilizar en funcion princ.
@@ -74,7 +75,7 @@ PID pid(0.6846, 0.4183, 0);
 float Error1=0;
 
 long tiempo=0;
-int pw=0;
+int pw=0,pwi=0;
 float Cte=56.88;
 
 void setup() {
@@ -105,6 +106,7 @@ void setup() {
 }
 
 void loop(){
+  
   calculo_offset();
   THP(); 
   difPresion();
@@ -112,8 +114,11 @@ void loop(){
   PIDS();
   entradas();
   salidas();
-  pulsador = digitalRead(8); 
+  pulsador = digitalRead(8);
+  //if (contserie>=4){ 
   imprimir_datos(); 
+  //contserie=0;}
+  //contserie++;
 }
 
 

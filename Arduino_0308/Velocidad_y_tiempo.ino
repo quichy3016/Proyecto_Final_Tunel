@@ -14,7 +14,9 @@ void vel_tiempo() {
   } else presionSF21 = presionSF2;
   
   velocidadA = sqrt((2 * (abs(presionSF21))) / den);
-  velocidadB = sqrt((2 * (abs(ADCFilterM1))) / den);
+  //velocidadB = sqrt((2 * (abs(ADCFilterM1))) / den);
+  velocidadB = analogRead(A0);
+  velocidadB = map(velocidadB,0,1023,4.7,18);
 
   /////////////////////////////////////////
   tiempo = millis();
