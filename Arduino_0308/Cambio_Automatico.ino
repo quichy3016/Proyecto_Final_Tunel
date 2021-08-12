@@ -1,5 +1,13 @@
 void cambio_automatico(){
 
+  if (cambio1==0){
+    Encendido = 1;   //Habilito Ai1
+    RUNSTOP = 1;     //Doy Marcha
+    cambio1 = 1;
+  }
+
+  
+
   int len=sizeof(entrada1);
   len=len/2;
   if  (inc1<=len-1){
@@ -21,7 +29,11 @@ void cambio_automatico(){
   inc1 = inc1+2;
   cambio=1;
  }
- }else terminoautoma=0;
+ }else {
+        RUNSTOP = 0;     //Apago Motor
+        Encendido = 0;   //Deshabilito Ai1
+        terminoautoma=0;     
+       }
 
 // Serial.print(Inref1);Serial.print(" ");
 // Serial.print(vtiempoant);Serial.println(" ");

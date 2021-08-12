@@ -59,7 +59,7 @@ float fpt,psv,xv,Z,den;
 boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
 int entrada[6], Inref;
 int entrada1[8]= {30000,5000,20000,5000,15000,5000,28020,5000};
-bool cambio=0,terminoautoma=0;
+bool cambio=0,cambio1=0,terminoautoma=0;
 int inc=0,inc1=1,Inref1;
 long vtiempoant,tiempoautomatico;
 boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
@@ -152,6 +152,11 @@ void serialEvent() {
        }}
      }
      if (entrada[5]==1){
+      int j = 0;
+      for (int i = n; i <= data.length();i++){
+        entrada1[j] = entrada[i];
+        j++;
+      }
 
       tiempoautomatico=millis();
       cambio=1;
