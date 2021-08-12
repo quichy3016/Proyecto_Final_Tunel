@@ -198,42 +198,32 @@ void Habilitacion(boolean D6) {//
 }
 
 //autofuncion
-void Settings(int n) {
+void Settings(int n) {   //lista donde elijo el archivo a leer
     fitem = cp5.get(ScrollableList.class, "Settings").getItem(n).get("name").toString();
     
 }
 
 void ICONO(){
-println("boton " + fitem);
-table = loadTable("autofun/" +fitem, "header");
+table1 = loadTable("autofun/" +fitem, "header"); //leo el archivo donde estan los escalones
+
+float [] yfun = new float [table1.getRowCount()];
+float [] dTiem = new float [table1.getRowCount()];
+for(int f= 0 ; f<table1.getRowCount(); f++){
+    yfun [f] = table1.getFloat(f, 0); 
+    dTiem [f] =  table1.getFloat(f, 1);
+}
+   for (int i = 0; i < yfun.length; i++) {
+    Dato7 = Dato7 + "," + str(yfun[i]) + "," + str(dTiem[i]);
+    }
+ 
+colfun= #000088; //señal visual que envie datos
+Dato6= "1";
 ddl1.setLabel("Elija archivo");
-println(table.getRowCount() + " total rows in table");
-  TableRow row = table.getRow(0);
-    y1 = row.getFloat("y1");
-    y2 = row.getFloat("y2");
-    y3 = row.getFloat("y3");
-    y4 = row.getFloat("y4");
-    y5 = row.getFloat("y5");
-    y6 = row.getFloat("y6");
-    y7 = row.getFloat("y7");
-    y8 = row.getFloat("y8");
-    Dt1 = row.getInt("Dt1");
-    Dt2 = row.getInt("Dt2");
-    Dt3 = row.getInt("Dt3");
-    Dt4 = row.getInt("Dt4");
-    Dt5 = row.getInt("Dt5");
-    Dt6 = row.getInt("Dt6");
 
-colfun= #000088;
-float j= y1+Dt1;
-println(j);
-DatoFun= str(y1)+","+str(Dt1)+","+str(y2)+","+str(Dt2)+","+str(y3)+","+str(Dt3)+","+str(y4)+","+str(Dt4)+","+str(y5)+","+str(Dt5)+","+str(y6)+","+str(Dt6)+","+str(y7)+","+str(Dt7)+","+str(y8)+","+str(Dt8);
-
-DatosWrite = ("0,0,0,0,0,0," + DatoFun+ ","+'\n');
-println(DatosWrite);
-
- //DatosWrite = (Dato0 + "," + Dato1 + "," + Dato2 + "," + Dato3 + "," + Dato4 + "," + Dato5 + "," + DatoFun+ ","+'\n');
-  //  Arduino.write(DatosWrite);
+ DatosWrite2 = (Dato0 + "," + Dato1 + "," + Dato2 + "," + Dato3 + "," + Dato4 + "," + Dato5 + "," + Dato6  + Dato7+ ","+'\n');
+ Arduino.write(DatosWrite2);
+ println(DatosWrite2);
+Dato6= "0";
 
 }
 
