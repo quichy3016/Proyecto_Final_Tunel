@@ -3,26 +3,32 @@ void PIDS() {
     In=Inref;
   }else In=Inref1;
   if (Control==1){
+    if (terminoautoma==1){
+      VelRef=In;
+    }else{
    // In=Inref;      //En (m/s)
-    In=map(In,0,32767,9059,32767);   
-//    if (In>17.5){
-//      In=17;
-//    }
-//    if (In<4.7){
-//      In=4.7;
-//    }
-    VelRef=In/1927.47;
-  }
+    In=map(In,0,32767,9059,32767);
+
+    VelRef=In/1927.47;}
+      if (VelRef>17.5){
+      VelRef=17;
+      }
+      if (VelRef<4.7){
+      VelRef=4.7;
+      }}
+  
   else if (Control==0){
     //In=Inref;      //En (hz) aproximados
+    
     In=map(In,0,32767,9175,32767);
-//    if (In>=50){
-//      In=50;
-//    }
-//    if (In<=14){
-//      In=14;
-//    }
     VelRef=In/655.34;
+    if (VelRef>=50){
+      VelRef=50;
+    }
+    if (VelRef<=14){
+      VelRef=14;
+    }
+    
     step1=0;
   }else VelRef=0;
   

@@ -11,7 +11,7 @@ void imprimir_datos() {
   
   Serial.print(t1, 3); Serial.print(";");
   Serial.print(output, 3); Serial.print(";");
-  Serial.print(p2, 3); Serial.print(";");
+  Serial.print(Control, 3); Serial.print(";");
   
   Serial.print(den, 4); Serial.print(";");    //Densidad
 

@@ -57,10 +57,12 @@ float T1; ////////////////////////////////////////////////////////OJO QUE ESTÁ 
 float fpt,psv,xv,Z,den;
 
 boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
-int entrada[6], Inref;
-int entrada1[8]= {30000,5000,20000,5000,15000,5000,28020,5000};
+int entrada[7], Inref;
+float entrada1[20];// {30000,5000,20000,5000,15000,5000,28020,5000};
+float entrada2[20];
 bool cambio=0,cambio1=0,terminoautoma=0;
-int inc=0,inc1=1,Inref1;
+int inc=0,inc1=1;
+float Inref1;
 long vtiempoant,tiempoautomatico;
 boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
 float In=0;
@@ -111,7 +113,6 @@ void setup() {
 
 void loop(){
   
-  calculo_offset();
   THP(); 
   difPresion();
   vel_tiempo();
@@ -136,7 +137,7 @@ void serialEvent() {
      data = Serial.readStringUntil('\n');                   // Lectura del dato hasta el line feed 
      //Serial.print("Dato original: "); Serial.println(data); // Muestra del dato original
 
-     int n,n1=0; // Variables para algoritmo de lectura
+     int n,n1=0,n2=0; // Variables para algoritmo de lectura
 
      for (int i = 0; i <= data.length(); i++){ // Lectura total del tamano del dato
        if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
@@ -151,16 +152,39 @@ void serialEvent() {
          n = i + 1;                            // Posicion de la letra final leida + 1
        }}
      }
-     if (entrada[5]==1){
+     n=0;
+///////////////////STRING A FLOAT////////////
+     for (int i = 0; i <= data.length(); i++){ // Lectura total del tamano del dato
+       if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
+         if (n2==0){
+          entrada2[n2] = data.substring(0, i).toFloat();
+          //Serial.println(entrada2[n2]);
+          n2=n2+1;
+          n = i + 1; 
+         }
+         else{
+         entrada2[n2] = data.substring(n, i).toFloat();
+         //Serial.println(entrada2[n2]);
+         n2=n2+1;
+         n = i + 1;                            // Posicion de la letra final leida + 1
+       }}
+     }
+///////////////////////////////////////
+     if (entrada[6]==1){
       int j = 0;
-      for (int i = n; i <= data.length();i++){
-        entrada1[j] = entrada[i];
+      for (int i = 7; i <= data.length();i++){
+        entrada1[j] = entrada2[i];
         j++;
       }
+//      Serial.print(entrada1[0]);Serial.print(" ");
+//      Serial.print(entrada1[1]);Serial.print(" ");
+//      Serial.print(entrada1[2]);Serial.print(" ");
+//      Serial.print(entrada1[3]);Serial.println(" ");
 
       tiempoautomatico=millis();
       cambio=1;
       terminoautoma=1;
+      entrada[2]=1;
       
      }
   
