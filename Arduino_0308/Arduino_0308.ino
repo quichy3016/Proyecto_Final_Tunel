@@ -57,7 +57,8 @@ float T1; ////////////////////////////////////////////////////////OJO QUE ESTÁ 
 float fpt,psv,xv,Z,den;
 
 boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
-int entrada[7], Inref;
+int entrada[7], Inref,len;
+bool ControlAutomatico=0;
 float entrada1[20];// {30000,5000,20000,5000,15000,5000,28020,5000};
 float entrada2[20];
 bool cambio=0,cambio1=0,terminoautoma=0;
@@ -185,7 +186,8 @@ void serialEvent() {
       cambio=1;
       terminoautoma=1;
       entrada[2]=1;
-      
+      len = data.length()-7;
+      ControlAutomatico = 1;
      }
   
 }}

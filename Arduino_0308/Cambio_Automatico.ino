@@ -2,17 +2,14 @@ void cambio_automatico(){
 
   if (cambio1==0){
     //Control=1;
-    Encendido = 1;   //Habilito Ai1
-    RUNSTOP = 1;     //Doy Marcha
+    entrada[3] = 1; //Encendido = 1;   //Habilito Ai1
+    entrada[0] = 1; //RUNSTOP = 1;     //Doy Marcha
     cambio1 = 1;
     inc=0;
     inc1=1;
   }
 
-  
-
-  int len=sizeof(entrada1);
-  len=len/2;
+ 
   if  (inc1<=len-1){
     
   
@@ -33,12 +30,13 @@ void cambio_automatico(){
   cambio=1;
  }
  }else {
-        RUNSTOP = 0;     //Apago Motor
-        Encendido = 0;   //Deshabilito Ai1
+        entrada[0] = 0; //RUNSTOP = 0;     //Apago Motor
+        entrada[3] = 0; //Encendido = 0;   //Deshabilito Ai1
         entrada[2]=0;
         Control=0;
         terminoautoma=0;
-        cambio1=0;     
+        cambio1=0;    
+        ControlAutomatico = 0; 
        }
 
 // Serial.print(Inref1);Serial.print(" ");

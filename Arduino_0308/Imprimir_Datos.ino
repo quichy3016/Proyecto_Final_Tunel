@@ -10,7 +10,7 @@ void imprimir_datos() {
   Serial.print(tiempo); Serial.print(";"); 
   
   Serial.print(t1, 3); Serial.print(";");
-  Serial.print(output, 3); Serial.print(";");
+  Serial.print(h1, 3); Serial.print(";");
   Serial.print(Control, 3); Serial.print(";");
   
   Serial.print(den, 4); Serial.print(";");    //Densidad
@@ -20,7 +20,8 @@ void imprimir_datos() {
   Serial.print(Error1); Serial.print(";");  //Error - Diferencia entre velocidad del aire y velocidad de referencia
 
   Serial.print(Estado); Serial.print(";"); //Estado del variador (encendido o apagado)
-  Serial.print(Errorvar); Serial.println(";");  //Indicacion de error en variador
+  Serial.print(Errorvar); Serial.print(";");  //Indicacion de error en variador
+  Serial.print(ControlAutomatico); Serial.println(";");  //Indicacion de error en variador
   digitalWrite(13,Control);
 
 
