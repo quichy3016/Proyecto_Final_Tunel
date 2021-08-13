@@ -172,9 +172,8 @@ void fallaext(boolean D5) { //
     }
 }
 
-void Habilitacion(boolean D6) {//
+void Habilitacion(boolean D6) {//habilitacion de ai1
     if (D6 ==  true) {
-        // HabilitacionV = true;
         Dato3 = "1";
         DatosW();
         println("ai1 en 1  " + DatosWrite);
@@ -215,6 +214,7 @@ for(int f= 0 ; f<table1.getRowCount(); f++){
    for (int i = 0; i < yfun.length; i++) {
     Dato7 = Dato7 + "," + str(yfun[i]) + "," + str(dTiem[i]);
     }
+  ///  println("datiii7= " +Dato7);
  
 colfun= #000088; //señal visual que envie datos
 Dato6= "1";

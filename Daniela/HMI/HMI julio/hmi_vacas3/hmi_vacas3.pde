@@ -67,15 +67,11 @@ Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
 Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
 Toggle TB6,TB7,TB8,TB9;
-
 ScrollableList ddl1 ; //autofun
 Button ICO;//autofun
-String fitem, DatoFun="0";//autofun
-Float y1,y2,y3,y4,y5,y6,y7,y8;//autofun
-int Dt1,Dt2,Dt3,Dt4,Dt5,Dt6,Dt7,Dt8;//autofun
+String fitem;//autofun
 Table table1;
 
-//String motorEstado="";
 
 ScrollableList SL, autoLista;   
 Icon ser, serono, TODOonoff, TB1, TB12, TB13;
@@ -97,16 +93,12 @@ int a = 0;
 String Dato0 = "0",Dato1 = "0", Dato2 = "0", Dato3 = "0", Dato4 = "0", Dato5 = "0", Dato6 = "0" ,Dato7= "",DatosWrite, DatosWrite2;
 
 
-
 void setup() {
-    
-    //background(0);
-   // background(248,240,248);  //REFRESCOPANTALLA  // Configura color fondo
+
     
     surface.setTitle("Automatización Túnel UNPSJB");
     size(1000,650);           // Configura resolucion interfaz
     ControlONOFFnueva = false;
-    // ControlTodoall = false;
     unicavez = 0;
     variablecontrol1 = 0;
     println(unicavez);
@@ -156,7 +148,6 @@ void setup() {
     cp5.addButton("buttonA").setPosition(10,10).setImage(loadImage("unpsjb.png"));
     
     cp5.addTextlabel("label1").setText("Automatización túnel de viento").setPosition(70,30).setColorValue(#03045e).setFont(createFont("Arial",25));
-    // TODOonoff = cp5.addIcon("ControlTodo",10).setPosition(440,30).setSize(60, 30).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
     
     TL1 = cp5.addTextlabel("label12").setText("Puerto:").setPosition(620,35).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TL2 = cp5.addTextlabel("label2").setText("Parametros actuales").setPosition(690,155).setColorValue(#002D5A).setFont(createFont("Arial",20));
@@ -173,7 +164,6 @@ void setup() {
     TL9 = cp5.addTextlabel("label10").setText("Velocidad: ").setPosition(640,495).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TF1 = cp5.addTextfield("Veloc").setPosition(744,495).setSize(100, 30).setAutoClear(false).setColor(cc).setFont(font).setLabel("");
     TB2 = cp5.addButton("EnviarVel").setPosition(744 + 100,495).setSize(85, 30).setLabel("Enviar").setFont(font2); //.toInt ver
-    
     
     TL99 = cp5.addTextlabel("label110").setText("Frecuencia: ").setPosition(635,495).setColorValue(#002D5A).setFont(createFont("Arial",20));
     TF11 = cp5.addTextfield("Frec").setPosition(744,495).setSize(100, 30).setAutoClear(false).setColor(cc).setFont(font).setLabel("");
@@ -197,7 +187,6 @@ void setup() {
     TB12 = cp5.addIcon("Habilitacion",10).setPosition(920,410).setSize(25, 15).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
     TL19 = cp5.addTextlabel("Habili").setText("Ai1").setPosition(920,380).setColorValue(#002D5A).setFont(createFont("Arial",20));
     
-    
     TB13 = cp5.addIcon("autoFun",10).setPosition(920,350).setSize(25, 15).setRoundedCorners(20).setFont(createFont("fontawesome-webfont.ttf", 40)).setFontIcons(#00f205,#00f204).setSwitch(true).setColorBackground(color(255,100)).hideBackground();
     TL22 = cp5.addTextlabel("autoFuncion").setText("AutoFuncion").setPosition(870,320).setColorValue(#002D5A).setFont(createFont("Arial",20));
     
@@ -210,8 +199,6 @@ void setup() {
         .setOpen(false)
         .setFont(font3)
         .setLabel("Elija archivo")
-        // .setColorBackground(color(60))
-        // .setColorActive(color(255, 128))
         .addItems(funciones);
         ;
     ICO = cp5.addButton("ICONO").setPosition(902,460).setSize(85, 30).setLabel("Abrir").setFont(font2); //.toInt ver
@@ -267,7 +254,6 @@ void draw() {
         rect(885,206,53,30);//P
         rect(668,246,53,30);//v
         rect(850,246,53,30);//vref
-       // rect(870,370,80,60);//habilita
         rect(590,455,400,90);//control
         rect(590,560,400,80);//guardado
         TL2.setVisible(true);
@@ -359,7 +345,7 @@ void draw() {
         ddl1.setVisible(true);//autofuncion
         ICO.setVisible(true);//autofuncion
         TL23.setVisible(true);//autofuncion
-        TL77.setVisible(false); //no muestro frecuencia
+        TL77.setVisible(false); //no muestro frecuencia   ///esto lo tengo q hacer segun la variable que mande arduino cuando comienza y termina de hacer la autofuncion
         TL7.setVisible(true); //muestro vref
         fill(colfun);//de que envie el archico
         noStroke();
@@ -428,11 +414,8 @@ void draw() {
         
         }
     
-    else{
-        // fill(255);//cuadros con fondo
-        // noStroke();
-        // rect(0,40,590,600);
-        //TL1.setVisible(false);     
+    else{ //si esta apagado serial arduino
+
         TL2.setVisible(false);
         TL3.setVisible(false);        TL4.setVisible(false);
         TL5.setVisible(false);        TL6.setVisible(false);
@@ -479,7 +462,6 @@ void verificacion() {
         println("HOLAAAAA" + variablecontrol1);
         tiempo3 = tiempo;
         if (variablecontrol1 == 1) {
-            //a = a + 1;
             
             cp5.get(Textfield.class, "Veloc").setText(str(VelRef));
             EnviarVel();
@@ -487,7 +469,6 @@ void verificacion() {
             TB1.setOn();
             println("seton");
             } else {
-            //a = a - 1;
             TB12.setOff();
             TB1.setOff();
             }
@@ -499,18 +480,14 @@ void verificacion() {
     void serialEvent(Serial Arduino){
           if ((millis()-tiempo1)>3000) {
               
-             // println("TOMO MUESTRA"+millis());        
         try {
-            val = Arduino.readStringUntil('\n'); //The newline separator separates each Arduino loop and so collection of data. 
-            //println(val);
-        //    Arduino.readBytesUntil('\n', inBuffer);
-        //     println(inBuffer);
-            if (val!= null) { //Verifies reading
-            //println(val);
+            val = Arduino.readStringUntil('\n'); //separador de nueva linea 
+
+            if (val!= null) { //verifica q no esta vacio
             if (tomomuestra==1){
                 val1=val;
-                val = trim(val); //gets rid of any whitespace or Unicode nonbreakable space
-                float algo[] = float(split(val, ';')); //parses the packet from Arduino and places the float values into the sensorVals array.
+                val = trim(val); //
+                float algo[] = float(split(val, ';')); //separo los datos que recibo por ; y los paso a flotante.
                 
                 tiempo = algo[4];
                 t = algo[5];
@@ -553,7 +530,6 @@ void verificacion() {
         catch(RuntimeException e) {//catches errors
         } 
          
-        // println(tomomuestra);
         }
 
         }
