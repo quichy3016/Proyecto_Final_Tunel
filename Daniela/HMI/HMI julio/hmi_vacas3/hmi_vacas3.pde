@@ -73,7 +73,7 @@ Button ICO;//autofun
 String fitem, DatoFun="0";//autofun
 Float y1,y2,y3,y4,y5,y6,y7,y8;//autofun
 int Dt1,Dt2,Dt3,Dt4,Dt5,Dt6,Dt7,Dt8;//autofun
-
+Table table1;
 
 //String motorEstado="";
 
@@ -94,7 +94,7 @@ int a = 0;
 
 
 //envío de datos a Arduino
-String Dato0 = "0",Dato1 = "0", Dato2 = "0", Dato3 = "0", Dato4 = "0", Dato5 = "0", DatosWrite;
+String Dato0 = "0",Dato1 = "0", Dato2 = "0", Dato3 = "0", Dato4 = "0", Dato5 = "0", Dato6 = "0" ,Dato7= "",DatosWrite, DatosWrite2;
 
 
 
@@ -359,13 +359,15 @@ void draw() {
         ddl1.setVisible(true);//autofuncion
         ICO.setVisible(true);//autofuncion
         TL23.setVisible(true);//autofuncion
+        TL77.setVisible(false); //no muestro frecuencia
+        TL7.setVisible(true); //muestro vref
         fill(colfun);//de que envie el archico
         noStroke();
         rect(930,500,30,30);
         }
         else{
-            TB12.setVisible(true);
-            TL19.setVisible(true);
+            TB12.setVisible(true); //ai1
+            TL19.setVisible(true); //ai1
             ddl1.setVisible(false);//autofuncion
             ICO.setVisible(false);//autofuncion
             TL23.setVisible(false);//autofuncion
@@ -467,7 +469,7 @@ void draw() {
 
 
 void DatosW() {
-    DatosWrite = (Dato0 + "," + Dato1 + "," + Dato2 + "," + Dato3 + "," + Dato4 + "," + Dato5 + "," + '\n');
+    DatosWrite = (Dato0 + "," + Dato1 + "," + Dato2 + "," + Dato3 + "," + Dato4 + "," + Dato5 + "," + Dato6 + "," + '\n');
     Arduino.write(DatosWrite);
 }
 
