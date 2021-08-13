@@ -13,7 +13,7 @@
 #include <Adafruit_ADS1015.h> //Convertidor analógico digital
 #include <Custom_PID_Tunel.h> //Librería modificada
 //SoftwareSerial BT(2,3);
-
+#define Fallaext 5
 //inicialización de variables
 //variables utilizadas en PHT
 float t1=0,t2=0;
@@ -59,8 +59,8 @@ float fpt,psv,xv,Z,den;
 boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
 int entrada[7], Inref,len;
 bool ControlAutomatico=0;
-float entrada1[20];// {30000,5000,20000,5000,15000,5000,28020,5000};
-float entrada2[20];
+float entrada1[30];// {30000,5000,20000,5000,15000,5000,28020,5000};
+float entrada2[30];
 bool cambio=0,cambio1=0,terminoautoma=0;
 int inc=0,inc1=1;
 float Inref1;
@@ -104,7 +104,7 @@ void setup() {
   pinMode(2,INPUT_PULLUP);
   pinMode(3,OUTPUT);
   pinMode(4,OUTPUT);
-  pinMode(5,OUTPUT);
+  pinMode(Fallaext,OUTPUT);
   pinMode(6,OUTPUT);
   pinMode(7,INPUT_PULLUP);
   pinMode(13,OUTPUT);
@@ -118,6 +118,7 @@ void loop(){
   difPresion();
   vel_tiempo();
   if (terminoautoma==1 & (millis()-tiempoautomatico)>=5000){
+  entrada[2]=1;
   cambio_automatico();}
   PIDS();
   entradas();
@@ -171,7 +172,7 @@ void serialEvent() {
        }}
      }
 ///////////////////////////////////////
-     if (entrada[6]==1){
+     if (entrada[6]!=0){
       int j = 0;
       for (int i = 7; i <= data.length();i++){
         entrada1[j] = entrada2[i];
@@ -185,10 +186,14 @@ void serialEvent() {
       tiempoautomatico=millis();
       cambio=1;
       terminoautoma=1;
-      entrada[2]=1;
-      len = data.length()-7;
+      //len = data.length()-7;
+      len = entrada[6];
       ControlAutomatico = 1;
-     }
+     }else {
+      terminoautoma = 0;
+      cambio = 0;
+      ControlAutomatico = 0;
+      }
   
 }}
 

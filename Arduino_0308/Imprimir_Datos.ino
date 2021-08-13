@@ -11,7 +11,7 @@ void imprimir_datos() {
   
   Serial.print(t1, 3); Serial.print(";");
   Serial.print(h1, 3); Serial.print(";");
-  Serial.print(Control, 3); Serial.print(";");
+  Serial.print(p2, 3); Serial.print(";");
   
   Serial.print(den, 4); Serial.print(";");    //Densidad
 
@@ -21,7 +21,8 @@ void imprimir_datos() {
 
   Serial.print(Estado); Serial.print(";"); //Estado del variador (encendido o apagado)
   Serial.print(Errorvar); Serial.print(";");  //Indicacion de error en variador
-  Serial.print(ControlAutomatico); Serial.println(";");  //Indicacion de error en variador
+  Serial.print(ControlAutomatico); Serial.println(";");  //Indicacion velocidad automatica activado
+  
   digitalWrite(13,Control);
 
 
