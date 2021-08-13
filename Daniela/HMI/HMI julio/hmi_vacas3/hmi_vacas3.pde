@@ -20,7 +20,7 @@ String text2;// puerto com
 Float textVV, textFF;
 int textVVV, textFFF;
 int unicavez;
-boolean unicavez2 = false;
+boolean unicavez2 = false,unicavez3=false;
 int variablecontrol1;
 long tiempo1,tiempo2;
 float tiempo3;
@@ -53,7 +53,7 @@ int tomomuestra=0;
 
 String myString = "";
 //String inString="";
-float tiempo=0,t=0,h=0,p=0,d=0,dp=0,VelRef=0,v1=0,pwm=0,controlSINO=0, error=0, Ev=0, ErrorVariador=0;
+float tiempo=0,t=0,h=0,p=0,d=0,dp=0,VelRef=0,v1=0,pwm=0,controlSINO=0, error=0, Ev=0, ErrorVariador=0, ControlAutomatico=0;
 //boolean VERSERIE = false;
 
 boolean ONOFF = false;
@@ -223,6 +223,7 @@ void setup() {
     table.addColumn("ESTADOvariador"); //motor funcionando
     table.addColumn("ERRORvariador");
     table.addColumn("TiempoRel");
+    table.addColumn("ControlAutomatico");
     
     grafica();
     
@@ -259,7 +260,7 @@ void draw() {
         TL2.setVisible(true);
         TL3.setVisible(true);        TL4.setVisible(true);
         TL5.setVisible(true);        TL6.setVisible(true);
-        TL77.setVisible(true);       
+        //TL77.setVisible(true);       
         TL10.setVisible(true);        TL11.setVisible(true);
         TF2.setVisible(true);        TB3.setVisible(true);
         TB4.setVisible(true);        TB5.setVisible(true);
@@ -280,7 +281,7 @@ void draw() {
         TB11.setVisible(true);      TL21.setVisible(true);
         textSize(15);
         fill(255,0,0);
-        text(nf(error,0,2), 669,226);///////////////////
+        text(nf(t,0,2), 669,226);
         text(nf(h,0,2), 813,226);
         text(nf(p,0, -1), 935,226);
         text(nf(v1,0,1), 715,266);
@@ -295,7 +296,8 @@ void draw() {
             TL9.setVisible(true);        TF1.setVisible(true);
             TB2.setVisible(true);        TL7.setVisible(true);
             TL99.setVisible(false);        TF11.setVisible(false);
-            TB22.setVisible(false);        TL77.setVisible(false);            
+            TB22.setVisible(false);        TL77.setVisible(false);  
+                 
             textSize(15);
             fill(255,0,0);
             text(nf(VelRef,0,2), 900,266);
@@ -313,6 +315,7 @@ void draw() {
 
        }    
         else{
+           
 
            if (TB1.isOn() ==  true) {
             TL9.setVisible(false);        TF1.setVisible(false);
@@ -346,10 +349,8 @@ void draw() {
         ICO.setVisible(true);//autofuncion
         TL23.setVisible(true);//autofuncion
         TL77.setVisible(false); //no muestro frecuencia   ///esto lo tengo q hacer segun la variable que mande arduino cuando comienza y termina de hacer la autofuncion
-        TL7.setVisible(true); //muestro vref
-        fill(colfun);//de que envie el archico
-        noStroke();
-        rect(930,500,30,30);
+        TL7.setVisible(false); //muestro vref
+        
         }
         else{
             TB12.setVisible(true); //ai1
@@ -384,21 +385,42 @@ void draw() {
             fill(255,0,0);
             noStroke();
             triangle(850, 90, 900, 90, 875, 135);
-            DD4 = TB10.isPressed();
+            //DD4 = TB10.isPressed();
+            if (unicavez3==false){
+                TB1.setOff();
+                TB12.setOff();
+                TB13.setOff();
+                unicavez3 = true;
+            }
         }
         else{
             TB10.setVisible(false);
             fill(255);
             noStroke();
             triangle(850, 90, 900, 90, 875, 135);
-            DD4 = DD4;
+            //DD4 = DD4;
+            unicavez3 = false;
+        }
+
+        if (int(ControlAutomatico)==1  && TB1.isOn()==false){//señal visual de que está corriendo la autofuncion
+            fill(colfun);//de que envie el archico
+            noStroke();
+            rect(930,500,30,30);
+            colfun= #008800; 
+             TL77.setVisible(false); //no muestro frecuencia   ///esto lo tengo q hacer segun la variable que mande arduino cuando comienza y termina de hacer la autofuncion
+            TL7.setVisible(true); //muestro vref
+                }
+        if (int(ControlAutomatico)==0  && TB1.isOn()==false){
+            colfun= #228888;
+             TL77.setVisible(true); //no muestro frecuencia   ///esto lo tengo q hacer segun la variable que mande arduino cuando comienza y termina de hacer la autofuncion
+            TL7.setVisible(false); //muestro vref
         }
         
-         if ((millis() - tiempo1)>1000) {
-             verificacion();    
-         }
+        //  if ((millis() - tiempo1)>1000) {
+        //      verificacion();    
+        //  }
         
-        if (TB10.isOn() ==  true) {
+        if (DD4 ==  true) { //reset
             if ((millis() - tiempo2)>3000) {
                 
                 DD4 = false;
@@ -406,7 +428,7 @@ void draw() {
                 DatosW();
                 reinicioreset = false;
                 println("HOLAAAAAAAAAAAAAAAAAAAAAAAA");
-                TB10.setOff();
+                //TB10.setOff();
             }
             
             
@@ -478,7 +500,7 @@ void verificacion() {
     
 
     void serialEvent(Serial Arduino){
-          if ((millis()-tiempo1)>3000) {
+          if ((millis()-tiempo1)>1000) {
               
         try {
             val = Arduino.readStringUntil('\n'); //separador de nueva linea 
@@ -502,6 +524,7 @@ void verificacion() {
                 error = algo[10];
                 Ev = algo[11];//estado del motor
                 ErrorVariador = algo[12]; //indicacion de error en variador
+                ControlAutomatico= algo[13];
                 
                 
                 TableRow newRow = table.addRow(); //adds a row for new reading
@@ -520,7 +543,8 @@ void verificacion() {
                 newRow.setFloat("ESTADOvariador", Ev);//11 //motor funcionando
                 newRow.setFloat("ERRORvariador", ErrorVariador);//12
                 newRow.setFloat("TiempoRel",tiempo - tiempo3);
-                
+                newRow.setFloat("ControlAutomatico",ControlAutomatico);
+
                 tomomuestra=0;
             }
             tomomuestra=tomomuestra+1;

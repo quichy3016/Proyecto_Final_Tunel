@@ -1,6 +1,3 @@
-
-
-
 ///////SERIAL
 void dropdown(int n) {
     puerta = cp5.get(ScrollableList.class, "dropdown").getItem(n).get("name").toString();
@@ -14,30 +11,39 @@ void actualizar() {
     cp5.get(ScrollableList.class, "dropdown").removeItem("COM1");
 }
 
-void seronoser(boolean estado) {
+void seronoser(boolean estado) { //abro puerto usb
     if (estado ==  true) {
         println("abro puerto" + puerta);
         Arduino = new Serial(this,puerta,baudrate);
-      //  VERSERIE = true;
         unicavez = 0;
         tiempo1 = millis();  
-    }
-    
-    else{
-        println("cierro puerto " + puerta);
-        actualizar();
-       // VERSERIE = false;
-        Corre = false;
-        Parada = true;
-        unicavez = 0;
-        TB12.setOff();
-        TB1.setOff();
         Dato0 = "0";
         Dato1 = "0";
         Dato2 = "0";
         Dato3 = "0";
         Dato4 = "0";
         Dato5 = "0";
+        Dato6 = "0";
+        DatosW();
+    }
+    
+    else{
+        println("cierro puerto " + puerta);
+        actualizar();
+        Corre = false;
+        Parada = true;
+        unicavez = 0;
+        variablecontrol1=0;
+        TB12.setOff();
+        TB1.setOff();
+        TB13.setOff();//autofuuncion
+        Dato0 = "0";
+        Dato1 = "0";
+        Dato2 = "0";
+        Dato3 = "0";
+        Dato4 = "0";
+        Dato5 = "0";
+        Dato6 = "0";
         DatosW();
         Arduino.clear();
         Arduino.stop();
@@ -101,7 +107,6 @@ void EnviarFrec() {
         Dato1 = str(textFFF);
         TL18.setVisible(false);
         DatosW();
-        
         println("ENVIAR FRECUENCIA" + DatosWrite);
     }
     else{
@@ -124,7 +129,7 @@ void Guardar() {
     tiempo3 = tiempo;  
 }
 
-void ControlONOFF(boolean D2) {
+void ControlONOFF(boolean D2) { //si esta prendido el control
 
     if (D2 ==  true) {
         Dato2 = "1";
@@ -140,22 +145,35 @@ void ControlONOFF(boolean D2) {
 }
 
 
-void reset(boolean D4) { //
-    
-  if (D4 ==  true) {
+// void reset(boolean D4) { //
+//     println(D4);
+//   if (D4 ==  true) {
+//         Dato4 = "1";
+//         DatosW();
+//         println("reset en 1 " + DatosWrite);
+//     }
+//     else{
+//         Dato4 = "0";
+//         DatosW();
+//         println("reseten 0 " + DatosWrite);
+//     }
+//     reinicioreset = true;
+//     tiempo2 = millis();
+//     println("reinicio");
+// }
+void reset() { //
+        DD4=true;
         Dato4 = "1";
         DatosW();
         println("reset en 1 " + DatosWrite);
-    }
-    else{
-        Dato4 = "0";
-        DatosW();
-        println("reseten 0 " + DatosWrite);
-    }
+
     reinicioreset = true;
     tiempo2 = millis();
     println("reinicio");
 }
+
+
+
 
 void fallaext(boolean D5) { //
    
@@ -191,7 +209,7 @@ void Habilitacion(boolean D6) {//habilitacion de ai1
         TB22.setVisible(false);        TL77.setVisible(true);    
         TL9.setVisible(false);        TF1.setVisible(false);
         TB2.setVisible(false);        TL7.setVisible(false);
-
+        TB1.setOff();///////////////////
     }
     
 }
@@ -202,7 +220,7 @@ void Settings(int n) {   //lista donde elijo el archivo a leer
     
 }
 
-void ICONO(){
+void ICONO(){ //boton de enviar el archivo
 table1 = loadTable("autofun/" +fitem, "header"); //leo el archivo donde estan los escalones
 
 float [] yfun = new float [table1.getRowCount()];
@@ -210,20 +228,22 @@ float [] dTiem = new float [table1.getRowCount()];
 for(int f= 0 ; f<table1.getRowCount(); f++){
     yfun [f] = table1.getFloat(f, 0); 
     dTiem [f] =  table1.getFloat(f, 1);
-}
+}   ///SI AL FINAL MARCA NULL O NaN ES PORQ EL ARCHIVO CSV TIENE LINEAS EN BLANCO
    for (int i = 0; i < yfun.length; i++) {
     Dato7 = Dato7 + "," + str(yfun[i]) + "," + str(dTiem[i]);
     }
-  ///  println("datiii7= " +Dato7);
+  //Dato6= "1";//////////////////////////////////
+  
+  Dato6= str(yfun.length+dTiem.length);
+  println("Dato6: "+Dato6);
+    ddl1.setLabel("Elija archivo");
  
-colfun= #000088; //señal visual que envie datos
-Dato6= "1";
-ddl1.setLabel("Elija archivo");
 
  DatosWrite2 = (Dato0 + "," + Dato1 + "," + Dato2 + "," + Dato3 + "," + Dato4 + "," + Dato5 + "," + Dato6  + Dato7+ ","+'\n');
  Arduino.write(DatosWrite2);
  println(DatosWrite2);
 Dato6= "0";
+Dato7="";
 
 }
 

@@ -32,9 +32,9 @@ void grafica() {
     Tx4=cp5.addTextlabel("yMin4").setText("yMin:").setPosition(417, 605).setColor(#002D5A).setFont(createFont("Arial",20));
 
     TL14=cp5.addTextlabel("variable1").setText("vel").setPosition(x = 65, y = 554).setColor(#002D5A).setFont(createFont("Arial",20));
-    TL15=cp5.addTextlabel("variable2").setText("vref/frec").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",20));
+    TL15=cp5.addTextlabel("variable2").setText("v/f(ref)").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",20));
     TL16=cp5.addTextlabel("variable3").setText("dDP").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",20));
-    TL17=cp5.addTextlabel("variable4").setText("variableCon").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",20));
+    TL17=cp5.addTextlabel("variable4").setText("Acc.C").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",20)); //accion de control
     TL144=cp5.addTextlabel("variable11").setText("[ m/s ]").setPosition(x = 76, y = 576).setColor(#002D5A).setFont(createFont("Arial",14));
     TL155=cp5.addTextlabel("variable22").setText("[m/s - Hz]").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",14));
     TL166=cp5.addTextlabel("variable33").setText("[ Pa ]").setPosition(x = x+80, y).setColor(#002D5A).setFont(createFont("Arial",14));
