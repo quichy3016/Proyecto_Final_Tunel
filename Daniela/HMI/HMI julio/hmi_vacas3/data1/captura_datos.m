@@ -1,10 +1,11 @@
 clear;
-name= "5555555.csv";
+name= "123131243.csv";
 [ALL]=table2array(readtable(name));
 of=20;  %offset de toma de datos
 largo=length(ALL)-of+1; %length(ALL)-of+1;
 G=zeros(largo,1);
-k=1;  %%ver q falta este error........... no llega hasta el final
+k=1;  
+con=0;
 
 [AA]=ALL(of:end,1);%muestras
 [A]=ALL(of:end,2); %tiempo
@@ -13,7 +14,6 @@ k=1;  %%ver q falta este error........... no llega hasta el final
 [D]=ALL(of:end,5); %Presión
 [E]=ALL(of:end,6); %densidad
 [F]=ALL(of:end,7); %diferencia de presion
-% [G]=ALL(:,8); %vel Ref o frec Referencia
 [H]=ALL(of:end,9); %velocidad
 [I]=ALL(of:end,10); %señal contol (pwm) 
 [J]=ALL(of:end,11); %marca si el control está encendido
@@ -23,23 +23,29 @@ k=1;  %%ver q falta este error........... no llega hasta el final
 [T]=ALL(of:end,15); %tiempo para usar desde 0.
 T=T/1000;
 
-for i=of: largo
-    for k=1:largo
-    if (ALL(i,11)==1)
-        G(k,1)=ALL(i,8); %vel Ref o frec Referencia
+
+for k=1:largo
+    if (ALL(k,11)==1 && k>20)
+        if con==0
+             G(k,1)=0;
+             con=1;
+       
+        else
+        G(k,1)=ALL(k,8); %vel Ref
+        end      
     else 
-        G(k,1)=3;
+        G(k,1)=0;%si esta descativado y tengo valor de f
     end
    
-    end
-end
+ end
 
-% 
-% 
-% figure(1)
-% plot(T,G,'k',T,H,'b');%v ref (control prendido) + velocidad
-% %%xlim([0 50]);  %%ver si puedo ingresar por aca el tiempo
-% title("PUEDO AGREGARLO?");
-% xlabel('xlabel [x]') 
-% ylabel('ylabel [y]') 
-% legend({'v ref (control prendido)','velocidad'},'Location','northwest')
+
+
+
+figure(1)
+plot(T,G,'k',T,H,'b');%v ref (control prendido) + velocidad
+%%xlim([0 50]);  %%ver si puedo ingresar por aca el tiempo
+title("PUEDO AGREGARLO?");
+xlabel('xlabel [x]') 
+ylabel('ylabel [y]') 
+legend({'v ref (control prendido)','velocidad'},'Location','northwest')
