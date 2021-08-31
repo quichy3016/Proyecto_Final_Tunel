@@ -67,7 +67,7 @@ float Inref1;
 long vtiempoant,tiempoautomatico;
 boolean EnableAi1=0,RUNSTOP=0,Control=0,FallaExterna=0,Resetfalla=0,Encendido;
 float In=0;
-long time1, time2,time3;
+long time1, time2,time3,tiemporetardo;
 int contserie=0;
 //////////////////////////
 /////Variables Entrada Serial/////

@@ -3,10 +3,11 @@ void cambio_automatico(){
   if (cambio1==0){
     //Control=1;
     entrada[3] = 1; //Encendido = 1;   //Habilito Ai1
+    if ((millis()-tiempoautomatico)>=9000){
     entrada[0] = 1; //RUNSTOP = 1;     //Doy Marcha
     cambio1 = 1;
     inc=0;
-    inc1=1;
+    inc1=1;}
   }
 
  
@@ -28,16 +29,18 @@ void cambio_automatico(){
   inc = inc+2;
   inc1 = inc1+2;
   cambio=1;
+  tiemporetardo=millis();
  }
  }else {
         entrada[0] = 0; //RUNSTOP = 0;     //Apago Motor
+        if ((millis()-tiemporetardo)>3000){
         entrada[3] = 0; //Encendido = 0;   //Deshabilito Ai1
         entrada[2]=0;
         Control=0;
         terminoautoma=0;
         cambio1=0;    
         ControlAutomatico = 0; 
-       }
+       }}
 
 // Serial.print(Inref1);Serial.print(" ");
 // Serial.print(vtiempoant);Serial.println(" ");
