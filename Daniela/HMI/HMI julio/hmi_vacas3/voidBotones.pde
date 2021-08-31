@@ -131,6 +131,7 @@ void Guardar() {
 
 void ControlONOFF(boolean D2) { //si esta prendido el control
 
+
     if (D2 ==  true) {
         Dato2 = "1";
         DatosW();
@@ -145,39 +146,28 @@ void ControlONOFF(boolean D2) { //si esta prendido el control
 }
 
 
-// void reset(boolean D4) { //
-//     println(D4);
-//   if (D4 ==  true) {
-//         Dato4 = "1";
-//         DatosW();
-//         println("reset en 1 " + DatosWrite);
-//     }
-//     else{
-//         Dato4 = "0";
-//         DatosW();
-//         println("reseten 0 " + DatosWrite);
-//     }
-//     reinicioreset = true;
-//     tiempo2 = millis();
-//     println("reinicio");
-// }
+
 void reset() { //
+    
         DD4=true;
         Dato4 = "1";
+        Dato5 = "0";
+        //TB11.update();
         DatosW();
         println("reset en 1 " + DatosWrite);
-
+        
     reinicioreset = true;
     tiempo2 = millis();
     println("reinicio");
 }
 
-
-
-
 void fallaext(boolean D5) { //
+   println("algo");
    
     if (D5 ==  true) {
+        Dato0 = "0";
+        Dato2 = "0";
+        Dato3 = "0";
         Dato5 = "1";
         DatosW();
         println("falla externa 1  " + DatosWrite);
@@ -201,6 +191,7 @@ void Habilitacion(boolean D6) {//habilitacion de ai1
     }
     else{
         Dato3 = "0";
+        Dato0 = "0";
         DatosW();
         TB1.setVisible(false);  
         TL8.setVisible(false);

@@ -65,7 +65,8 @@ boolean ControlONOFFnueva;
 //boolean ControlTodoall;
 Textlabel TL1,TL2,TL3,TL4,TL5,TL6,TL7,TL77,TL8,TL9,TL99,TL10,TL11,TL12,TL13,TL14,TL15,TL16,TL17, Tx3, Tx4,TL144,TL155,TL166,TL177, TL18, TL19, TL20, TL21, TL22, TL23;
 Textfield TF1,TF11, TF2,TF3,TF4,TF5,TF6,TF7,TF8;
-Button TB2, TB22, TB3,TB4,TB5,TB10, TB11;
+Button TB2, TB22, TB3,TB4,TB5,TB10;
+controlP5.Button TB11;
 Toggle TB6,TB7,TB8,TB9;
 ScrollableList ddl1 ; //autofun
 Button ICO;//autofun
@@ -178,9 +179,9 @@ void setup() {
     TB5 = cp5.addButton("Stop").setPosition(733,310).setSize(85, 85).setLabel("STOP").setFont(font2).setColorActive(#990000);
     TL20 = cp5.addTextlabel("estado de motor").setText("").setPosition(640,410).setColorValue(#002D5A).setFont(createFont("Arial",20));
 
-    TB10 = cp5.addButton("reset").setPosition(910,70).setSize(60, 25).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
-    TB11 = cp5.addButton("fallaext").setPosition(910,100).setSize(60, 35).setLabelVisible(false).setFont(createFont("Arial",14)).setColor(ccS);
-    TL21 = cp5.addTextlabel("emerg").setText("   STOP \n EMERG").setPosition(905,100).setColorValue(#AAAAAA).setFont(createFont("Arial",14));
+    TB10 = cp5.addButton("reset").setPosition(910,75).setSize(60, 25).setLabel("RESET").setFont(createFont("Arial",14)).setColorActive(#990000);
+    TB11 = cp5.addButton("fallaext").setPosition(910,105).setSize(60, 35).setLabelVisible(false).setFont(createFont("Arial",14)).setColor(ccS);
+    TL21 = cp5.addTextlabel("emerg").setText("   STOP \n EMERG").setPosition(905,105).setColorValue(#AAAAAA).setFont(createFont("Arial",14));
 
     TL18 = cp5.addTextlabel("valiTL18").setText("ingrese un numero valido").setPosition(725,525).setColorValue(#770000).setFont(createFont("Arial",15));
     
@@ -263,9 +264,9 @@ void draw() {
         //TL77.setVisible(true);       
         TL10.setVisible(true);        TL11.setVisible(true);
         TF2.setVisible(true);        TB3.setVisible(true);
-        TB4.setVisible(true);        TB5.setVisible(true);
-        TB4.setVisible(true);
-        TB5.setVisible(true);     
+        //TB4.setVisible(true);        TB5.setVisible(true);
+        //TB4.setVisible(true);
+        //TB5.setVisible(true);     
         TL12.setVisible(true);        TL13.setVisible(true);
         TL14.setVisible(true);        TL15.setVisible(true);
         TL16.setVisible(true);        TL17.setVisible(true);
@@ -287,16 +288,18 @@ void draw() {
         text(nf(v1,0,1), 715,266);
         
           textSize(15);
-            fill(0,255,0);
+            fill(255,0,0);
             text(nf(VelRef,0,2), 900,266);
         
         
        if(TB12.isOn()==true){ //ai1
+       TB4.setVisible(true);           TB5.setVisible(true);
         if (TB1.isOn() ==  true) { //control onoff
             TL9.setVisible(true);        TF1.setVisible(true);
             TB2.setVisible(true);        TL7.setVisible(true);
             TL99.setVisible(false);        TF11.setVisible(false);
             TB22.setVisible(false);        TL77.setVisible(false);  
+           // TB4.setVisible(true);           TB5.setVisible(true);
                  
             textSize(15);
             fill(255,0,0);
@@ -304,7 +307,7 @@ void draw() {
         }
         else{
             textSize(15);
-            fill(0,255,0);
+            fill(255,0,0);
             text(nf(VelRef,0,2), 900,266);
             TL9.setVisible(false);        TF1.setVisible(false);
             TB2.setVisible(false);        TL7.setVisible(false);
@@ -329,7 +332,7 @@ void draw() {
         }
         else{
             textSize(15);
-            fill(0,255,0);
+            fill(255,0,0);
             text(nf(VelRef,0,2), 900,266);
             TL9.setVisible(false);        TF1.setVisible(false);
             TB2.setVisible(false);        TL7.setVisible(false);
@@ -337,7 +340,7 @@ void draw() {
             TB22.setVisible(false);        TL77.setVisible(true);
          
         }
-           
+           // TB4.setVisible(true);           TB5.setVisible(true);
         TB13.setVisible(true);         TL22.setVisible(true);
               
             }
@@ -350,7 +353,8 @@ void draw() {
         TL23.setVisible(true);//autofuncion
         TL77.setVisible(false); //no muestro frecuencia   ///esto lo tengo q hacer segun la variable que mande arduino cuando comienza y termina de hacer la autofuncion
         TL7.setVisible(false); //muestro vref
-        
+         //TB4.setVisible(true);          
+          TB5.setVisible(true);
         }
         else{
             TB12.setVisible(true); //ai1
@@ -358,7 +362,13 @@ void draw() {
             ddl1.setVisible(false);//autofuncion
             ICO.setVisible(false);//autofuncion
             TL23.setVisible(false);//autofuncion
+           // TB4.setVisible(false);           TB5.setVisible(false);
         }
+
+        if(TB13.isOn()==false && TB12.isOn()==false ){   
+             TB4.setVisible(false);           TB5.setVisible(false);
+        }
+
 
         if (unicavez2 ==  false) {
             unicavez2 = true;
@@ -370,7 +380,7 @@ void draw() {
             colorONOFF = #AA0000;
             TL20.setVisible(true);
             TL20.setText("Motor en Marcha").setColorValue(#FFFFFF);
-            print(" en marcha ");//agregar el cartel y refrescar 
+            //print(" en marcha ");//agregar el cartel y refrescar 
             
         }
         else{
