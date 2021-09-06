@@ -19,15 +19,14 @@ void PIDS() {
   
   else if (Control==0){
     //In=Inref;      //En (hz) aproximados
-    VelRef1=map(In,0,32767,9175,32767);///9175
-    VelRef1=VelRef1/655.3;
-    In=map(In,0,32767,7300,32767);///9175
+    
+    In=map(In,0,32767,9175,32767);
     VelRef=In/655.34;
     if (VelRef>=50){
       VelRef=50;
     }
-    if (VelRef<=11.14){
-      VelRef=11.14;
+    if (VelRef<=14){
+      VelRef=14;
     }
     
     step1=0;
@@ -44,7 +43,7 @@ void PIDS() {
     output = pid.Update(Error1, 55);            //Calcula PID con el Error (el 55 esta deshabilitado por libreria) - Salida PID
   }
   else {
-    output = VelRef*19.8;          //19.3                  // La salida esta determinada por la frecuencia aproximada
+    output = VelRef*19.3;                            // La salida esta determinada por la frecuencia aproximada
     step1 = 0;
   }
   pw = output;

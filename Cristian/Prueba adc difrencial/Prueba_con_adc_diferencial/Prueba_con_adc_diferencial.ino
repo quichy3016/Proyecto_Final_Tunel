@@ -31,7 +31,7 @@ Adafruit_ADS1115 ads;
 float presionSF2=0,presionSF21;
 float ADCFilterM=0,ADCFilterM1;
 float presionCF21=0;
-float adc0=0;
+float adc0=0,adc1=0;
 
 //Variables utilizadas en los filtros
 MeanFilter<float> meanFilter(20);
@@ -45,7 +45,7 @@ float S21=Y;
 //////Variables velocidad/////////////
 float velocidadA=0,velocidadB=0,velocidadC=0,velocidadD=0;
 int contador=0;
-float offsetp2=0,offsetdf=0,offsetdf1=2.592;
+float offsetp2=0,offsetdf=0,offsetdf1=2.573;
 //////////////////////////////////////
 ///Constantes Densidad/////
 float a0=0.00000158123,a1=-0.000000029331,a2=0.00000000011043;
@@ -56,8 +56,7 @@ float C=33.93711047,D=-6343.1645,alfa=1.00062,beta=0.0000000314,gamma=0.00000056
 float T1; ////////////////////////////////////////////////////////OJO QUE ESTÁ DEFINIDO EN THP IGUAL
 float fpt,psv,xv,Z,den;
 
-boolean paro, BOT=0,BOT2=0,step1=0,Estado=0,Errorvar=0,pulsador,Estado1=0,Errorvar1=0,Estadoant=0,Errorvarant=0;
-long tiemporead=0;
+boolean paro, BOT=0,BOT2=0,step1=0,Estado,Errorvar,pulsador;
 int entrada[7], Inref,len;
 bool ControlAutomatico=0;
 float entrada1[30];// {30000,5000,20000,5000,15000,5000,28020,5000};
@@ -75,7 +74,7 @@ int contserie=0;
 String data; //Guardo los datos del buffer para utilizar en funcion princ.
 ////////PID////////
 double output=0;
-float VelRef=0,VelRef1=0;
+float VelRef=0;
 // variables externas del controlador
 
 
@@ -99,7 +98,7 @@ void setup() {
     while (1);
   }
   /////ADS1115///////////////////////
-  ads.setGain(GAIN_ONE);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
+  ads.setGain(GAIN_FOUR);        // 1x gain   +/- 4.096V  1 bit = 2mV      0.125mV
   ads.begin();
   /////Inicializo Entradas/Salidas  
   pinMode(2,INPUT_PULLUP);
@@ -118,8 +117,8 @@ void loop(){
   THP(); 
   difPresion();
   vel_tiempo();
-  if (terminoautoma==1 & (millis()-tiempoautomatico)>=3500){
-  
+  if (terminoautoma==1 & (millis()-tiempoautomatico)>=5000){
+  entrada[2]=1;
   cambio_automatico();}
   PIDS();
   entradas();

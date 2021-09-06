@@ -3,11 +3,8 @@ void cambio_automatico(){
   if (cambio1==0){
     //Control=1;
     entrada[3] = 1; //Encendido = 1;   //Habilito Ai1
-    if ((millis()-tiempoautomatico)>=4000){
-    entrada[0] = 1;} //RUNSTOP = 1;     //Doy Marcha
     if ((millis()-tiempoautomatico)>=9000){
-    
-    entrada[2]=1;
+    entrada[0] = 1; //RUNSTOP = 1;     //Doy Marcha
     cambio1 = 1;
     inc=0;
     inc1=1;}

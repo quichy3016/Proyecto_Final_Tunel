@@ -1,28 +1,8 @@
 void entradas(){
 
   ////FISICAS///
-  if ((millis()-tiemporead)>300){
-  Estado1 = !digitalRead(2);
-  Errorvar1= !digitalRead(7);
-  tiemporead = millis();
-
-  if (Estado1 == 1 && Estadoant == 1){
-    Estado = 1;
-  }
-  if (Estado1 == 0 && Estadoant == 0){
-        Estado = 0;
-        }
-
-  if (Errorvar1 == 1 && Errorvarant == 1){
-      Errorvar = 1;    
-  }
-  if (Errorvar1 == 0 && Errorvarant == 0){
-      Errorvar = 0;
-      }
-      Estadoant = Estado1;
-      Errorvarant=Errorvar1;
-    
-  }
+  Estado = !digitalRead(2);
+  Errorvar= !digitalRead(7);
 
   if (Errorvar == 1){
 

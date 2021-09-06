@@ -1,14 +1,7 @@
 void imprimir_datos() {
 
-  Serial.print(velocidadB, 3); Serial.print(";");//Velocidad del Aire con Filtro Mediana
-  if (Control == 1){
-  Serial.print(VelRef); Serial.print(";");           //Velocidad de referencia o frecuencia aproximada.(dependiendo el control)
-  }
-  else{Serial.print(VelRef1); Serial.print(";");}
-  
-  //Serial.print(Estado, 3); Serial.print(";");//Velocidad del Aire con Filtro Mediana
-  //Serial.print(Errorvar); Serial.print(";");           //Velocidad de referencia o frecuencia aproximada.(dependiendo el control)
-
+  Serial.print(presionSF2, 5); Serial.print(";");//Velocidad del Aire con Filtro Mediana
+  Serial.print(adc1,5); Serial.print(";");           //Velocidad de referencia o frecuencia aproximada.(dependiendo el control)
 
   Serial.print(ADCFilterM, 3); Serial.print(";"); //Diferencia de Presion - Filtro Mediana
 
@@ -16,7 +9,7 @@ void imprimir_datos() {
   
   Serial.print(tiempo); Serial.print(";"); 
   
-  Serial.print(t1, 3); Serial.print(";");
+  Serial.print(output, 3); Serial.print(";");
   Serial.print(h1, 3); Serial.print(";");
   Serial.print(p2, 3); Serial.print(";");
   
