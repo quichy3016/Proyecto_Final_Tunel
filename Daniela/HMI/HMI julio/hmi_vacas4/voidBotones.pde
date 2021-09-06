@@ -116,7 +116,7 @@ void ControlONOFF(boolean D2) { //control prendido adentro de Ai
     if (D2 ==  true) {
         Dato2 = "1";
         DatosW();
-        Stop();
+     //   Stop();
     }
     else {
         Dato2 = "0";

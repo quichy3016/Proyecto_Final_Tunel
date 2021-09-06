@@ -1,6 +1,6 @@
 clear;
 %% Variables para modficiar
-name= "hola10.csv";
+name= "pre2.csv";
 of=20;  %offset de toma de datos
 %% Programa
 [ALL]=table2array(readtable(name));
