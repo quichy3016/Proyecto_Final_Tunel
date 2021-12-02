@@ -189,6 +189,7 @@ void serialEvent() {
       terminoautoma=1;
       //len = data.length()-7;
       len = entrada[6];
+      //Serial.println(len);
       ControlAutomatico = 1;
      }else {
       terminoautoma = 0;
