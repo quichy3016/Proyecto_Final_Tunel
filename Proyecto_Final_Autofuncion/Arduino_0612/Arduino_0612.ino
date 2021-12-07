@@ -60,8 +60,8 @@ boolean paro, BOT=0,BOT2=0,step1=0,Estado=0,Errorvar=0,pulsador,Estado1=0,Errorv
 long tiemporead=0;
 int entrada[7], Inref,len;
 bool ControlAutomatico=0;
-float entrada1[30];// {30000,5000,20000,5000,15000,5000,28020,5000};
-float entrada2[30];
+float entrada1[60];// {30000,5000,20000,5000,15000,5000,28020,5000};
+float entrada2[60];
 bool cambio=0,cambio1=0,terminoautoma=0;
 int inc=0,inc1=1;
 float Inref1;
@@ -141,7 +141,7 @@ void serialEvent() {
      //Serial.print("Dato original: "); Serial.println(data); // Muestra del dato original
      int largovector=sizeof(entrada)/sizeof(int);
      int n,n1=0,n2=0; // Variables para algoritmo de lectura
-Serial.println(data.length());
+//Serial.println(data.length());
      for (int i = 0; i < data.length(); i++){ // Lectura total del tamano del dato
        if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
          if (n1==0){
@@ -164,10 +164,12 @@ Serial.println(data.length());
 //     Serial.println(entrada[i]);}
      n=0;
 /////////////////STRING A FLOAT////////////
-     for (int i = 16; i <= data.length(); i++){ // Lectura total del tamano del dato
+     for (int i = 15; i <= data.length(); i++){ // Lectura total del tamano del dato
        if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
          if (n2==0){
-          entrada2[n2] = data.substring(15, i).toFloat();
+          if (entrada[6]>=10){
+          entrada2[n2] = data.substring(15, i).toFloat();}
+          else{entrada2[n2] = data.substring(14, i).toFloat();}
           //Serial.println(entrada2[n2]);
           n2=n2+1;
           n = i + 1; 

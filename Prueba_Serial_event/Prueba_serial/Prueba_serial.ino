@@ -50,10 +50,12 @@ Serial.println(data.length());
 //     Serial.println(entrada[i]);}
      n=0;
 /////////////////STRING A FLOAT////////////
-     for (int i = 16; i <= data.length(); i++){ // Lectura total del tamano del dato
+     for (int i = 15; i <= data.length(); i++){ // Lectura total del tamano del dato
        if (data.substring(i, i+1) == ","){     // Lectura del dato hasta encontrar el caracter ","
          if (n2==0){
-          entrada2[n2] = data.substring(15, i).toFloat();
+          if (entrada[6]>=10){
+          entrada2[n2] = data.substring(15, i).toFloat();}
+          else{entrada2[n2] = data.substring(14, i).toFloat();}
           Serial.println(entrada2[n2]);
           n2=n2+1;
           n = i + 1; 
@@ -74,7 +76,7 @@ Serial.println(data.length());
             break;}
         else{
         entrada1[j] = entrada2[i];
-        //Serial.println(entrada1[j]);
+        Serial.println(entrada1[j]);
         j++;
       }}
 //      Serial.print(entrada1[0]);Serial.print(" ");

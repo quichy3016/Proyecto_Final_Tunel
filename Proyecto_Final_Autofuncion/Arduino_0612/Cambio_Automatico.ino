@@ -57,7 +57,7 @@ void cambio_automatico(){
         if ((millis()-tiemporetardo)>3000){
         if (entrada[3]==1){
         entrada[3] = 0; //Encendido = 0;   //Deshabilito Ai1
-        //Serial.println("Deshabilito Ai1");
+        //Serial.println("Deshabilito Ai1");}
         }
         terminoautoma=0;
         cambio1=0;    
