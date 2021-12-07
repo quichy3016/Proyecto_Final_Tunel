@@ -1,4 +1,4 @@
-void THP() {
+void THP(){
 
   ////////SHT21/////////////////////////
   t1 = sensor.readTemperature();

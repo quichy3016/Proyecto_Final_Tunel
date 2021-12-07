@@ -4,11 +4,13 @@ void cambio_automatico(){
     //Control=1;
     if (entrada[3]==0){
     entrada[3] = 1; //Encendido = 1;   //Habilito Ai1
-    //Serial.println("Habilito Ai1");}
+    //Serial.println("Habilito Ai1");
+    }
     if ((millis()-tiempoautomatico)>=5000){
     if (entrada[0]==0){  
     entrada[0] = 1;
-    //Serial.println("Doy Marcha");}} //RUNSTOP = 1;     //Doy Marcha
+    //Serial.println("Doy Marcha");
+    }} //RUNSTOP = 1;     //Doy Marcha
     
     if ((millis()-tiempoautomatico)>=10000){
     
@@ -45,15 +47,18 @@ void cambio_automatico(){
  }else {
         if (entrada[0]==1){
         entrada[0] = 0; //RUNSTOP = 0;     //Apago Motor
-        //Serial.println("Apago Motor");}
+        //Serial.println("Apago Motor");
+        }
         if (entrada[2]==1){
         entrada[2]=0;
-        //Serial.println("Desactivo Control");}
+        //Serial.println("Desactivo Control");
+        }
         Control=0;
         if ((millis()-tiemporetardo)>3000){
         if (entrada[3]==1){
         entrada[3] = 0; //Encendido = 0;   //Deshabilito Ai1
-        //Serial.println("Deshabilito Ai1");}
+        //Serial.println("Deshabilito Ai1");
+        }
         terminoautoma=0;
         cambio1=0;    
         cambio = 0;
