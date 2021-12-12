@@ -8,6 +8,7 @@ fin=length(ALL);%length(ALL);
 %% Programa
 con=0;
 
+
 [AA]=ALL(of:fin,1);%muestras
 [A]=ALL(of:fin,2); %tiempo
 [B]=ALL(of:fin,3); %Temperatura
@@ -24,28 +25,32 @@ con=0;
 [M]=ALL(of:fin,14); %error variador
 [T]=ALL(of:fin,15); %tiempo para usar desde 0.
 T=T/1000; %Tiempo en segundos
+disp('HOLA')
+x=length(AA);
 
-% for k=1:1:fin-of+1
-%     if (ALL(k,13)==1)    
-%         if (ALL(k,11)==1) %Control encendido
+
+% for k=of:x-of
+%     if L(k,1)==1    %motor encendido
+%         if J(k,1)==1 %Control encendido
 %             if con<1 %valor previo al cambio de valor del control
 %              G(k,1)=ALL(k+1,8); %vel Ref
 %              con=con+1;
-%              disp('hola0')
+%              disp('estoy1')
 %             else
 %             G(k,1)=ALL(k,8); %vel Ref
-%             disp('hola1')
+%             disp('estoy2')
 %             end
 %         else %control apagado
-%             G(k,1)=0.4*G(k,1)-0.8;
-%             disp('hola2')
+%             %G(k,1)=10
+%            G(k,1)=0.4*G(k,1)-0.8;
+%            disp('estoy3')
 %         end
 %     else %motor apagado y control apagado
 %     G(k,1)=0;    
-%     disp('hola3')
 %     end
+% 
 % end
- 
+%  k=k+1;
 
 %% Gráfico
 figure(1)

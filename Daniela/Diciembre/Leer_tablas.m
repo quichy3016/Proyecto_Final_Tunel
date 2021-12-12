@@ -1,9 +1,9 @@
 clear;
 %% Variables para modficiar
-%name= "Ejemplo1.csv";
-name= "Prueba_04.csv";
+name= "Ejemplo3.csv"; %"Ejemplo2.csv" "Ejemplo3.csv"
+
 [ALL]=table2array(readtable(name));
-of=1000;  %offset de toma de datos
+of=1;  %offset de toma de datos
 fin=length(ALL);%length(ALL);
 %% Programa
 con=0;
@@ -25,26 +25,24 @@ con=0;
 [T]=ALL(of:fin,15); %tiempo para usar desde 0.
 T=T/1000; %Tiempo en segundos
 
-% for k=1:1:fin-of+1
-%     if (ALL(k,13)==1)    
-%         if (ALL(k,11)==1) %Control encendido
-%             if con<1 %valor previo al cambio de valor del control
-%              G(k,1)=ALL(k+1,8); %vel Ref
-%              con=con+1;
-%              disp('hola0')
-%             else
-%             G(k,1)=ALL(k,8); %vel Ref
-%             disp('hola1')
-%             end
-%         else %control apagado
-%             G(k,1)=0.4*G(k,1)-0.8;
-%             disp('hola2')
-%         end
-%     else %motor apagado y control apagado
-%     G(k,1)=0;    
-%     disp('hola3')
-%     end
-% end
+for k=1:1:fin-of+1
+    if (L(k,1)==1)    
+        if (J(k,1)==1) %Control encendido
+            if con<1 %valor previo al cambio de valor del control
+             G(k,1)=G(k+1,1); %vel Ref
+             con=con+1;
+            else
+            G(k,1)=G(k,1); %vel Ref
+            end
+        else %control apagado
+            G(k,1)=0.4*G(k+1,1)-0.8;
+            con=0;
+        end
+    else %motor apagado y control apagado
+    G(k,1)=0; 
+    end
+    
+end
  
 
 %% Gráfico
