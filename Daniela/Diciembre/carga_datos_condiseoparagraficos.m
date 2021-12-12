@@ -2,8 +2,8 @@
 
 clear;
 %% Variables para modficiar
-%name= "Prueba_1610_1.csv";
-name= "Prueba_04.csv";
+name= "Prueba_1610_1.csv";
+%name= "Prueba_05.csv";
 of=1;  %offset de toma de datos
 %% Programa
 [ALL]=table2array(readtable(name));
@@ -29,7 +29,7 @@ largo=length(ALL)-of+1; %length(ALL)-of+1;
 T=A/1000;
 
 
-figure(1)
+figure(2)
 plot(T,H,'r',T,G,'k');
 %ylim([0 100]);
 %xlim([0 220]);
