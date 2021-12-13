@@ -1,10 +1,12 @@
 clear;
 %% Variables para modficiar
-name= "Ejemplo3.csv"; %"Ejemplo2.csv" "Ejemplo3.csv"
-
+name= "Ejemplo3.csv"; %"Ejemplo2.csv" "Ejemplo1.csv"
 [ALL]=table2array(readtable(name));
-of=1;  %offset de toma de datos
-fin=length(ALL);%length(ALL);
+of=1;  %N° de muestra dónde se comienza a tomar los datos.
+fin=length(ALL); %Defecto: length(ALL); N° de muestra dónde deja de tomar los datos.
+%Recordar que cada muestra es tomada cada 50ms, se observa en la columna
+%"Tiempo" el tiempo transcurrido en ms desde el comienzo del puerto serie,
+%y en "TiempoRel" el relativo luego de guardar cada archivo.
 %% Programa
 con=0;
 
@@ -43,21 +45,16 @@ for k=1:1:fin-of+1
     end
     
 end
- 
-
-%% Gráfico
+ %% Gráfico
 figure(1)
-plot(T,G,'k',T,H,'b',T,J,'--r');%v ref + velocidad
-%plot(T,G,'k',T,H,'b',T,J,'--r',T,F,':r');%v ref + velocidad+ control + dif
-%de presión
-title("Velocidad");
-xlabel('tiempo [s]','FontSize',14) 
-ylabel('velocidad [m/s]','FontSize',14) 
-
-%ylim([0 100]);
-%xlim([0 220]);
-
-dim = [0.15 0.5 0.1 0.2];
-str = {'Si el control está apagado:','    se estima la v de ref'};
-annotation('textbox',dim,'String',str,'FitBoxToText','on');
-legend({'velocidad ref','velocidad','control'},'Location','northwest','FontSize',12)
+plot(T,G,'k',T,H,'b',T,J,'--r');%v ref + v
+%plot(T,G,'k',T,H,'b',T,J,'--r',T,F,':r');%v ref + v+ control + DdP
+title("Velocidad",'FontSize',14); %Título
+xlabel('tiempo [s]','FontSize',14)  %Título del eje x
+ylabel('velocidad [m/s]','FontSize',14) %Título del eje y
+%ylim([0 100]); %Límites eje y
+%xlim([0 220]); %Límites eje x
+dim = [0.15 0.5 0.1 0.2]; %ubicación del texto auxiliar
+str = {'Si el control está apagado:','    se estima la v de ref'}; % texto auxiliar
+annotation('textbox',dim,'String',str,'FitBoxToText','on'); % texto auxiliar
+legend({'velocidad ref','velocidad','control'},'Location','northwest','FontSize',12) %Referencias
