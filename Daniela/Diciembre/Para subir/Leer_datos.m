@@ -1,17 +1,17 @@
 clear;
 %% Variables para modficiar
-name= "Ejemplo3.csv"; %"Ejemplo2.csv" "Ejemplo1.csv"
+name= "Ejemplo4.csv";%%%"Ejemplo3.csv"; %"Ejemplo2.csv" "Ejemplo1.csv"
 [ALL]=table2array(readtable(name));
 of=1;  %N° de muestra dónde se comienza a tomar los datos.
 fin=length(ALL); %Defecto: length(ALL); N° de muestra dónde deja de tomar los datos.
-%Recordar que cada muestra es tomada cada 50ms, se observa en la columna
-%"Tiempo" el tiempo transcurrido en ms desde el comienzo del puerto serie,
-%y en "TiempoRel" el relativo luego de guardar cada archivo.
+%El tiempo entre cada muestra es 51ms, observar los tiempos
+%transcurridos en la columna A /T del archivo csv.
 %% Programa
 con=0;
 
 [AA]=ALL(of:fin,1);%muestras
 [A]=ALL(of:fin,2); %tiempo
+A=A/1000;
 [B]=ALL(of:fin,3); %Temperatura
 [C]=ALL(of:fin,4); %Humedad
 [D]=ALL(of:fin,5); %Presión
@@ -28,7 +28,7 @@ con=0;
 T=T/1000; %Tiempo en segundos
 
 for k=1:1:fin-of+1
-    if (L(k,1)==1)    
+    if (L(k,1)==1)  %motor prendido  
         if (J(k,1)==1) %Control encendido
             if con<1 %valor previo al cambio de valor del control
              G(k,1)=G(k+1,1); %vel Ref
@@ -37,7 +37,7 @@ for k=1:1:fin-of+1
             G(k,1)=G(k,1); %vel Ref
             end
         else %control apagado
-            G(k,1)=0.4*G(k+1,1)-0.8;
+            G(k,1)=132/373*G(k+1,1)-18/373;
             con=0;
         end
     else %motor apagado y control apagado
@@ -47,10 +47,12 @@ for k=1:1:fin-of+1
 end
  %% Gráfico
 figure(1)
-plot(T,G,'k',T,H,'b',T,J,'--r');%v ref + v
+plot(AA,G,'k',AA,H,'b',AA,J,'--r');%v ref + v CON MUESTRAS
+
+%plot(T,G,'k',T,H,'b',T,J,'--r');%v ref + v
 %plot(T,G,'k',T,H,'b',T,J,'--r',T,F,':r');%v ref + v+ control + DdP
 title("Velocidad",'FontSize',14); %Título
-xlabel('tiempo [s]','FontSize',14)  %Título del eje x
+xlabel('muestras','FontSize',14)  %Título del eje x
 ylabel('velocidad [m/s]','FontSize',14) %Título del eje y
 %ylim([0 100]); %Límites eje y
 %xlim([0 220]); %Límites eje x
